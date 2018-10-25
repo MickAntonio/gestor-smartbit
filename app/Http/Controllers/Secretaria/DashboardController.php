@@ -11,4 +11,8 @@ class DashboardController extends Controller
     {
         return view('secretaria.pages.dashboard');
     }
+    public function index()
+    {
+        return view('secretaria.pages.dashboard');
+    }
 }
