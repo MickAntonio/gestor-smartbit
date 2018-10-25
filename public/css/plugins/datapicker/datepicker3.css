@@ -737,9 +737,6 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.active {
 .input-daterange input {
   text-align: center;
 }
-.input-daterange{
-  width: 100%;
-}
 .input-daterange input:first-child {
   border-radius: 3px 0 0 3px;
 }
@@ -760,7 +757,6 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.active {
   margin-left: -5px;
   margin-right: -5px;
 }
-
 .datepicker.dropdown-menu {
   position: absolute;
   top: 100%;

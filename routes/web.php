@@ -15,13 +15,7 @@
 
 Route::group(['middleware'=>['web']], function(){
 
-    Route::get('/', 'General\DashboardController@index');
-
-     Route::prefix('admin')->group(function(){
-        
-        
-    });
-
+    Route::get('/', 'Administrador\PagesController@dashboard');
     
 
     // JSON Lista de Municípios
