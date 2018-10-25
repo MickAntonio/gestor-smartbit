@@ -10,7 +10,4 @@ class Municipio extends Model
         return $this->belongsTo('App\Models\General\Provincia');
     }
 
-    public function endereco(){
-        return $this->hasOne('App\Models\General\Endereco');
-    }
 }

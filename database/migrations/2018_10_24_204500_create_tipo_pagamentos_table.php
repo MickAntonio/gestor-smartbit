@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateContactosTable extends Migration
+class CreateTipoPagamentosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateContactosTable extends Migration
      */
     public function up()
     {
-        Schema::create('contactos', function (Blueprint $table) {
+        Schema::create('tipo_pagamentos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('telefone');
-            $table->string('email')->nullable();
-            $table->string('redes_sociais')->nullable();
+            $table->string('nome');    
+            $table->enum('tipo', ['Entrada', 'Saida']);               
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateContactosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contactos');
+        Schema::dropIfExists('tipo_pagamentos');
     }
 }
