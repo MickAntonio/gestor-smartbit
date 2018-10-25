@@ -15,7 +15,9 @@
 
 Route::group(['middleware'=>['web']], function(){
 
-    Route::get('/', 'Administrador\PagesController@dashboard');
+    Route::get('/', 'Administrador\DashboardController@dashboard');
+    Route::get('/administrador', 'Administrador\DashboardController@dashboard');
+    Route::get('/secretaria', 'Secretaria\DashboardController@dashboard');
     
 
     // JSON Lista de Municípios

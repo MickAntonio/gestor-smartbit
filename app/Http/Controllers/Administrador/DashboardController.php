@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Administrador;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class PagesController extends Controller
+class DashboardController extends Controller
 {
     public function dashboard()
     {
-        return view('general.pages.dashboard');
+        return view('secretaria.pages.dashboard');
     }
 }

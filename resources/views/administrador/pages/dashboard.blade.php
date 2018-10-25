@@ -1,4 +1,4 @@
-@extends('general.main')
+@extends('administrador.main')
 
 @section('title', 'GEscolar')
 
