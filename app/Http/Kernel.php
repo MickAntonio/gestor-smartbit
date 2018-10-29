@@ -41,6 +41,12 @@ class Kernel extends HttpKernel
             'throttle:60,1',
             'bindings',
         ],
+        'Secretaria' => [
+            \App\Http\Middleware\Secretaria::class,
+        ],
+        'Administrador' => [
+            \App\Http\Middleware\Administrador::class,
+        ]
     ];
 
     /**
