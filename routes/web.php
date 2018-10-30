@@ -33,5 +33,3 @@ Route::group(["middleware" => ["Administrador"]], function ()
     Route::post("Administrador/AddCourse","Administrador\PostCursoController@store")->name("AddCourse");
     Route::post("Administrador/AddClass","Administrador\PostTurma@store")->name("AddClass");
 });
-
-
