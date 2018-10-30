@@ -15,54 +15,32 @@
                 <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
                     <i class="fa fa-reorder"></i>
                 </button>
-                <a href="#" class="navbar-brand">GESB</a>
+                <a href="#" class="navbar-brand">Smartbit</a>
             </div>
             <div class="navbar-collapse collapse" id="navbar">
                 <ul class="nav navbar-nav">
                     <li class="active">
-                        <a aria-expanded="false" role="button" href="layouts.html"> Gestor-Smartbit</a>
+                        <a aria-expanded="false" role="button" href="<?=route("Adm")?>"> Administrador</a>
                     </li>
                     <li class="dropdown">
-                        <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Menu item <span class="caret"></span></a>
+                        <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Curso <span class="caret"></span></a>
                         <ul role="menu" class="dropdown-menu">
-                            <li><a href="#">Menu item</a></li>
-                            <li><a href="#">Menu item</a></li>
-                            <li><a href="#">Menu item</a></li>
-                            <li><a href="#">Menu item</a></li>
+                            <li><a href="<?=route("NewCourse")?>">Criar Curso</a></li>
+                            <li><a href="<?=route("ListCourse")?>">Lista de cursos</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Menu item <span class="caret"></span></a>
+                        <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Turma <span class="caret"></span></a>
                         <ul role="menu" class="dropdown-menu">
-                            <li><a href="#">Menu item</a></li>
-                            <li><a href="#">Menu item</a></li>
-                            <li><a href="#">Menu item</a></li>
-                            <li><a href="#">Menu item</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Menu item <span class="caret"></span></a>
-                        <ul role="menu" class="dropdown-menu">
-                            <li><a href="#">Menu item</a></li>
-                            <li><a href="#">Menu item</a></li>
-                            <li><a href="#">Menu item</a></li>
-                            <li><a href="#">Menu item</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Menu item <span class="caret"></span></a>
-                        <ul role="menu" class="dropdown-menu">
-                            <li><a href="#">Menu item</a></li>
-                            <li><a href="#">Menu item</a></li>
-                            <li><a href="#">Menu item</a></li>
-                            <li><a href="#">Menu item</a></li>
+                            <li><a href="<?=route("NewClass")?>">Criar Turma</a></li>
+                            <li><a href="<?=route("ListClass")?>">Lista de turmas</a></li>
                         </ul>
                     </li>
 
                 </ul>
                 <ul class="nav navbar-top-links navbar-right">
                     <li>
-                        <a href="login.html">
+                        <a href="">
                             <i class="fa fa-sign-out"></i> Log out
                         </a>
                     </li>

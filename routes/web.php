@@ -11,7 +11,27 @@
 |
 */
 
+// My middleware
 
+Route::group(["middleware" => "Secretaria"], function ()
+{
+    Route::get('/', 'Secretaria\DashboardController@dashboard');
+    Route::get('Secretary', 'Secretaria\DashboardController@dashboard')->name("Secre");
+    Route::get('Secretary/CourseList', 'Secretaria\DashboardController@ListCurso')->name("CourseList");
+    Route::get('Secretary/ClassList', 'Secretaria\DashboardController@Listturma')->name("ClassList");
+    Route::get("Secretary/Inscription","Secretaria\matriculaController@Inscricao")->name("Inscription");
+});
+
+Route::group(["middleware" => ["Administrador"]], function ()
+{
+    Route::get('Administrador', 'Administrador\DashboardController@dashboard')->name("Adm");
+    Route::get('Administrador/NewClass', 'Administrador\DashboardController@setTurma')->name("NewClass");
+    Route::get('Administrador/ListClass', 'Administrador\DashboardController@ListTurma')->name("ListClass");
+
+    
+    Route::post("Administrador/AddCourse","Administrador\PostCursoController@store")->name("AddCourse");
+    Route::post("Administrador/AddClass","Administrador\PostTurma@store")->name("AddClass");
+});
 
 Route::group(['middleware'=>['web']], function(){
 
@@ -36,8 +56,6 @@ Route::group(['middleware'=>['web']], function(){
     });
     
 
-    // JSON Lista de Municípios
-    Route::get('json/lista-de-municipios/{provincia}', 'General\MunicipioController@jsonListaDeMunicipios');
-
-
 });
+
+
