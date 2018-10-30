@@ -23,7 +23,7 @@
                         <a aria-expanded="false" role="button" href="layouts.html"> Gestor-Smartbit</a>
                     </li>
                     <li class="dropdown">
-                        <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Menu item <span class="caret"></span></a>
+                        <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Estatísticas <span class="caret"></span></a>
                         <ul role="menu" class="dropdown-menu">
                             <li><a href="#">Menu item</a></li>
                             <li><a href="#">Menu item</a></li>
@@ -32,32 +32,31 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Menu item <span class="caret"></span></a>
+                        <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown">Pagamentos dos Alunos<span class="caret"></span></a>
                         <ul role="menu" class="dropdown-menu">
-                            <li><a href="#">Menu item</a></li>
-                            <li><a href="#">Menu item</a></li>
-                            <li><a href="#">Menu item</a></li>
-                            <li><a href="#">Menu item</a></li>
+                            <li><a href="/secretaria/lista-de-alunos">Lista de Alunos</a></li>
+                            <li><a href="/secretaria/alunos-propinas-pagamentos">Propinas</a></li>
+                            <li><a href="/secretaria/alunos-outros-pagamentos">Outros</a></li>
                         </ul>
                     </li>
+
+                     <li class="dropdown">
+                        <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown">Outros Pagamentos <span class="caret"></span></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li><a href="/secretaria/entradas-pagamentos">Entradas</a></li>
+                            <li><a href="/secretaria/saidas-pagamentos">Saidas</a></li>
+                        </ul>
+                    </li>
+                    
                     <li class="dropdown">
-                        <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Menu item <span class="caret"></span></a>
+                        <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Configurações de Dados <span class="caret"></span></a>
                         <ul role="menu" class="dropdown-menu">
-                            <li><a href="#">Menu item</a></li>
-                            <li><a href="#">Menu item</a></li>
-                            <li><a href="#">Menu item</a></li>
-                            <li><a href="#">Menu item</a></li>
+                            <li><a href="/secretaria/tipos-de-pagamentos">Tipos de Pagamentos</a></li>
+                            <li><a href="/secretaria/preco-das-propinas">Preços das Propinas</a></li>
+                            <li><a href="/secretaria/precos">Preços</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown">
-                        <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Menu item <span class="caret"></span></a>
-                        <ul role="menu" class="dropdown-menu">
-                            <li><a href="#">Menu item</a></li>
-                            <li><a href="#">Menu item</a></li>
-                            <li><a href="#">Menu item</a></li>
-                            <li><a href="#">Menu item</a></li>
-                        </ul>
-                    </li>
+                  
 
                 </ul>
                 <ul class="nav navbar-top-links navbar-right">

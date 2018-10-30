@@ -17,6 +17,7 @@ class CreateTipoPagamentosTable extends Migration
             $table->increments('id');
             $table->string('nome');    
             $table->enum('tipo', ['Entrada', 'Saida']);               
+            $table->enum('proveniencia', ['Aluno', 'Outro']);               
             $table->timestamps();
         });
     }

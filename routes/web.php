@@ -16,8 +16,24 @@
 Route::group(['middleware'=>['web']], function(){
 
     Route::get('/', 'Administrador\DashboardController@dashboard');
-    Route::get('/administrador', 'Administrador\DashboardController@dashboard');
-    Route::get('/secretaria', 'Secretaria\DashboardController@dashboard');
+
+    Route::prefix('secretaria')->group(function(){
+        Route::get('/', 'Secretaria\DashboardController@dashboard');       
+        Route::resource('/precos', 'Secretaria\PrecosController', ['except'=>['create', 'edit', 'show']]);       
+        Route::resource('/preco-das-propinas', 'Secretaria\PrecoClassesController', ['except'=>['create', 'edit', 'show']]);  
+        Route::resource('/tipos-de-pagamentos', 'Secretaria\TipoPagamentosController', ['except'=>['create', 'edit', 'show']]);       
+        Route::resource('/entradas-pagamentos', 'Secretaria\EntradasPagamentosController', ['except'=>['create', 'edit', 'show']]);       
+        Route::resource('/saidas-pagamentos', 'Secretaria\SaidasPagamentosController', ['except'=>['create', 'edit', 'show']]);       
+        Route::resource('/alunos-outros-pagamentos', 'Secretaria\AlunosOutrosPagamentosController', ['except'=>['create', 'edit', 'show']]);       
+        Route::resource('/alunos-propinas-pagamentos', 'Secretaria\AlunosPropinasPagamentosController', ['except'=>['create', 'edit', 'show']]);       
+        Route::resource('/lista-de-alunos', 'Secretaria\AlunosPropinasPagamentosController', ['except'=>['create', 'edit', 'show']]);       
+        Route::get('/lista-de-alunos', 'Secretaria\AlunosPropinasPagamentosController@alunos');       
+             
+    });
+
+    Route::prefix('administrador')->group(function(){
+        Route::get('/', 'Administrador\DashboardController@dashboard');
+    });
     
 
     // JSON Lista de Municípios

@@ -18,13 +18,13 @@ class CreatePagamentosTable extends Migration
             $table->decimal('valor_pago');    
             $table->text('descricao');    
             $table->enum('forma', ['TPA', 'Dinheiro', 'Banco']);               
-            $table->unsignedInteger('tipo_pagamento_id');                                
+            $table->unsignedInteger('pagamento_preco_id');                                
             $table->unsignedInteger('user_id');                                
             $table->timestamps();
         });
 
         Schema::table('pagamentos', function($table){
-            $table->foreign('tipo_pagamento_id')->references('id')->on('tipo_pagamentos')->onDelete('cascade');
+            $table->foreign('pagamento_preco_id')->references('id')->on('pagamento_precos')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
 
@@ -37,7 +37,7 @@ class CreatePagamentosTable extends Migration
      */
     public function down()
     {
-        Schema::dropForeign(['tipo_pagamento_id']);                        
+        Schema::dropForeign(['pagamento_preco_id']);                        
         Schema::dropForeign(['user_id']);                        
         Schema::dropIfExists('pagamentos');
     }
