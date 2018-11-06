@@ -5,16 +5,14 @@
 @section("content")
 
 <div class="row">
-    @if ($errors->any())     
-        <div class="alert alert-danger">         
-            <ul>             
-                @foreach ($errors->all() as $error)                 
-                    <li>{{ $error }}</li>            
-                @endforeach         
-            </ul>     
-        </div> 
-    @endif 
-    {!! Form::open(['url' => 'Administrador/AddCourse']) !!}
+
+    <div class="col-md-12">
+        <div class="col-md-6">
+            @include('components.messages')
+        </div>
+    </div> 
+
+    {!! Form::open(['url' => '/Administrador/cadastrar-curso']) !!}
 
         <div class="col-md-6">
             <div class="col-md-8">

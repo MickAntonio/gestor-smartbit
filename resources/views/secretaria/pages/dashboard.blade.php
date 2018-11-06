@@ -1,6 +1,6 @@
 @extends('secretaria.main')
 
-@section('title', 'GEscolar')
+@section('title', 'GE-Smartbit')
 
 @section('head')
     

@@ -12,11 +12,11 @@ class Candidatos extends Model
     }
 
     public function escolaAnterior(){
-        return $this->belongsTo('App\Models\Secretaria\EscolaAnterior','escola_anterior_id');
+        return $this->belongsTo('App\Models\Secretaria\Escola_Anterior','escola_anterior_id');
     }
 
     public function aluno(){
-        return $this->hasOne('App\Models\Administrador\Alunos');
+        return $this->hasOne('App\Models\Administrador\Alunos','candidato_id');
     }
 
 }

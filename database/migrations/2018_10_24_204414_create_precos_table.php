@@ -16,6 +16,7 @@ class CreatePrecosTable extends Migration
         Schema::create('precos', function (Blueprint $table) {
             $table->increments('id');
             $table->decimal('preco');                
+            $table->string('moeda');                
             $table->timestamps();
         });
     }

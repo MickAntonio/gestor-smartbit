@@ -1,0 +1,20 @@
+a.a-color-white{
+    color: #fff; 
+}
+
+.bg-w{
+    background-color:#fff;
+}
+
+.width-120{
+    width: 120px;
+}
+
+.width-180{
+    width: 180px;
+}
+
+.btn-adicionar{
+margin-bottom: 10px;
+margin-top: -5px;
+}
