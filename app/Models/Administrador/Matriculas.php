@@ -26,4 +26,6 @@ class Matriculas extends Model
         return $this->hasMany('App\Models\Secretaria\DisciplinaAtrasos');
     }
 
+    
+
 }

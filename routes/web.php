@@ -56,16 +56,17 @@ Route::prefix("Administrador")->group(function ()
         Route::resource('/entradas-pagamentos', 'Secretaria\EntradasPagamentosController', ['except'=>['create', 'edit', 'show']]);       
         Route::resource('/saidas-pagamentos', 'Secretaria\SaidasPagamentosController', ['except'=>['create', 'edit', 'show']]);       
         Route::resource('/alunos-outros-pagamentos', 'Secretaria\AlunosOutrosPagamentosController', ['except'=>['create', 'edit', 'show']]);       
-        Route::resource('/alunos-propinas-pagamentos', 'Secretaria\AlunosPropinasPagamentosController', ['except'=>['create', 'edit', 'show']]);       
-        Route::resource('/lista-de-alunos', 'Secretaria\AlunosPropinasPagamentosController', ['except'=>['create', 'edit', 'show']]);       
+        Route::resource('/alunos-propinas-pagamentos', 'Secretaria\AlunosPropinasPagamentosController', ['except'=>['create', 'edit']]);       
         Route::get('/lista-de-alunos', 'Secretaria\AlunosPropinasPagamentosController@alunos');       
-             
+        Route::get('/preco-propina/{curso}/{classe}', 'Secretaria\AlunosPropinasPagamentosController@getPrecoPropina');       
+                          
     });
 
    // Route::prefix('administrador')->group(function(){
      //   Route::get('/', 'Administrador\DashboardController@dashboard');
    // });
     
+    Route::get('/json/lista-de-meses', 'Secretaria\AlunosPropinasPagamentosController@jsonListaDeMeses');       
 
 });
 

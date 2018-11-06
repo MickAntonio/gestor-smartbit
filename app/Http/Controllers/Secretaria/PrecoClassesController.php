@@ -45,7 +45,7 @@ class PrecoClassesController extends Controller
         $preco = new PrecoClasses();
 
         $preco->estado = $request->estado;
-        $preco->classe_id = $request->curso_id;
+        $preco->classe_id = $request->classe_id;
         $preco->preco_id = $request->preco_id;
         $preco->curso_id = $request->curso_id;
         $preco->save();

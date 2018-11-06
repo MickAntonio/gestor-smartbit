@@ -15,15 +15,17 @@ class CreatePagamentoPropinasTable extends Migration
     {
         Schema::create('pagamento_propinas', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('mes_id');                                
-            $table->unsignedInteger('pagamento_id');                                
+            $table->decimal('total');    
+            $table->decimal('valor_pago');    
+            $table->text('descricao');    
+            $table->enum('forma', ['TPA', 'Dinheiro', 'Banco']);               
             $table->unsignedInteger('matricula_id');
+            $table->unsignedInteger('user_id');                                                
             $table->timestamps();
         });
 
         Schema::table('pagamento_propinas', function($table){
-            $table->foreign('mes_id')->references('id')->on('meses')->onDelete('cascade');
-            $table->foreign('pagamento_id')->references('id')->on('pagamentos')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('matricula_id')->references('id')->on('matriculas')->onDelete('cascade');
         });
     }
@@ -35,8 +37,7 @@ class CreatePagamentoPropinasTable extends Migration
      */
     public function down()
     {
-        Schema::dropForeign(['mes_id']);                                
-        Schema::dropForeign(['pagamento_id']);                                
+        Schema::dropForeign(['user_id']);                        
         Schema::dropForeign(['matricula_id']);
         Schema::dropIfExists('pagamento_propinas');
     }
