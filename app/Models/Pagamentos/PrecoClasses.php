@@ -17,5 +17,4 @@ class PrecoClasses extends Model
     public function preco(){
         return $this->belongsTo('App\Models\Pagamentos\Precos');
     }
-
 }

@@ -12,6 +12,9 @@
 @section('content')
 
     <div class="container">
+
+        @include('components.messages')
+    
         <div class="row">
         
             <div class="col-md-12">
@@ -23,9 +26,7 @@
 
                             <a href="" class="btn btn-white btn-sm"><i class="fa fa-refresh"></i> </a>
 
-                            <a href="/servicos/pdf" class="btn btn-info btn-sm a-color-white"><i class="fa fa-file-pdf-o"></i> </a>                        
-
-                            <a href="#" data-toggle="modal" data-target="#adicionarModal" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> </a>
+                            <a href="/servicos/pdf" class="btn btn-primary btn-sm a-color-white"><i class="fa fa-file-pdf-o"></i> </a>                        
                       
                         </div>
 
@@ -49,18 +50,29 @@
                                 </thead>
                                 <tbody>
                               
+                                @php
+                                    $i=1
+                                @endphp                              
+                                @foreach($matriculas as $matricula)
+
                                 <tr>
-                                    <td>1</td>
-                                    <td>Manuel de Salto</td>
-                                    <td>M</td>
-                                    <td>Info.</td>
-                                    <td>11ª</td>
-                                    <td>A2.</td>
-                                    <td>Manha</td>
+                                
+                                    <td>{{ $i++ }}</td>
+                                    <td>{{ $matricula->aluno->candidato->nome }}</td>
+                                    <td>{{ $matricula->aluno->candidato->sexo }}</td>
+                                    <td>{{ $matricula->turma->curso->nome }}</td>                                                                        
+                                    <td>{{ $matricula->turma->classe->nome }}</td>
+                                    <td>{{ $matricula->turma->nome }}</td>
+                                    <td>{{ $matricula->turma->periodo }}</td>
+                                   
                                     <td>
-                                        <a class="btn btn-primary btn-sm show-modal"  ><i class="fa fa-eye"></i> </a>
+                                        <a href="/secretaria/alunos-propinas-pagamentos/{{ $matricula->id }}" class="btn btn-primary btn-sm show-modal"><i class="fa fa-user-circle"></i> </a>
+                                        <a class="btn btn-info btn-sm pagar-modal"    data-id="{{ $matricula->id }}" data-nome="{{ $matricula->aluno->candidato->nome }}" data-curso="{{ $matricula->turma->curso->id }}" data-classe="{{ $matricula->turma->classe->id }}" ><i class="fa fa-money"></i> </a>
                                     </td>
+
                                 </tr>
+                                
+                                @endforeach
                                 
                                 </tbody>
                             </table>
@@ -80,32 +92,29 @@
             <div class="modal-content animated bounceInRight">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <i class="fa fa-laptop modal-icon"></i>
 
                 </div>
                 
-                {!! Form::open(array()) !!}   
+                {!! Form::open(array('route' => 'alunos-propinas-pagamentos.store')) !!}   
                 
                 <div class="modal-body">
 
                     <div class="row">
 
-                        <div class="col-md-12">
-                            @include('components.messages')
-                        </div>
-
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Aluno</label> 
-                                <input type="text" name="pago" placeholder="" value="Manuel de Salto" class="form-control">                                
+                                <input type="text" name="nome" placeholder="" disabled class="form-control">                                
                             </div>                            
                         </div>
 
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Forma de Pagamento</label> 
-                                <select class="form-control"  tabindex="2" name="forma_pagamento">
-                                    <option value="Dinheiro">Banco</option>
+                                 <select class="form-control"  tabindex="2" name="forma">
+                                    <option value="Banco">Banco</option>
+                                    <option value="TPA">TPA</option>
+                                    <option value="Dinheiro">Dinheiro</option>
                                 </select>
                             </div>                            
                         </div>
@@ -122,27 +131,67 @@
                                         <th></th>
                                     </tr>
                                     </thead>
+                                    <tbody id="tbody-pagamento">
+                                
+                                    <tr id="tr-pagamento-main">
+                                        <td>
+
+                                            <select class="form-control width-180 mes" id="ad" tabindex="2" name="mes[]">
+                                                <option value="0">Selecione o Mês</option>
+                                                @foreach($meses as $mes)                                
+                                                <option value="{{ $mes->id }}">{{ $mes->mes }}</option>
+                                                @endforeach
+                                            </select>
+                                        
+                                        </td>
+                                        <td>
+                                            <input type="number" name="multa[]" placeholder="" value="00.00" class="form-control width-120 multas">
+                                        </td>
+                                        <td>
+                                            <input type="text" name="sub" placeholder="" value="00.00 kz" class="form-control width-120 subs">
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-primary btn-sm btn-adicionar-mes"  ><i class="fa fa-plus"></i> </a>
+                                        </td>
+                                    </tr>
+                                   
+                                    </tbody>
+                                </table>
+                                
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-12">   
+                        
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>Total dos Meses</th>
+                                        <th>Total das Multas</th>
+                                        <th>Total a Pagar</th>
+                                    </tr>
+                                    </thead>
                                     <tbody>
                                 
                                     <tr>
                                         <td>
 
-                                            <select class="form-control width-180" id="ad" tabindex="2" name="forma_pagamento2">
-                                                <option value="Dinheiro">Março</option>
-                                            </select>
+                                            <input type="text" name="total_meses" placeholder="" value="00.00" class="form-control width-180">                                    
                                         
                                         </td>
                                         <td>
-                                            <input type="number" name="pago" placeholder="" value="460.00kz" class="form-control width-120">
+                                            <input type="text" name="total_multas" placeholder="" value="00.00" class="form-control">
                                         </td>
                                         <td>
-                                            <input type="number" name="pago" placeholder="" value="460.00kz" class="form-control width-120">
+                                            <input type="text" name="total_a_pagar" placeholder="" value="00.00" class="form-control">
                                         </td>
-                                        <td>
-                                            <a class="btn btn-primary btn-sm"  ><i class="fa fa-plus"></i> </a>
-                                        </td>
+                                    
                                     </tr>
-                                   
+
+                                    <input type="hidden" name="total" placeholder="" class="form-control">                                
+      
                                     </tbody>
                                 </table>
                                 
@@ -154,23 +203,29 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Pago</label> 
-                                <input type="number" name="pago" placeholder="" class="form-control">                                
+                                <input type="number" name="valor_pago" placeholder="" class="form-control">                                
                             </div>                            
                         </div>
 
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Descrição</label> 
-                                <textarea class="form-control" name="" id="" cols="30" rows="1"></textarea>
+                                <textarea class="form-control" name="descricao" id="" cols="30" rows="1"></textarea>
                             </div>                            
                         </div>
+
+                        <input type="hidden" name="user_id" value="1" placeholder="" class="form-control">                                
+                        <input type="hidden" name="matricula_id" value="1" placeholder="" class="form-control">                                
+                        <input type="hidden" name="preco_propina" placeholder="" class="form-control">                                
+                        <input type="hidden" name="preco_propina_id" placeholder="" class="form-control">                                
+                        
 
                     </div>
                     
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Adicionar</button>
+                    <button type="submit" class="btn btn-primary">Efectuar Pagamento</button>
                 </div>
 
                 {!! Form::close() !!} 
@@ -382,46 +437,141 @@
 
     <script>
 
-    
+        var d = new Date();
 
-    // Show Categoria Function
-    $(document).on('click', '.show-modal', function(){
+        setInterval(calculate, 1000)
 
-        $("#visualizarModal").modal("show");
+        function calculate(){
 
-        $("#show-id").text($(this).data('id'));
-        $("#show-nome").text($(this).data('nome'));
-        $("#show-preco").text($(this).data('preco'));
-        $("#show-created").text($(this).data('created'));
-        $("#show-updated").text($(this).data('updated'));
+            var mes = document.getElementsByClassName("mes")
 
-    });
+            var multas = document.getElementsByClassName("multas")
+            var subs   = document.getElementsByClassName("subs")
+            var preco = $("#adicionarModal input[name=preco_propina]").val();
+            var total_multas=new Number()
+            var total_a_pagar=new Number()
 
-     // Edit Categoria Function
-    $(document).on('click', '.edit-modal', function(){
+            for (var i = 0; i < multas.length; i++) {
 
-        $("#EditarModal").modal("show");
+                var m=new Number()
 
-        $("#editarModal input[name=nome]").val($(this).data('nome'));
-        $("#editarModal input[name=preco]").val($(this).data('preco'));
-        $("#editarModal textarea[name=descricao]").text($(this).data('descricao'));
+                if(mes[i].value!=0){
 
-        var url = "{{ url('admin/servicos') }}/"+$(this).data('id');
+                    if(mes[i].value==d.getMonth()+1){
 
-        $("#EditarModal form").attr("action", url);
+                        if(d.getDate()>=11 && d.getDate()<=20){
+                            m = 0.10;
+                        }else if(d.getDate()>=21 && d.getDate()<=31){
+                            m = 0.20;
+                        }
+
+                    }else if(mes[i].value<d.getMonth()+1){
+                        m = 0.30;
+                    }else{
+                        m = 0.0;           
+                    }
+                
+            
+                    multas[i].value = (new Number(preco) * m)+'.00';
+
+                    subs[i].value = ((new Number(preco) * m) + new Number(preco))+'.00 kz';
+
+                    total_multas=total_multas+( new Number(preco) * m);
+                    total_a_pagar=total_a_pagar+((new Number(preco) * m) + new Number(preco));
+
+                }
+
+                
+            }
+
+            $("#adicionarModal input[name=total_meses]").val(0+''+multas.length);
+            $("#adicionarModal input[name=total_multas]").val(total_multas+'.00 kz');
+            $("#adicionarModal input[name=total_a_pagar]").val(total_a_pagar+'.00 kz');
+            $("#adicionarModal input[name=total]").val(total_a_pagar);
+
         
-    });
 
-    // Edit Categoria Function
-    $(document).on('click', '.delete-modal', function(){
+        }
 
-        $("#ExcluirModal").modal("show");
+        // pagar Function
+        $(document).on('click', '.pagar-modal', function(){
 
-        var url = "{{ url('admin/servicos') }}/"+$(this).data('id');
+            $("#adicionarModal").modal("show");
 
-        $("#ExcluirModal form").attr("action", url);
+            $("#adicionarModal input[name=nome]").val($(this).data('nome'));
+            $("#adicionarModal input[name=matricula_id]").val($(this).data('id'));
 
-    });
+            var url = "{{ url('admin/servicos') }}/"+$(this).data('id');
+            var classe = $(this).data('classe');
+            var curso = $(this).data('curso');
+
+            $("#EditarModal form").attr("action", url);
+
+            $(function(){
+                $.get('http://localhost:8000/secretaria/preco-propina/'+curso+'/'+classe+'', function(data){
+                    
+                    $("#adicionarModal input[name=preco_propina]").val(data[1].preco);
+                    $("#adicionarModal input[name=preco_propina_id]").val(data[0]);
+                
+
+                }, 'json');
+            });
+            
+        });
+
+        var produtoAdd = 1
+
+        $(document).on('click', '.btn-adicionar-mes', function(){
+
+            if(produtoAdd<=10){
+                
+                produtoAdd++
+
+                var tr = $("<tr/>")
+                                .append($("<td/>").append($("<select/>", { id:"select-mes-"+produtoAdd, name:"mes[]", class:"form-control width-180 mes" }).append("<option value='0'>Selecione o Mês</option>")))
+                                .append($("<td/>").append(
+                                        $("<input/>", { type:"text", name:"multa[]", value:"00.00 kz", class:"form-control width-120 multas" })
+                                ))
+                                .append($("<td/>").append(
+                                        $("<input/>", { type:"text", name:"subtotal[]", value:"00.00 kz", class:"form-control width-120 subs" })
+                                ))
+                                .append($("<td/>").append($("<a/>", {class:"btn btn-danger btn-sm btn-remove"})
+                                    .append($("<i/>", {class:"fa fa-window-close"} ))
+                                ));
+                                
+                
+                $('#tbody-pagamento').append(tr);
+                
+                $(function(){
+                    $.get('http://localhost:8000/json/lista-de-meses', function(data){
+                    
+                        for(var i=0; i<data.length; i++){
+                            $("#select-mes-"+produtoAdd).append('<option value="'+data[i].id+'">'+data[i].mes+'</option>');
+                        }
+
+                        return false;
+                        //  alert(data[0].nome)
+
+                    }, 'json');
+                });
+                
+
+            }else{
+                alert('Antigiu o Limite De Adição dos Meses de Pagamento');
+            }
+            
+
+        });
+
+
+        $(document).on('click', '.btn-remove', function(){
+
+            $(this).parents('tr').remove();
+
+            produtoAdd--;
+
+        });
+
     
     </script>
 

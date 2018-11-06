@@ -13,4 +13,5 @@ class Alunos extends Model
     public function curso(){
         return $this->belongsTo('App\Models\Administrador\Cursos');
     }
+
 }

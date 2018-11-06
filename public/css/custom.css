@@ -18,3 +18,16 @@ a.a-color-white{
 margin-bottom: 10px;
 margin-top: -5px;
 }
+
+.table-th-200 tr th{
+    width: 200px;
+}
+
+.td-bg-green{
+    background-color:#1ab394;
+    color: #fff;     
+}
+
+.td-bg-gray{
+    background-color:rgb(245, 243, 243);
+}

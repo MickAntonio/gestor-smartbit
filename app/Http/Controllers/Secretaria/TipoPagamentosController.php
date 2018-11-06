@@ -57,6 +57,7 @@ class TipoPagamentosController extends Controller
         return redirect()->route('tipos-de-pagamentos.index');
     }
 
+
     /**
      * Update the specified resource in storage.
      *
