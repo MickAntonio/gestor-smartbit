@@ -8,6 +8,7 @@ use App\Models\Pagamentos\Pagamentos;
 use App\Models\Pagamentos\TipoPagamentos;
 use App\Models\Pagamentos\PagamentoPrecos;
 use Session;
+use PDF;
 
 class SaidasPagamentosController extends Controller
 {
@@ -20,7 +21,7 @@ class SaidasPagamentosController extends Controller
     {
         return view('secretaria.pagamentos-saidas.index')
         ->withSaidas(Pagamentos::all())
-        ->withTipoPagamentos(TipoPagamentos::where("tipo", "Saida")->get())
+        ->withTipoPagamentos(TipoPagamentos::where("tipo", "Saida")->where("proveniencia", "Outro")->get())
         ;
     }
 
@@ -97,5 +98,22 @@ class SaidasPagamentosController extends Controller
         Session::flash('successo', 'Saida Excluida com Successo');
 
         return redirect()->route('saidas-pagamentos.index');
+    }
+
+     /**
+     * Display the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function pdfRelatorio(Request $request)
+    {
+       
+        $start = $request->start .' 00:00:00';
+        $end   = $request->end   .' 23:59:59';
+
+        $saidas = Pagamentos::whereBetween('created_at', [$start,  $end])->get();
+
+        $pdf = PDF::loadView('secretaria.pagamentos-saidas.pdf.saidas',  $data=["saidas"=>$saidas,  "start"=>$request->start, "end"=>$request->end])->setPaper('a4', 'landscape');
+        return $pdf->stream('marcacoes.pdf');
     }
 }

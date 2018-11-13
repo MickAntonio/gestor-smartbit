@@ -25,8 +25,6 @@
 
                             <a href="" class="btn btn-white btn-sm"><i class="fa fa-refresh"></i> </a>
 
-                            <a href="/servicos/pdf" class="btn btn-info btn-sm a-color-white"><i class="fa fa-file-pdf-o"></i> </a>                        
-
                             <a href="#" data-toggle="modal" data-target="#adicionarModal" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> </a>
                       
                         </div>

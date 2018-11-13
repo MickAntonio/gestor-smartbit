@@ -24,7 +24,7 @@ class AlunosOutrosPagamentosController extends Controller
         ->withEntradas(Pagamentos::all())
         ->withMatriculas(Matriculas::all())
         ->withAlunoPagamentos(AlunoPagamentos::all())
-        ->withTipoPagamentos(TipoPagamentos::where("tipo", "Entrada")->get());;
+        ->withTipoPagamentos(TipoPagamentos::where("tipo", "Entrada")->where("proveniencia", "Aluno")->get());;
     }
 
      /**

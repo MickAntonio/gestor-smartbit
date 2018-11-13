@@ -8,6 +8,18 @@
  <!-- Custom and plugin javascript -->
 {!! Html::script('js/inspinia.js') !!}
 {!! Html::script('js/plugins/pace/pace.min.js') !!}
+{!! Html::script('js/plugins/datapicker/bootstrap-datepicker.js') !!}  
+
+<script>
+
+    $('#data_5 .input-daterange').datepicker({
+        keyboardNavigation: false,
+        forceParse: false,
+        autoclose: true,
+        format: "yyyy-mm-dd"
+    });
+
+</script>
 
 @yield('scripts')
 

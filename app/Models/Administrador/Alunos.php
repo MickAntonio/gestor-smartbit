@@ -14,4 +14,8 @@ class Alunos extends Model
         return $this->belongsTo('App\Models\Administrador\Cursos');
     }
 
+    public function saldo(){
+        return $this->hasOne('App\Models\Pagamentos\Saldo', 'aluno_id');
+    }
+
 }

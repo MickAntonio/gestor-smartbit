@@ -1,0 +1,119 @@
+a.a-color-white{
+    color: #fff; 
+}
+
+.bg-w{
+    background-color:#fff;
+}
+
+.width-120{
+    width: 120px;
+}
+
+.width-180{
+    width: 180px;
+}
+.width-200{
+    width: 200px;
+}
+.btn-adicionar{
+margin-bottom: 10px;
+margin-top: -5px;
+}
+
+.table-th-200 tr th{
+    width: 200px;
+}
+
+.td-bg-green{
+    background-color:#1ab394;
+    color: #fff;     
+}
+
+.td-bg-gray{
+    background-color:rgb(245, 243, 243);
+}
+
+.pg-container{
+    margin: 5px;
+    border: 4px #000 solid;
+    height: 270px;
+    border-style: double;
+}
+
+.pg-header{
+    text-align: center;
+}
+
+.pg-header h3{
+   font-size: 0.7em;
+   line-height: 0.4em;
+}
+
+.pg-header-sub{
+    margin-top: 10px;
+}
+
+.pg-border-body{
+    border: 1px #000 solid;
+    margin: 30px 20px;
+    height: 90px;
+    padding: 10px;
+   font-size: 0.8em;
+   line-height: 0.9em;
+}
+
+.under-line{
+    border-bottom: 0.5px#000 solid;
+    width: 90%;
+    float: left;
+}
+
+.under-line-2{
+    border-bottom: 0.5px#000 solid;
+    width: 42%;
+    float: left;
+}
+
+.under-line-3{
+    border-bottom: 0.5px#000 solid;
+    width: 23%;
+    float: left;
+}
+.pg-footer{
+    margin: 0px 20px;
+}
+.pg-f-right{
+    width: 200px;
+   font-size: 0.8em;
+   text-align: center;
+   line-height: 0.9em;
+   margin-top: -10px;
+}
+.pg-f-left{
+    width: 200px;
+   font-size: 0.8em;
+   text-align: center;
+   line-height: 0.9em;
+   margin-top: -25px;
+   float: right;
+}
+
+.under-title{
+    float: left;
+}
+
+.h1-title{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+ .data-span{
+    font-size:11px;
+}
+.text-align-center{
+    text-align: center;
+}
+.bold{
+    font-weight: bold;
+}
