@@ -4,6 +4,7 @@
 @section("head")
 {!! Html::style('css/plugins/iCheck/custom.css') !!}
 {!! Html::style('css/plugins/steps/jquery.steps.css') !!}
+{!! Html::style('css/plugins/chosen/bootstrap-chosen.css') !!}
 @endsection
 
 @section("content")
@@ -30,8 +31,6 @@
                             * todos os campos são de caracter obrigatorio...
                         </p>
                         {{ Form::open(["url" => "/Secretaria/inscricao-pela-primeira-vez","class" => "wizard-big","id" => "form"])}}
-                       <!-- <form id="form" action="#" class="wizard-big"> -->
-                        <!--<input type="hidden" name="_token" value="" /> -->
                             <h1>DADOS BIOGRAFICOS</h1>
                             <fieldset>
                                 <div class="col-md-12">
@@ -57,6 +56,17 @@
                                 <div class="col-md-12">
                                     <br>   
                                     <div class="col-md-4">
+                                        <label for="Naturalidade">
+                                            <p>Naturalidade:</p>
+                                        </label>
+                                        <select required min="1"  id="Naturalidade" name="Naturalidade" class="form-control chosen-select">
+                                        <option selected disabled>Selecione:</option>
+                                            <?php for ($i=0; $i <count($municipio) ; $i++) { ?>
+                                                <option value="<?= $municipio[$i]->id?>"><?= $municipio[$i]->nome?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
                                         <label for="futher">
                                             <p>Nome do Pai:</p>
                                         </label>
@@ -68,15 +78,16 @@
                                         </label>
                                         <input required type="text" id="mother" name="mother" class="form-control" />
                                     </div>
-                                    <div class="col-md-4">
+                                   
+                                </div>
+                                <div class="col-md-12">
+                                <br>   
+                                <div class="col-md-4">
                                         <label for="Idnumber">
                                             <p>Número de B.I:</p>
                                         </label>
                                         <input required type="text" minlength="14" maxlength="14" id="Idnumber" name="Idnumber" class="form-control" />
                                     </div>
-                                </div>
-                                <div class="col-md-12">
-                                <br>   
                                     <div class="col-md-4">
                                         <label for="born">
                                             <p>Data de nascimento:</p>
@@ -93,18 +104,7 @@
                                             <option value="FEMENINO">FEMENINO</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-4">
-                                        <label for="Naturalidade">
-                                            <p>Naturalidade:</p>
-                                        </label>
-                                        <select required  id="Naturalidade" name="Naturalidade" class="form-control">
-                                        <option selected disabled>Selecione:</option>
-                                        <option >Selecione:</option>
-                                            <?php for ($i=0; $i <count($municipio) ; $i++) { ?>
-                                                <option value="<?= $municipio[$i]->id?>"><?= $municipio[$i]->nome?></option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>
+                                    
                                 </div>        
                             </fieldset>
                             <h1>CONTACTOS</h1>
@@ -172,7 +172,6 @@
                                         </label>
                                         <select required  id="curso" name="curso" class="form-control">
                                         <option selected disabled>Selecione:</option>
-                                        <option >Selecione:</option>
                                             <?php for ($i=0; $i < count($curso) ; $i++) { ?>
                                                 <option value="<?= $curso[$i]->id?>"><?= $curso[$i]->nome?></option>
                                             <?php } ?>
@@ -201,8 +200,11 @@
 
 {!! Html::script('js/plugins/steps/jquery.steps.min.js') !!}
 {!! Html::script('js/plugins/validate/jquery.validate.min.js') !!}
+{!! Html::script('js/plugins/chosen/chosen.jquery.js') !!}
+
 
  <script>
+
         $(document).ready(function(){
             $("#wizard").steps();
             $("#form").steps({
@@ -284,6 +286,8 @@
             $(".actions a[href='#previous']").html("Anterior");
             $(".actions a[href='#next']").html("Seguinte");
             $(".actions a[href='#finish']").html("Concluir");
+
+             $('.chosen-select').chosen({width: "100%"});
        });
     </script>
 @endsection

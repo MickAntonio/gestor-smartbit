@@ -32,13 +32,6 @@
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Estatísticas <span class="caret"></span></a>
-                            <ul role="menu" class="dropdown-menu">
-                                <li><a href="/Secretaria/inscricao">Matricular candidato</a></li>
-                                <li><a href="#">Ver candidato matriculado</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
                             <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown">Pagamentos dos Alunos<span class="caret"></span></a>
                             <ul role="menu" class="dropdown-menu">
                                 <li><a href="/secretaria/lista-de-alunos">Lista de Alunos</a></li>

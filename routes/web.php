@@ -25,6 +25,8 @@ Route::group(['middleware'=>['web']], function(){
     Route::post("/matricula-anonima","Secretaria\InscricaoController@MatriculaAnonima")->name("MatriculaAnonima"); 
 
     Route::resource("/confirmar-matricula","Administrador\ConfirmacaoController",['except'=>['create', 'edit', 'show']]);
+
+    Route::get("/confirmar-matricula/{processo}","Administrador\ConfirmacaoController@index")->name("confirmar");
 });
 
 Route::prefix("Administrador")->group(function ()
