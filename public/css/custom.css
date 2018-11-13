@@ -31,3 +31,9 @@ margin-top: -5px;
 .td-bg-gray{
     background-color:rgb(245, 243, 243);
 }
+
+.pg-container{
+    margin: 20px;
+    border: 2px #000 solid;
+    height: 250px;
+}

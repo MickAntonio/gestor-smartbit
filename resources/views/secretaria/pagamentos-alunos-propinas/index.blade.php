@@ -40,27 +40,60 @@
                                     <th>#</th>
                                     <th>Nome </th>
                                     <th>Sexo </th>
-                                    <th>Curso</th>
-                                    <th>Classe</th>
                                     <th>Turma</th>
-                                    <th>Periódo</th>
+                                    <th>Meses</th>
+                                    <th>Multa</th>
+                                    <th>Total Pago</th>
                                     <th>Acção</th>
                                 </tr>
                                 </thead>
                                 <tbody>
+
+                                @php
+                                    $i=1
+                                @endphp                              
+                              
+                                @foreach($pagamentos as $pagamento)
                               
                                 <tr>
-                                    <td>1</td>
-                                    <td>Manuel de Salto</td>
-                                    <td>M</td>
-                                    <td>Info.</td>
-                                    <td>11ª</td>
-                                    <td>A2.</td>
-                                    <td>Manha</td>
+                                    <td>{{ $i++ }}</td>
+                                    <td>{{ $pagamento->matricula->aluno->candidato->nome }}</td>
+                                    <td>{{ $pagamento->matricula->aluno->candidato->sexo }}</td>
                                     <td>
-                                        <a class="btn btn-primary btn-sm show-modal"  ><i class="fa fa-eye"></i> </a>
+                                        {{ $pagamento->matricula->turma->curso->abreviacao }}&nbsp;
+                                        {{ $pagamento->matricula->turma->classe->nome }}&nbsp;
+                                        {{ $pagamento->matricula->turma->nome }}&nbsp;
+                                    </td>
+                                    <td>
+                                        
+                                    @foreach($pagamento->propinas as $propina)
+                                        {{ $propina->mes->mes }}&nbsp; 
+                                    @endforeach
+
+                                    </td>
+
+                                    @php
+                                        $multas=0
+                                    @endphp  
+
+                                    @foreach($pagamento->propinas as $propina)
+
+                                        @if($propina->multa>0)
+
+                                        @php $multas=$multas+$propina->multa @endphp 
+                                        
+                                        @endif                           
+
+                                    @endforeach
+                                    <td>{{ $multas }}.00 kz</td>
+                                    <td>{{ $pagamento->valor_pago }} kz</td>
+                                    <td>
+                                        <a  href="/secretaria/propina-recibo/{{ $pagamento->id }}" class="btn btn-primary btn-sm"  ><i class="fa fa-file-pdf-o"></i> </a>
                                     </td>
                                 </tr>
+
+                                @endforeach
+
                                 
                                 </tbody>
                             </table>

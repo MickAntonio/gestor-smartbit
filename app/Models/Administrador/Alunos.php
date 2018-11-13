@@ -19,4 +19,9 @@ class Alunos extends Model
     public function Inscritos(){
         return $this->hasMany('App\Models\Secretaria\Candidatos');
     }
+
+    public function saldo(){
+        return $this->hasOne('App\Models\Pagamentos\Saldo', 'aluno_id');
+    }
+
 }

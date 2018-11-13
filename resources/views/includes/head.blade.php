@@ -8,5 +8,7 @@
 {!! Html::style('css/animate.css') !!}
 {!! Html::style('css/style.css') !!}
 {!! Html::style('css/custom.css') !!}
+{!! Html::style('css/plugins/datapicker/datepicker3.css') !!}   
+
 
 @yield('head')

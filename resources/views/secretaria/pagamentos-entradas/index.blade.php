@@ -5,7 +5,8 @@
 @section('head')
     
     {!! Html::style('css/plugins/dataTables/datatables.min.css') !!}
-    
+ 
+
 @endsection
 
 @section('content')
@@ -25,7 +26,7 @@
 
                             <a href="" class="btn btn-white btn-sm"><i class="fa fa-refresh"></i> </a>
 
-                            <a href="/servicos/pdf" class="btn btn-info btn-sm a-color-white"><i class="fa fa-file-pdf-o"></i> </a>                        
+                            <a href="#" data-toggle="modal" data-target="#relatorioModal" class="btn btn-info btn-sm a-color-white"><i class="fa fa-file-pdf-o"></i> </a>
 
                             <a href="#" data-toggle="modal" data-target="#adicionarModal" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> </a>
                       
@@ -54,7 +55,7 @@
                                 @endphp                              
                                 @foreach($entradas as $entrada)
 
-                                @if($entrada->pagamentoPreco->tipoPagamento->tipo=="Entrada")
+                                @if($entrada->pagamentoPreco->tipoPagamento->tipo=="Entrada" && $entrada->pagamentoPreco->tipoPagamento->proveniencia=="Outro" )
                                 <tr>
                                 
                                     <td>{{ $i++ }}</td>
@@ -370,6 +371,39 @@
 
     </div>
 
+    <!--Relatorio modal-->
+
+     <div class="modal inmodal" id="relatorioModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content animated bounceInRight">
+        {!! Form::open(array('route' => 'outras.entradas.pdf')) !!}   
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <i class="fa fa-laptop modal-icon"></i>
+                    <h4 class="modal-title">Gerar Relatório</h4>
+                    <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
+                </div>
+                <div class="modal-body">
+            
+                    <div class="form-group" id="data_5">
+                        <div class="input-daterange input-group" id="datepicker">
+                            <input type="text" class="form-control" name="start" value="2018-02-22"/>
+                            <span class="input-group-addon">à</span>
+                            <input type="text" class="form-control" name="end" value="2018-02-22" />
+                        </div>
+                    </div>
+               
+               
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">Sair</button>
+                    <button type="submit" class="btn btn-primary">Visualizar</button>
+                </div>
+        {!! Form::close() !!} 
+            </div>
+        </div>
+    </div>
+
     
 
 @endsection
@@ -391,138 +425,68 @@
     {!! Html::script('js/demo/peity-demo.js') !!} 
 
     {!! Html::script('js/plugins/dataTables/datatables.min.js') !!}
-  
+ 
+
     <script>
 
-    // Show Categoria Function
-    $(document).on('click', '.show-modal', function(){
+        // Show Categoria Function
+        $(document).on('click', '.show-modal', function(){
 
-        $("#visualizarModal").modal("show");
+            $("#visualizarModal").modal("show");
 
-        $("#show-id").text($(this).data('id'));
-        $("#show-tipo").text($(this).data('tipo'));
-        $("#show-pago").text($(this).data('pago'));
-        $("#show-forma").text($(this).data('forma'));
-        $("#show-preco").text($(this).data('preco'));
-        $("#show-descricao").text($(this).data('descricao'));        
-        $("#show-created").text($(this).data('created'));
-        $("#show-updated").text($(this).data('updated'));
+            $("#show-id").text($(this).data('id'));
+            $("#show-tipo").text($(this).data('tipo'));
+            $("#show-pago").text($(this).data('pago'));
+            $("#show-forma").text($(this).data('forma'));
+            $("#show-preco").text($(this).data('preco'));
+            $("#show-descricao").text($(this).data('descricao'));        
+            $("#show-created").text($(this).data('created'));
+            $("#show-updated").text($(this).data('updated'));
 
-    });
+        });
 
-     // Edit Categoria Function
-    $(document).on('click', '.edit-modal', function(){
+        // Edit Categoria Function
+        $(document).on('click', '.edit-modal', function(){
 
-        $("#EditarModal").modal("show");
+            $("#EditarModal").modal("show");
 
-        $("#EditarModal input[name=valor_pago]").val($(this).data('pago'));
-        $("#EditarModal textarea[name=descricao]").text($(this).data('descricao'));
+            $("#EditarModal input[name=valor_pago]").val($(this).data('pago'));
+            $("#EditarModal textarea[name=descricao]").text($(this).data('descricao'));
 
-        // seleciona a option tipo
-        var idTipoRemove = "#EditarModal select[name=tipo_pagamento_id] option";
-        $(idTipoRemove).removeAttr("selected");
-        
-        var idTipo = "#EditarModal select[name=tipo_pagamento_id] option[value="+$(this).data('tipo')+"]";
-        $(idTipo).attr({ selected:"selected" })
+            // seleciona a option tipo
+            var idTipoRemove = "#EditarModal select[name=tipo_pagamento_id] option";
+            $(idTipoRemove).removeAttr("selected");
+            
+            var idTipo = "#EditarModal select[name=tipo_pagamento_id] option[value="+$(this).data('tipo')+"]";
+            $(idTipo).attr({ selected:"selected" })
 
-        // seleciona a option forma
-        var idFormaRemove = "#EditarModal select[name=forma] option";
-        $(idFormaRemove).removeAttr("selected");
-        
-        var idForma = "#EditarModal select[name=forma] option[value="+$(this).data('forma')+"]";
-        $(idForma).attr({ selected:"selected" })
+            // seleciona a option forma
+            var idFormaRemove = "#EditarModal select[name=forma] option";
+            $(idFormaRemove).removeAttr("selected");
+            
+            var idForma = "#EditarModal select[name=forma] option[value="+$(this).data('forma')+"]";
+            $(idForma).attr({ selected:"selected" })
 
-        var url = "{{ url('secretaria/entradas-pagamentos') }}/"+$(this).data('id');
+            var url = "{{ url('secretaria/entradas-pagamentos') }}/"+$(this).data('id');
 
-        $("#EditarModal form").attr("action", url);
-        
-    });
+            $("#EditarModal form").attr("action", url);
+            
+        });
 
-    // Edit Categoria Function
-    $(document).on('click', '.delete-modal', function(){
+        // Edit Categoria Function
+        $(document).on('click', '.delete-modal', function(){
 
-        $("#ExcluirModal").modal("show");
+            $("#ExcluirModal").modal("show");
 
-        var url = "{{ url('secretaria/entradas-pagamentos') }}/"+$(this).data('id');
+            var url = "{{ url('secretaria/entradas-pagamentos') }}/"+$(this).data('id');
 
-        $("#ExcluirModal form").attr("action", url);
+            $("#ExcluirModal form").attr("action", url);
 
-    });
+        });
     
     </script>
 
     <script>
-        $(document).ready(function() {
-
-
-            var d1 = [[1262304000000, 6], [1264982400000, 3057], [1267401600000, 20434], [1270080000000, 31982], [1272672000000, 26602], [1275350400000, 27826], [1277942400000, 24302], [1280620800000, 24237], [1283299200000, 21004], [1285891200000, 12144], [1288569600000, 10577], [1291161600000, 10295]];
-            var d2 = [[1262304000000, 5], [1264982400000, 200], [1267401600000, 1605], [1270080000000, 6129], [1272672000000, 11643], [1275350400000, 19055], [1277942400000, 30062], [1280620800000, 39197], [1283299200000, 37000], [1285891200000, 27000], [1288569600000, 21000], [1291161600000, 17000]];
-
-            var data1 = [
-                { label: "Data 1", data: d1, color: '#17a084'},
-                { label: "Data 2", data: d2, color: '#127e68' }
-            ];
-            $.plot($("#flot-chart1"), data1, {
-                xaxis: {
-                    tickDecimals: 0
-                },
-                series: {
-                    lines: {
-                        show: true,
-                        fill: true,
-                        fillColor: {
-                            colors: [{
-                                opacity: 1
-                            }, {
-                                opacity: 1
-                            }]
-                        },
-                    },
-                    points: {
-                        width: 0.1,
-                        show: false
-                    },
-                },
-                grid: {
-                    show: false,
-                    borderWidth: 0
-                },
-                legend: {
-                    show: false,
-                }
-            });
-
-            var lineData = {
-                labels: ["January", "February", "March", "April", "May", "June", "July"],
-                datasets: [
-                    {
-                        label: "Example dataset",
-                        backgroundColor: "rgba(26,179,148,0.5)",
-                        borderColor: "rgba(26,179,148,0.7)",
-                        pointBackgroundColor: "rgba(26,179,148,1)",
-                        pointBorderColor: "#fff",
-                        data: [48, 48, 60, 39, 56, 37, 30]
-                    },
-                    {
-                        label: "Example dataset",
-                        backgroundColor: "rgba(220,220,220,0.5)",
-                        borderColor: "rgba(220,220,220,1)",
-                        pointBackgroundColor: "rgba(220,220,220,1)",
-                        pointBorderColor: "#fff",
-                        data: [65, 59, 40, 51, 36, 25, 40]
-                    }
-                ]
-            };
-
-            var lineOptions = {
-                responsive: true
-            };
-
-
-            var ctx = document.getElementById("lineChart").getContext("2d");
-            new Chart(ctx, {type: 'line', data: lineData, options:lineOptions});
-
-        });
 
         // Data table
         $(document).ready(function(){
@@ -543,6 +507,9 @@
             });
 
         });
+
+        
+
     </script>
 
 

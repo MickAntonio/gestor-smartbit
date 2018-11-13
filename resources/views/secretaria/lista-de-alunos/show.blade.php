@@ -122,7 +122,7 @@
                                 <td rowspan="2" class="td-bg-gray">{{ $i++ }}</td>
                                 <th colspan="7" class="td-bg-green">Pagamento Efectuado aos {{ $pagamento->created_at }}</th>
                                 <td class="td-bg-green">
-                                    <a href="" class="btn btn-info btn-sm a-color-white"><i class="fa fa-file-pdf-o"></i> </a>                                                            
+                                    <a href="/secretaria/propina-recibo/{{ $pagamento->id }}" target="__BLANK" class="btn btn-info btn-sm a-color-white"><i class="fa fa-file-pdf-o"></i> </a>                                                            
                                 </td>
                               
                               </tr>

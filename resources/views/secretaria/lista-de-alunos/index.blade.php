@@ -67,7 +67,7 @@
                                    
                                     <td>
                                         <a href="/secretaria/alunos-propinas-pagamentos/{{ $matricula->id }}" class="btn btn-primary btn-sm show-modal"><i class="fa fa-user-circle"></i> </a>
-                                        <a class="btn btn-info btn-sm pagar-modal"    data-id="{{ $matricula->id }}" data-nome="{{ $matricula->aluno->candidato->nome }}" data-curso="{{ $matricula->turma->curso->id }}" data-classe="{{ $matricula->turma->classe->id }}" ><i class="fa fa-money"></i> </a>
+                                        <a class="btn btn-info btn-sm pagar-modal"    data-id="{{ $matricula->id }}" data-nome="{{ $matricula->aluno->candidato->nome }}" data-curso="{{ $matricula->turma->curso->id }}" data-classe="{{ $matricula->turma->classe->id }}" data-saldo="{{ $matricula->aluno->saldo->valor }}"><i class="fa fa-money"></i> </a>
                                     </td>
 
                                 </tr>
@@ -101,14 +101,21 @@
 
                     <div class="row">
 
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                             <div class="form-group">
                                 <label>Aluno</label> 
                                 <input type="text" name="nome" placeholder="" disabled class="form-control">                                
                             </div>                            
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Saldo</label> 
+                                <input type="text" name="saldo_show" value="0.00" placeholder="" disabled class="form-control">                                
+                            </div>                            
+                        </div>
+
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label>Forma de Pagamento</label> 
                                  <select class="form-control"  tabindex="2" name="forma">
@@ -216,8 +223,9 @@
 
                         <input type="hidden" name="user_id" value="1" placeholder="" class="form-control">                                
                         <input type="hidden" name="matricula_id" value="1" placeholder="" class="form-control">                                
-                        <input type="hidden" name="preco_propina" placeholder="" class="form-control">                                
-                        <input type="hidden" name="preco_propina_id" placeholder="" class="form-control">                                
+                        <input type="hidden" name="preco_propina" class="form-control">                                
+                        <input type="hidden" name="preco_propina_id" class="form-control">                                
+                        <input type="hidden" name="saldo"  class="form-control">                                
                         
 
                     </div>
@@ -499,6 +507,8 @@
             $("#adicionarModal").modal("show");
 
             $("#adicionarModal input[name=nome]").val($(this).data('nome'));
+            $("#adicionarModal input[name=saldo_show]").val($(this).data('saldo'));
+            $("#adicionarModal input[name=saldo]").val($(this).data('saldo'));
             $("#adicionarModal input[name=matricula_id]").val($(this).data('id'));
 
             var url = "{{ url('admin/servicos') }}/"+$(this).data('id');

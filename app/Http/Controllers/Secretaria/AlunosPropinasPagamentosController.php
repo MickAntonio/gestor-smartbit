@@ -11,6 +11,7 @@ use App\Models\Pagamentos\PrecoClasses;
 use App\Models\Pagamentos\PagamentoPropinas;
 use App\Models\Pagamentos\Propinas;
 use Session;
+use PDF;
 
 class AlunosPropinasPagamentosController extends Controller
 {
@@ -21,7 +22,7 @@ class AlunosPropinasPagamentosController extends Controller
      */
     public function index()
     {
-        return view('secretaria.pagamentos-alunos-propinas.index');
+        return view('secretaria.pagamentos-alunos-propinas.index')->withPagamentos(PagamentoPropinas::all());
     }
 
     /**
@@ -75,6 +76,18 @@ class AlunosPropinasPagamentosController extends Controller
 
         }
 
+        if($request->total!=$request->valor_pago){
+
+            if($request->total>$request->valor_pago){
+
+                //$saldo = Saldo::find(1);
+                //$saldo->valor = 122;
+                //$propina->save();
+
+            }
+
+        }
+
         Session::flash('successo', 'Pagamento da Propina Efectuado com Successo');
 
         return redirect('secretaria/lista-de-alunos');
@@ -118,6 +131,17 @@ class AlunosPropinasPagamentosController extends Controller
         //
     }
 
+     /**
+     * Display the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function pdfRecibo($id)
+    {
+        $pdf = PDF::loadView('secretaria.pagamentos-alunos-propinas.pdf.recibo',  $data=["pagamento"=>[PagamentoPropinas::find($id)]])->setPaper('a5', 'landscape');
+        return $pdf->stream('recibo.pdf');
+    }
+
     public function jsonListaDeMeses()
     {
         return json_encode( Meses::all() );
@@ -134,6 +158,5 @@ class AlunosPropinasPagamentosController extends Controller
             return 0;            
         }
 
-        
     }
 }

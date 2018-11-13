@@ -61,12 +61,21 @@ Route::prefix("Administrador")->group(function ()
         Route::resource('/alunos-propinas-pagamentos', 'Secretaria\AlunosPropinasPagamentosController', ['except'=>['create', 'edit']]);       
         Route::get('/lista-de-alunos', 'Secretaria\AlunosPropinasPagamentosController@alunos');       
         Route::get('/preco-propina/{curso}/{classe}', 'Secretaria\AlunosPropinasPagamentosController@getPrecoPropina');       
+        Route::get('/propina-recibo/{id}', 'Secretaria\AlunosPropinasPagamentosController@pdfRecibo');  
+        
+        //
+        Route::get('/relatorios/pagamentos-de-propinas', 'Secretaria\Relatorios\PropinasPagamentosController@index');       
+        Route::get('/relatorios/pagamentos-de-propinas-pdf/{id}', 'Secretaria\Relatorios\PropinasPagamentosController@pdfPagamentos');       
+
+        Route::post('/relatorios/outras-entradas-pdf',  ['as'=>'outras.entradas.pdf', 'uses'=>'Secretaria\EntradasPagamentosController@pdfRelatorio']);
+        Route::post('/relatorios/outras-saidas-pdf',  ['as'=>'outras.saidas.pdf', 'uses'=>'Secretaria\SaidasPagamentosController@pdfRelatorio']);
                           
     });
 
-   // Route::prefix('administrador')->group(function(){
-     //   Route::get('/', 'Administrador\DashboardController@dashboard');
-   // });
+    Route::prefix('administrador')->group(function(){
+        Route::get('/', 'Administrador\DashboardController@dashboard');
+    });
+
     
     Route::get('/json/lista-de-meses', 'Secretaria\AlunosPropinasPagamentosController@jsonListaDeMeses');       
 
