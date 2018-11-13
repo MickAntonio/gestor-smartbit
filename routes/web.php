@@ -11,31 +11,40 @@
 |
 */
 
-// My middleware
-
-Route::group(["middleware" => "Secretaria"], function ()
-{
-    Route::get('/', 'Secretaria\DashboardController@dashboard');
-    Route::get('Secretary', 'Secretaria\DashboardController@dashboard')->name("Secre");
-    Route::get('Secretary/CourseList', 'Secretaria\DashboardController@ListCurso')->name("CourseList");
-    Route::get('Secretary/ClassList', 'Secretaria\DashboardController@Listturma')->name("ClassList");
-    Route::get("Secretary/Inscription","Secretaria\matriculaController@Inscricao")->name("Inscription");
-});
-
-Route::group(["middleware" => ["Administrador"]], function ()
-{
-    Route::get('Administrador', 'Administrador\DashboardController@dashboard')->name("Adm");
-    Route::get('Administrador/NewClass', 'Administrador\DashboardController@setTurma')->name("NewClass");
-    Route::get('Administrador/ListClass', 'Administrador\DashboardController@ListTurma')->name("ListClass");
-
-    Route::get('Administrador/NewCourse', 'Administrador\DashboardController@setCurso')->name("NewCourse");
-    Route::get('Administrador/ListCourse', 'Administrador\DashboardController@ListCurso')->name("ListCourse");
-    
-    Route::post("Administrador/AddCourse","Administrador\PostCursoController@store")->name("AddCourse");
-    Route::post("Administrador/AddClass","Administrador\PostTurma@store")->name("AddClass");
-});
-
 Route::group(['middleware'=>['web']], function(){
+
+    Route::prefix("Secretaria")->group(function ()
+{
+    Route::get('/test', 'Secretaria\DashboardController@index')->name("Secre");
+    Route::get('/', 'Secretaria\DashboardController@dashboard')->name("Secre");
+    Route::get('/listar-curso', 'Secretaria\DashboardController@ListCurso')->name("CourseList");
+    Route::get('listar-turmas', 'Secretaria\DashboardController@Listturma')->name("ClassList");
+    Route::resource('inscricao-pela-primeira-vez', 'Secretaria\InscricaoController', ['except'=>['create', 'edit', 'show']]);  
+    Route::get('lista-de-candidatos-inscritos', 'Secretaria\InscricaoController@listaCandidatoInscritos');   
+
+    Route::post("/matricula-anonima","Secretaria\InscricaoController@MatriculaAnonima")->name("MatriculaAnonima"); 
+
+    Route::resource("/confirmar-matricula","Administrador\ConfirmacaoController",['except'=>['create', 'edit', 'show']]);
+});
+
+Route::prefix("Administrador")->group(function ()
+{
+    Route::get('/', 'Administrador\DashboardController@dashboard')->name("Adm");
+    Route::get('/listar-turmas', 'Administrador\PostTurma@ListTurma')->name("ListClass");
+    Route::get('/listar-turmas-antigas', 'Administrador\PostTurma@ListTurmaAntigas')->name("ListOldClass");
+    Route::resource('/criar-turma', 'Administrador\PostTurma', ['except'=>['create', 'edit', 'show']]);   
+
+    Route::resource('/cadastrar-curso', 'Administrador\PostCursoController', ['except'=>['create', 'edit', 'show']]); 
+    Route::get('/listar-curso', 'Administrador\PostCursoController@ListCurso')->name("ListCourse");
+    
+    Route::resource("/atribuir-turma-ao-aluno","Administrador\MatriculaController",['except'=>['create', 'edit', 'show']])->names(["index"=>"AtribuirTurmaAluno","store"=>"AtribuirTurmaAluno"]);
+    Route::get('/lista-da-turma/{idturma}', 'Administrador\Postturma@AlunosDaTurma')->name("AlunosDaTurma");
+    Route::get('/Ficha-do-aluno/{id}', 'Administrador\MatriculaController@FichaMatricula')->name("FichaAluno");
+    Route::get('/lista-dos-alunos-da-turma/{idturma}', 'Administrador\PostTurma@ListaDosAlunos')->name("ListaDosAlunos");    
+
+    Route::get('/json-turma/{idclasse}/{idcurso}', 'Administrador\Postturma@JsonTurma')->name("JsonTurma");
+});
+ // ==================================================================================================
 
     Route::get('/', 'Administrador\DashboardController@dashboard');
 

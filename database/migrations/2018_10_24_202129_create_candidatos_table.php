@@ -35,7 +35,7 @@ class CreateCandidatosTable extends Migration
 
         Schema::table('candidatos', function($table){
             $table->foreign('municipio_id')->references('id')->on('municipios')->onDelete('cascade');
-            $table->foreign('escola_anterior_id')->references('id')->on('escola_anterior')->onDelete('cascade');
+            $table->foreign('escola_anterior_id')->references('id')->on('escola_anteriors')->onDelete('cascade');
         });
     }
 

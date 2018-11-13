@@ -29,8 +29,7 @@
     <div class="row">
         <div class="col-sm-9 m-b-xs">
             <div data-toggle="" class="btn-group">
-            <label class="btn btn-sm btn-white"> <a href="{{ route('ListOldClass') }}" class="">Turmas Antigas</a> </label>
-            <label class="btn btn-sm btn-white"> <a href="{{ route('ListOldClass') }}" class="">Turmas Antigas</a> </label>
+            <label class="btn btn-sm btn-white"> <a href="{{ route('ListClass') }}" class="">Turmais actuais</a> </label>
             </div>
                                 </div>
                             </div>
@@ -39,17 +38,17 @@
                                     <thead>
                                     <tr>
                                         <th>Nome</th>
-                                        <th>Vaga (as) </th>
+                                        <th>Quantidade </th>
                                         <th>Periodo</th>
                                         <th>Classe </th>
                                         <th>Curso</th>
                                         <th>Ano Lectivo </th>
                                         <th>Acção</th>
+                                        <th>Acção</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                   <?php for ($i=0; $i <count($Turma) ; $i++) { 
-                                       if($Turma[$i]->anolectivo == date("Y")) {?>
+                                   <?php for ($i=0; $i <count($Turma) ; $i++) { ?>
                                     <tr>
                                         <td>{{ $Turma[$i]->nome }}</td>
                                         <td>{{ $Turma[$i]->Quantidade }}</td>
@@ -57,14 +56,12 @@
                                         <td>{{ $Turma[$i]->classe()->get()[0]->nome }}</td>
                                         <td>{{ $Turma[$i]->curso()->get()[0]->nome }}</td>
                                         <td>{{ $Turma[$i]->anolectivo }}</td>
+                                        <td><a href="#" class="btn btn-success" >Editar</a></td>
                                         <td>
-                                            <a href="{{route('AlunosDaTurma',$Turma[$i]->id)}}" class="btn btn-success" ><i class="fa fa-print"></i> Lista</a>
-                                            <a href="#" class="btn btn-success" ><i class="fa fa-pencil"></i></a>
-                                            <a data-id="{{ $Turma[$i]->id }}" class="btn btn-danger Eliminar" ><i class="fa fa-close"></i></a>
-                                        </td>
+                                        <a data-id="{{ $Turma[$i]->id }}" class="btn btn-danger Eliminar" >  Eliminar</a></td>
 
                                     </tr>
-                                    <?php } } ?>
+                                    <?php } ?>
                                     </tbody>
                                 </table>
                             </div>

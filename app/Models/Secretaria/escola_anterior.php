@@ -4,7 +4,7 @@ namespace App\Models\Secretaria;
 
 use Illuminate\Database\Eloquent\Model;
 
-class EscolaAnterior extends Model
+class escola_anterior extends Model
 {
     //
 }

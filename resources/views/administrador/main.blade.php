@@ -20,20 +20,27 @@
             <div class="navbar-collapse collapse" id="navbar">
                 <ul class="nav navbar-nav">
                     <li class="active">
-                        <a aria-expanded="false" role="button" href="<?=route("Adm")?>"> Administrador</a>
+                        <a aria-expanded="false" role="button" href=""> Administrador</a>
                     </li>
                     <li class="dropdown">
                         <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Curso <span class="caret"></span></a>
                         <ul role="menu" class="dropdown-menu">
-                            <li><a href="<?=route("NewCourse")?>">Criar Curso</a></li>
-                            <li><a href="<?=route("ListCourse")?>">Lista de cursos</a></li>
+                            <li><a href="/Administrador/cadastrar-curso">Criar Curso</a></li>
+                            <li><a href="/Administrador/listar-curso">Lista de cursos</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
                         <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Turma <span class="caret"></span></a>
                         <ul role="menu" class="dropdown-menu">
-                            <li><a href="<?=route("NewClass")?>">Criar Turma</a></li>
-                            <li><a href="<?=route("ListClass")?>">Lista de turmas</a></li>
+                            <li><a href="/Administrador/criar-turma">Criar Turma</a></li>
+                            <li><a href="{{route('ListClass')}}">Lista de turmas</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown">Matriculas<span class="caret"></span></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li><a href="{{route('AtribuirTurmaAluno')}}">Matricula</a></li>
+                            <li><a href="">Confirmação de Matricula </a></li>
                         </ul>
                     </li>
 

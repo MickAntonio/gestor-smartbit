@@ -18,7 +18,8 @@ class CreateTurmasTable extends Migration
             $table->string('nome'); 
             $table->enum('periodo', ['Manhã', 'Tarde', 'Noite']);   
             $table->integer('anolectivo'); 
-            $table->integer('Quantidade'); 
+            $table->integer('Quantidade');
+            $table->enum("estado",["ANONIMA","NORMAL"]);
             $table->unsignedInteger('classe_id');
             $table->unsignedInteger('curso_id');                                
             $table->timestamps();

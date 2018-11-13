@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Administrador\Cursos;
 use App\Models\Administrador\Turmas;
+use App\Models\Secretaria\escola_anterior;
 
 class DashboardController extends Controller
 {
@@ -15,7 +16,8 @@ class DashboardController extends Controller
     }
     public function index()
     {
-        return view('secretaria.pages.dashboard');
+       $a = new escola_anterior;
+        print_r($a);
     }
     public function ListCurso()
     {
