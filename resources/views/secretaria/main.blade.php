@@ -10,35 +10,6 @@
     <div id="wrapper">
         <div id="page-wrapper" class="gray-bg">
         <div class="row border-bottom white-bg">
-<<<<<<< HEAD
-        <nav class="navbar navbar-static-top" role="navigation">
-            <div class="navbar-header">
-                <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
-                    <i class="fa fa-reorder"></i>
-                </button>
-                <a href="" class="navbar-brand">GESB</a>
-            </div>
-            <div class="navbar-collapse collapse" id="navbar">
-                <ul class="nav navbar-nav">
-                    <li class="active">
-                        <a aria-expanded="false" role="button" href=""> SECRETÁRIA</a>
-                    </li>
-                    <li class="dropdown">
-                        <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Estatísticas <span class="caret"></span></a>
-                        <ul role="menu" class="dropdown-menu">
-                            <li><a href="<?=route("Inscription")?>">Matricular candidato</a></li>
-                            <li><a href="#">Ver candidato matriculado</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown">Pagamentos dos Alunos<span class="caret"></span></a>
-                        <ul role="menu" class="dropdown-menu">
-                            <li><a href="/secretaria/lista-de-alunos">Pagamento de Propinas</a></li>
-                            <li><a href="/secretaria/alunos-propinas-pagamentos">Lista de Pagamentos das Propinas</a></li>
-                            <li><a href="/secretaria/alunos-outros-pagamentos">Outros</a></li>
-                        </ul>
-                    </li>
-=======
             <nav class="navbar navbar-static-top" role="navigation">
                 <div class="navbar-header">
                     <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
@@ -60,13 +31,14 @@
                                 <li><a href="/Secretaria/inscricao">Lista de Confirmados</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown">
+                 <!--       <li class="dropdown">
                             <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Estatísticas <span class="caret"></span></a>
                             <ul role="menu" class="dropdown-menu">
                                 <li><a href="/Secretaria/inscricao">Matricular candidato</a></li>
                                 <li><a href="#">Ver candidato matriculado</a></li>
                             </ul>
                         </li>
+                        -->
                         <li class="dropdown">
                             <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown">Pagamentos dos Alunos<span class="caret"></span></a>
                             <ul role="menu" class="dropdown-menu">
@@ -75,7 +47,6 @@
                                 <li><a href="/secretaria/alunos-outros-pagamentos">Outros</a></li>
                             </ul>
                         </li>
->>>>>>> 69823c1574549dd2c89fe0dfa42e030d0fffa7d3
 
                         <li class="dropdown">
                             <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown">Outros Pagamentos <span class="caret"></span></a>
@@ -93,16 +64,7 @@
                                 <li><a href="/secretaria/precos">Preços</a></li>
                             </ul>
                         </li>
-                    
-<<<<<<< HEAD
-                    <li class="dropdown">
-                        <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Configurações de Dados <span class="caret"></span></a>
-                        <ul role="menu" class="dropdown-menu">
-                            <li><a href="/secretaria/tipos-de-pagamentos">Tipos de Pagamentos</a></li>
-                            <li><a href="/secretaria/preco-das-propinas">Preços das Propinas</a></li>
-                            <li><a href="/secretaria/precos">Preços</a></li>
-                        </ul>
-                    </li>
+                 
 
                     <li class="dropdown">
                         <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Relatórios <span class="caret"></span></a>
@@ -113,8 +75,6 @@
                         </ul>
                     </li>
                   
-=======
->>>>>>> 69823c1574549dd2c89fe0dfa42e030d0fffa7d3
 
                     </ul>
                     <ul class="nav navbar-top-links navbar-right">
