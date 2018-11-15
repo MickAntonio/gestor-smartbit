@@ -216,7 +216,7 @@
                             <tr>
                                 <th>Ação</th>
                                 <td>
-                                <a class="btn btn-danger btn-sm delete-preco-modal" data-id="{{ $preco->id }}" ><i class="fa fa-trash"></i> </a>
+                                <a class="btn btn-danger btn-sm delete-preco-modal" data-id="" ><i class="fa fa-trash"></i> </a>
                                 </td>
                             </tr>
                             
