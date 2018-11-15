@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Administrador;
 use App\Models\Secretaria\Candidatos;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Administrador\Alunos;
+use App\Models\Administrador\Classes;
 
 class ConfirmacaoController extends Controller
 {
@@ -13,9 +15,14 @@ class ConfirmacaoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($processo = 0)
     {
-        return view("secretaria.confirmacao.confirmar-matricula");
+        $Aluno = Alunos::where("processo",$processo)->get();
+        if(isset($Aluno[0]))
+            return view("secretaria.confirmacao.confirmar-matricula")
+                    ->withprocesso($processo)
+                    ->withaluno($Aluno)
+                    ->withclasse(Classes::all());
     }
 
     /**

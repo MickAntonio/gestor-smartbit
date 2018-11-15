@@ -13,7 +13,6 @@ class Alunos extends Model
     public function curso(){
         return $this->belongsTo('App\Models\Administrador\Cursos');
     }
-
     public function matricula(){
         return $this->hasMany('App\Models\Administrador\matriculas',"aluno_id");
     }
