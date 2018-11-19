@@ -32,17 +32,25 @@
                                 <li><a href="{{url('/Secretaria/Lista-de-alunos-com-matricula-confirmada')}}">Lista de Confirmados</a></li>
                             </ul>
                         </li>
+                 <!--       <li class="dropdown">
+                            <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Estatísticas <span class="caret"></span></a>
+                            <ul role="menu" class="dropdown-menu">
+                                <li><a href="/Secretaria/inscricao">Matricular candidato</a></li>
+                                <li><a href="#">Ver candidato matriculado</a></li>
+                            </ul>
+                        </li>
+                        -->
                         <li class="dropdown">
                             <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown">Pagamentos dos Alunos<span class="caret"></span></a>
                             <ul role="menu" class="dropdown-menu">
-                                <li><a href="/secretaria/lista-de-alunos">Lista de Alunos</a></li>
-                                <li><a href="/secretaria/alunos-propinas-pagamentos">Propinas</a></li>
+                                <li><a href="/secretaria/lista-de-alunos">Pagamento de Propina</a></li>
+                                <li><a href="/secretaria/alunos-propinas-pagamentos">Pag. Propinas Efectuados</a></li>
                                 <li><a href="/secretaria/alunos-outros-pagamentos">Outros</a></li>
                             </ul>
                         </li>
 
                         <li class="dropdown">
-                            <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown">Outros Pagamentos <span class="caret"></span></a>
+                            <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown">Pagamentos de Entidades<span class="caret"></span></a>
                             <ul role="menu" class="dropdown-menu">
                                 <li><a href="/secretaria/entradas-pagamentos">Entradas</a></li>
                                 <li><a href="/secretaria/saidas-pagamentos">Saidas</a></li>
@@ -52,12 +60,14 @@
                         <li class="dropdown">
                             <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Configurações de Dados <span class="caret"></span></a>
                             <ul role="menu" class="dropdown-menu">
-                                <li><a href="/secretaria/tipos-de-pagamentos">Tipos de Pagamentos</a></li>
+                                <li><a href="/secretaria/tipos-de-pagamentos">Tipos de Entradas/Saidas</a></li>
                                 <li><a href="/secretaria/preco-das-propinas">Preços das Propinas</a></li>
-                                <li><a href="/secretaria/precos">Preços</a></li>
+                                <li><a href="/secretaria/precos">Preços Usados</a></li>
                             </ul>
                         </li>
                     
+                 
+
                     <li class="dropdown">
                         <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Relatórios <span class="caret"></span></a>
                         <ul role="menu" class="dropdown-menu">

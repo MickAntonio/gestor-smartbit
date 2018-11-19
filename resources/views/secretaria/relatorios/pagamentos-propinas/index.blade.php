@@ -52,7 +52,7 @@
                                 @endphp                              
                               
                                 @foreach($turmas as $turma)
-                              
+                                @if($turma->estado!="ANONIMA")
                                 <tr>
                                     <td>{{ $i++ }}</td>
                                     <td>{{ $turma->curso->nome }}</td>
@@ -64,6 +64,7 @@
                                         <a  href="/secretaria/relatorios/pagamentos-de-propinas-pdf/{{ $turma->id }}" class="btn btn-primary btn-sm"  ><i class="fa fa-file-pdf-o"></i> </a>
                                     </td>
                                 </tr>
+                                @endif
 
                                 @endforeach
 
