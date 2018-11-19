@@ -40,7 +40,7 @@
                         <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown">Matriculas<span class="caret"></span></a>
                         <ul role="menu" class="dropdown-menu">
                             <li><a href="{{route('AtribuirTurmaAluno')}}">Matricula</a></li>
-                            <li><a href="">Confirmação de Matricula </a></li>
+                            <li><a href="{{route('ConfirmacaoRecentes')}}">Lista de confirmação de Matricula </a></li>
                         </ul>
                     </li>
 

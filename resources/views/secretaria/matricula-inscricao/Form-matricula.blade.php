@@ -34,23 +34,17 @@
                             <h1>DADOS BIOGRAFICOS</h1>
                             <fieldset>
                                 <div class="col-md-12">
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <label for="firstName">
                                             <p>Primeiro Nome</p>
                                         </label>
-                                        <input required type="text" id="firstName" name="firstName" class="form-control" />
+                                        <input required minlength="3" type="text" id="firstName" name="firstName" class="form-control" />
                                     </div>
-                                    <div class="col-md-4">
-                                        <label for="middleName">
-                                            <p>Segundo Nome</p>
-                                        </label>
-                                        <input required type="text" id="middleName" name="middleName" class="form-control" />
-                                    </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <label for="lastName">
                                             <p>Ultimo Nome</p>
                                         </label>
-                                        <input required type="text" id="lastName" name="lastName" class="form-control" />
+                                        <input required minlength="3" type="text" id="lastName" name="lastName" class="form-control" />
                                     </div>
                                 </div>   
                                 <div class="col-md-12">
@@ -70,13 +64,13 @@
                                         <label for="futher">
                                             <p>Nome do Pai:</p>
                                         </label>
-                                        <input required type="text" id="futher" name="futher" class="form-control" />
+                                        <input required minlength="7" type="text" id="futher" name="futher" class="form-control" />
                                     </div>
                                     <div class="col-md-4">
                                         <label for="mother">
                                             <p>Nome do Mãe:</p>
                                         </label>
-                                        <input required type="text" id="mother" name="mother" class="form-control" />
+                                        <input required minlength="7" type="text" id="mother" name="mother" class="form-control" />
                                     </div>
                                    
                                 </div>
@@ -121,13 +115,13 @@
                                         <label for="cellphoneFuther">
                                             <p>Telefone do pai:</p>
                                         </label>
-                                        <input required min="910000000" max="999999999" type="number" id="cellphoneFuther" name="cellphoneFuther" class="form-control" />
+                                        <input required min="910000000" max="999999999" type="number" id="cellphoneFuther" name="TelefonePai" class="form-control" />
                                     </div>
                                     <div class="col-md-4">
                                         <label for="cellphoneMother">
                                             <p>Telefone da mãe:</p>
                                         </label>
-                                        <input required min="910000000" max="999999999" type="number" id="cellphoneMother" name="cellphoneMother" class="form-control" />
+                                        <input required min="910000000" max="999999999" type="number" id="cellphoneMother" name="TelefoneMae" class="form-control" />
                                     </div>           
                                 </div>
                                 <div class="col-md-12">
@@ -155,7 +149,7 @@
                                         <label for="escolaAnterior">
                                             <p>Escola Anterior:</p>
                                         </label>
-                                        <input required type="text" id="escolaAnterior" name="escolaAnterior" class="form-control" />
+                                        <input required type="text" minlength="4" id="escolaAnterior" name="escolaAnterior" class="form-control" />
                                     </div>
                                     <div class="col-md-8">
                                         <label for="anoAnterior">

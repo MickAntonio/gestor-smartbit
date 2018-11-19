@@ -34,10 +34,33 @@ class MatriculaController extends Controller
     {
         return view("Administrador.pages.lista-alunos-matriculados-sem-turma") ->withmatricula(matriculas::All());
     }
+    public function listaAlunosMatriculados($date = 0)
+    {
+        Session::flash("failed","Não há alunos matriculados neste ano lectivo $date ...");
+        if($date != 0)
+        {
+            return view("secretaria.confirmacao.lista-matriculado")
+            ->withmatricula(matriculas::where("tipo","Matricula")->get())
+            ->withdate($date);
+        }
+        else
+        {
+            return view("secretaria.confirmacao.lista-matriculado")
+            ->withdate($date);
+        }
+    }
+    public function PdfAllMatriculados($date = 0 )
+    {
+        return PDF::loadView('administrador.pdf.lista-dos-matriculados',
+                    [
+                        "matriculado" =>matriculas::where("tipo","Matricula")->get(),
+                        "date" => $date
+                    ])->setPaper('a4', 'portraite')->stream();
+    }
     public function FichaMatricula($id = 0)
     {
       $products =[2,2,3];//\Product::all();
-
+        Session::flash("MatriFicha","verdadeiro");
         return PDF::loadView('administrador.pdf.FichaAluno',["matricula" => Candidatos::where("id",$id)->get()[0]])
                 // Se quiser que fique no formato a4 retrato:
                 ->setPaper('a4', 'portraite')->stream();;

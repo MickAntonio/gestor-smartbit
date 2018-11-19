@@ -7,7 +7,7 @@
 
     @if (count($errors) > 0)            
         <div class="alert alert-danger margin-top-100" role="alert">
-            <strong>Mensagem:</strong>
+            <strong>Lamento:</strong>
             
             <ul>
             @foreach($errors->all() as $error)

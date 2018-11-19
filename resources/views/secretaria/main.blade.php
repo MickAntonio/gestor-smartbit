@@ -25,10 +25,11 @@
                         <li class="dropdown">
                             <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Inscricao Matricula <span class="caret"></span></a>
                             <ul role="menu" class="dropdown-menu">
-                                <li><a href="/Secretaria/inscricao-pela-primeira-vez">Inscrever</a></li>
-                                <li><a href="/Secretaria/lista-de-candidatos-inscritos">Lista de inscritos</a></li>
-                                <li><a href="/Secretaria/confirmar-matricula">Confirmar Matricula</a></li>
-                                <li><a href="/Secretaria/inscricao">Lista de Confirmados</a></li>
+                                <li><a href="{{url('/Secretaria/inscricao-pela-primeira-vez')}}">Inscrever</a></li>
+                                <li><a href="{{url('/Secretaria/lista-de-candidatos-inscritos')}}">Lista de inscritos</a></li>
+                                <li><a href="{{url('Secretaria/Lista-de-alunos-matriculados')}}">Lista de Matriculados</a></li>
+                                <li><a href="{{url('/Secretaria/confirmar-matricula')}}">Confirmar Matricula</a></li>
+                                <li><a href="{{url('/Secretaria/Lista-de-alunos-com-matricula-confirmada')}}">Lista de Confirmados</a></li>
                             </ul>
                         </li>
                  <!--       <li class="dropdown">
@@ -64,6 +65,7 @@
                                 <li><a href="/secretaria/precos">Preços Usados</a></li>
                             </ul>
                         </li>
+                    
                  
 
                     <li class="dropdown">
