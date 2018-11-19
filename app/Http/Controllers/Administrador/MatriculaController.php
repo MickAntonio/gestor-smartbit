@@ -47,6 +47,14 @@ class MatriculaController extends Controller
                         "date" => $date
                     ])->setPaper('a4', 'portraite')->stream();
     }
+    public function renderiza ()
+    {
+        if(Session::has("MatriFicha") and Session::get("MatriFicha")=="verdadeiro")
+        {
+            Session::flash("MatriFicha","falso");
+            return json_encode(["view" => true]);
+        }else return json_encode(["view" => false]);
+    }
     public function FichaMatricula($id = 0)
     {
       $products =[2,2,3];//\Product::all();

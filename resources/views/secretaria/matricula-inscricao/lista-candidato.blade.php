@@ -160,12 +160,19 @@
 
     <script>
     // Data table
-        @if(Session::has("MatriFicha"))
-            @if(Session::get("MatriFicha")=="verdadeiro")
-                window.location.href = "";
-                @php Session::flash("MatriFicha","falso"); @endphp
-            @endif
-        @endif
+        setTimeout(function()
+        {
+            $.get("{{url('/Secretaria/renderiza')}}",{"game":1},function(done)
+                {
+                    if(done.view == true)
+                    {
+                        window.location.href = "";
+                    }
+                    console.log(done)
+                },"Json");
+                
+        },50);
+       
         $(document).ready(function(){
             $(".adds").click(function ()
             {
