@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use App\Models\General\Instituicional;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -30,7 +29,7 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        return view('auth.login')->withInstituicional(Instituicional::find(1));
+        return view('auth.login');
     }
 
     /**
@@ -129,7 +128,13 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-        return redirect('/admin');
+        if($user->type=='Secretaria'){
+            $url = '/secretaria';
+        }else{
+            $url = '/Administrador';
+        }
+
+        return redirect($url);
     }
 
     /**
@@ -189,7 +194,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin';
+    protected $redirectTo = '/ww';
 
     /**
      * Create a new controller instance.
@@ -201,5 +206,6 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+   
 
 }

@@ -10,6 +10,17 @@ use App\Models\Secretaria\escola_anterior;
 
 class DashboardController extends Controller
 {
+
+     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function dashboard()
     {
         return view('secretaria.pages.dashboard');

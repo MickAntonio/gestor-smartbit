@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use App\Models\General\Instituicional;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
@@ -38,7 +37,7 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
-        return view('auth.register')->withInstituicional(Instituicional::find(1));
+        return view('auth.register');
     }
 
     /**
@@ -78,7 +77,13 @@ class RegisterController extends Controller
      */
     protected function registered(Request $request, $user)
     {
-        //
+        if($user->type=='Secretaria'){
+            $url = '/secretaria';
+        }else{
+            $url = '/Administrador';
+        }
+
+        return redirect($url);
     }
 
     /**
@@ -95,7 +100,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:web');
+      //  $this->middleware('auth:web');
     }
 
     /**
