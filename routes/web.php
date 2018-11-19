@@ -13,6 +13,8 @@
 
 Route::group(['middleware'=>['web']], function(){
 
+
+
     Route::prefix("Secretaria")->group(function ()
 {
     Route::get('/', 'Secretaria\DashboardController@dashboard')->name("Secre");
@@ -107,4 +109,9 @@ Route::prefix("Administrador")->group(function ()
 
 });
 
+
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
 
