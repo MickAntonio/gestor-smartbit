@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Administrador\Cursos;
 use App\Models\Administrador\Turmas;
 use App\Models\Secretaria\escola_anterior;
+use App\Models\Administrador\matriculas;
+use Session;
 
 class DashboardController extends Controller
 {
@@ -26,5 +28,20 @@ class DashboardController extends Controller
     public function ListTurma()
     {
         return view('secretaria.pages.ListTurma')->with("Turma", Turmas::All());
+    }
+    public function listaAlunosConfirmados($date = 0)
+    {
+        Session::flash("failed","Não há alunos confirmados neste ano lectivo $date ...");
+        if($date != 0)
+        {
+            return view("secretaria.confirmacao.lista-confirmacao")
+            ->withmatricula(matriculas::All())
+            ->withdate($date);
+        }
+        else
+        {
+            return view("secretaria.confirmacao.lista-confirmacao")
+            ->withdate($date);
+        }
     }
 }

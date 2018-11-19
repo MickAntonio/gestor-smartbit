@@ -40,23 +40,31 @@ class InscricaoController extends Controller
             [
                 "classe" => " required"
             ]);
-            
-            $turma = Turmas::where("estado","=","ANONIMA")
-                            ->where("curso_id","=",$request->curso)
-                            ->where("classe_id","=",$request->classe)
-                            ->where("periodo","=",$request->periodo)->get()[0];
-            if(isset($turma))
+            if($request->classe==4)
             {
-                $matricula = new matriculas;
-                $matricula->aluno_id = $request->idaluno;
-                $matricula->turma_id = $turma->id;
-                $matricula->tipo = "Matricula";
-                $matricula->condicao = "Limpo";
-                $matricula->save();
+                Session::flash("successo","Candidato não pode ser matriculado  na 13ª classe...");
+                return redirect()->back();
+            }else
+            {
+                
+                $turma = Turmas::where("estado","=","ANONIMA")
+                                ->where("curso_id","=",$request->curso)
+                                ->where("classe_id","=",$request->classe)
+                                ->where("periodo","=",$request->periodo)->get()[0];
+                if(isset($turma))
+                {
+                    $matricula = new matriculas;
+                    $matricula->aluno_id = $request->idaluno;
+                    $matricula->turma_id = $turma->id;
+                    $matricula->tipo = "Matricula";
+                    $matricula->condicao = "Limpo";
+                    $matricula->save();
 
-                Session::flash("successo","Candidato matriculado com sucesso e encaminhado a coordenação");
+                    Session::flash("successo","Candidato matriculado com sucesso e encaminhado a coordenação");
+                    return redirect("Administrador/Ficha-do-aluno/".$matricula->aluno_id);
+                }
+                return redirect()->back();
             }
-            return redirect()->back();
 
     }
     /**
@@ -79,20 +87,20 @@ class InscricaoController extends Controller
     {
        // print_r($request::All());
         $this->validate($request,[
-            "firstName" => "required | min:4",
-            "lastName" => "required | min:4",
-            "futher" => "required | min:7",
-            "mother" => " required | min:7",
+            "firstName" => "required | min:3",
+            "lastName"  => "required | min:3",
+            "futher" => " required | min:6",
+            "mother" => " required | min:6",
             "Idnumber" => "required | min:14 | max:14 | string",
             "genre" => "required | min:1",
-            "born" => "required | date",
+            "born" =>  "required | date",
             "Naturalidade" => "required | min:1",
-            "residencia" => "required | min:10",
-            "cellphoneFuther" => "required | min:909999999 | numeric",
-            "cellphoneMother" => "required | min:909999999 | numeric",
-            "cellphone" => "required | min:909999999 | numeric",
+            "residencia" => "required | min:4",
+            "TelefonePai" => "required | numeric",
+            "TelefoneMae" => "required | numeric",
+            "cellphone" => "required | | numeric",
             "email" => "required | e-mail",
-            "escolaAnterior" => "required | min:4",
+            "escolaAnterior" => "required | min:3",
             "anoAnterior" => "required | min:4",
             "curso" => "required | min:1"
         ]);
@@ -107,7 +115,7 @@ class InscricaoController extends Controller
         {
             $Candidato = new Candidatos;
 
-            $Candidato->nome = $request->firstName." ".$request->middleName." ".$request->lastName;
+            $Candidato->nome = $request->firstName." ".$request->lastName;
             $Candidato->pai = $request->futher;
             $Candidato->mae = $request->mother;
             $Candidato->bi = $request->Idnumber;
@@ -117,8 +125,8 @@ class InscricaoController extends Controller
             $Candidato->bairro = $request->residencia;
             $Candidato->email = $request->email;
             $Candidato->telefone = $request->cellphone;
-            $Candidato->telefone_pai = $request->cellphoneFuther;
-            $Candidato->telefone_mae = $request->cellphoneMother;
+            $Candidato->telefone_pai = $request->TelefonePai;
+            $Candidato->telefone_mae = $request->TelefoneMae;
             $Candidato->escola_anterior_id = $EscolaAnterior->id;
             $Candidato->naturalidade = "nothing";
             if($Candidato->save())

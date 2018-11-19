@@ -29,16 +29,31 @@ class PostTurma extends Controller
         
         return view('Administrador.pages.ListTurma')->with("Turma", Turmas::where("estado",">=","NORMAL")->get());
     }
-    public function ListTurmaAntigas ()
+    public function ListTurmaAntigas ($ano = 0)
     {
-        return view('Administrador.pages.Lista-turma-antiga')
-                ->with("Turma", Turmas::where("estado","=","NORMAL")->where("anolectivo","<",date("Y"))->get());
+        $turma = Turmas::where("estado","=","NORMAL")->where("anolectivo","=",$ano)
+                         ->where("anolectivo","<",date("Y"))->get();
+        if(isset($turma[0]))
+        {
+            return view('Administrador.pages.Lista-turma-antiga')->with( "Turma", $turma );
+        }
+        else
+        {
+            Session::flash("failed","O ano lectivo $ano não existe...");
+            return view('Administrador.pages.Lista-turma-antiga');
+        }
+    }
+    public function ListTurmaFuturas ()
+    {
+        return view('Administrador.pages.Lista-turma-futuras')
+                ->with("Turma", Turmas::where("estado","=","NORMAL")->where("anolectivo",">",date("Y"))->get());
     }
     public function JsonTurma($idclasse,$idcurso)
     {
         return json_encode( 
                 Turmas::where("classe_id",$idclasse)
                 ->where("Quantidade","!=",0)
+                ->where("anolectivo",">=",date("Y"))
                 ->where("curso_id",$idcurso)
                 ->where("estado","NORMAL")->get() );
     }
@@ -46,15 +61,15 @@ class PostTurma extends Controller
     {
         return view("Administrador.pages.lista-alunos-matriculados-com-turma")
                  ->withidturma($idturma)
+                 ->withmatriculado(new matriculas)
                  ->withmatricula(Candidatos::orderBy("nome","ASC")->get());
     }
     public function ListaDosAlunos($idturma = 0)
     {
-      $products =[2,2,3];//\Product::all();
-
         return PDF::loadView('administrador.pdf.lista-dos-alunos-da-turma',
                     [
                         "matricula" => Candidatos::orderBy("nome","ASC")->get(),
+                        "matriculado" => new matriculas,
                         "idturma" => $idturma,
                         "turma" => Turmas::where("id",$idturma)->get()[0]
                     ])

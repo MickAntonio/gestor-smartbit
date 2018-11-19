@@ -67,7 +67,7 @@
                                    
                                     <td>
                                         <a href="/secretaria/alunos-propinas-pagamentos/{{ $matricula->id }}" class="btn btn-primary btn-sm show-modal"><i class="fa fa-user-circle"></i> </a>
-                                        <a class="btn btn-info btn-sm pagar-modal"    data-id="{{ $matricula->id }}" data-nome="{{ $matricula->aluno->candidato->nome }}" data-curso="{{ $matricula->turma->curso->id }}" data-classe="{{ $matricula->turma->classe->id }}" data-saldo="{{ $matricula->aluno->saldo->valor }}"><i class="fa fa-money"></i> </a>
+                                        <a class="btn btn-info btn-sm pagar-modal"    data-id="{{ $matricula->id }}" data-nome="{{ $matricula->aluno->candidato->nome }}" data-curso="{{ $matricula->turma->curso->id }}" data-classe="{{ $matricula->turma->classe->id }}" data-saldo="{{ $matricula->aluno->saldo->valor??'' }}"><i class="fa fa-money"></i> </a>
                                     </td>
 
                                 </tr>

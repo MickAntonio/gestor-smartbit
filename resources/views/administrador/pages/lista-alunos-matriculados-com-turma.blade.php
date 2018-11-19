@@ -46,26 +46,24 @@
                                 </thead>
                                 <tbody>
                                 <?php  $conta = 0 ?>
-                                @foreach($matricula as $aluno)
-                                    @if(isset($aluno->aluno()->get()[0]->matricula()->get()[0]->id))
-                                        @if(isset($aluno->aluno()->get()[0]->matricula()->get()[0]->turma()->get()[0]->id))
-                                            @if($aluno->aluno()->get()[0]->matricula()->get()[0]->turma()->get()[0]->id == $idturma)
-                                        
+                                @foreach($matricula as $text)
+                                    @if(isset($matriculado->where("aluno_id",$text->aluno()->get()[0]->id)->where("turma_id",$idturma)->get()[0]))
+                                        @php  
+                                            $aluno = $matriculado->where("aluno_id",$text->aluno()->get()[0]->id)->where("turma_id",$idturma)->get()[0];
+                                        @endphp
                                             <tr>
                                                 <td>{{ $conta = $conta + 1 }}</td>
-                                                <td>{{ $aluno->aluno()->get()[0]->processo }} </td>
-                                                <td>{{ $aluno->nome }}</td>
-                                                <td>{{ $aluno->aluno()->get()[0]->matricula()->get()[0]->turma()->get()[0]->classe()->get()[0]->nome }} </td>
-                                                <td>{{ $aluno->aluno()->get()[0]->matricula()->get()[0]->turma()->get()[0]->periodo }} </td>
-                                                <td>{{ $aluno->aluno()->get()[0]->matricula()->get()[0]->turma()->get()[0]->curso()->get()[0]->nome }} </td>
-                                                <td>{{$aluno->sexo }} </td>
+                                                <td>{{ $text->aluno()->get()[0]->processo }} </td>
+                                                <td>{{ $text->nome }}</td>
+                                                <td>{{ $aluno->turma()->get()[0]->classe()->get()[0]->nome }} </td>
+                                                <td>{{ $aluno->turma()->get()[0]->periodo }} </td>
+                                                <td>{{ $aluno->turma()->get()[0]->curso()->get()[0]->nome }} </td>
+                                                <td>{{$text->sexo }} </td>
                                                 <td>
                                                 <a  class="btn btn-success btn-sm show-modal"  ><i class="fa fa-share"></i> Trocar de curso</a>
                                                 <a class=" btn btn-primary btn-sm show-modal"   ><i class="fa fa-share"></i> Trocar de turma </a>
                                                 </td>
                                             </tr>
-                                            @endif
-                                        @endif
                                     @endif
                                 @endforeach
                                 

@@ -46,22 +46,21 @@
                 </thead>
                 <tbody>
                 <?php  $conta = 0 ?>
-                @foreach($matricula as $aluno)
-                    @if(isset($aluno->aluno()->get()[0]->matricula()->get()[0]->id))
-                        @if(isset($aluno->aluno()->get()[0]->matricula()->get()[0]->turma()->get()[0]->id))
-                            @if(isset($aluno->aluno()->get()[0]->matricula()->get()[0]->turma()->get()[0]->id) and $aluno->aluno()->get()[0]->matricula()->get()[0]->turma()->get()[0]->id == $idturma)
-                                            
-                            <tr>
-                                <td>{{ $conta = $conta + 1 }}</td>
-                                <td>{{ $aluno->aluno()->get()[0]->processo?? "" }} </td>
-                                <td>{{ $aluno->nome?? "" }}</td>
-                                <td>{{ $aluno->sexo?? "" }} </td>
-                                <td>{{ $aluno->nascido?? "" }} </td><td>{{$aluno->telefone?? "" }} </td>                                                
-                            </tr>
-                            @endif
-                        @endif
-                    @endif
-                @endforeach
+                @foreach($matricula as $text)
+                                    @if(isset($matriculado->where("aluno_id",$text->aluno()->get()[0]->id)->where("turma_id",$idturma)->get()[0]))
+                                        @php  
+                                            $aluno = $matriculado->where("aluno_id",$text->aluno()->get()[0]->id)->where("turma_id",$idturma)->get()[0];
+                                        @endphp
+                                            <tr>
+                                                <td>{{ $conta = $conta + 1 }}</td>
+                                                <td>{{ $text->aluno()->get()[0]->processo }} </td>
+                                                <td>{{ $text->nome }}</td>
+                                                <td>{{$text->sexo }} </td>
+                                                <td>{{$text->nascido }} </td> 
+                                                <td>{{$text->telefone }} </td> 
+                                            </tr>
+                                    @endif
+                                @endforeach
                    
                </tbody>
            </table>

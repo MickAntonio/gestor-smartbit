@@ -29,11 +29,11 @@
     <div class="row">
         <div class="col-sm-9 m-b-xs">
             <div data-toggle="" class="btn-group">
-                <label class="btn btn-sm btn-white"> <a href="{{ route('ListClass') }}" class="">TURMAS ACTUAIS</a> </label>
-                <label class="btn btn-sm btn-white"> <a href="{{ route('ListNextClass') }}" class="">TURMAS DE {{ date("Y")+1 }}</a> </label>
+            <label class="btn btn-sm btn-white"> <a href="{{ route('ListOldClass') }}" class="">TURMAS ANTIGAS</a> </label>
+            <label class="btn btn-sm btn-white"> <a href="{{ route('ListClass') }}" class="">TURMAS ACTUAIS</a> </label>
             </div>
-        </div>
-    </div>
+                                </div>
+                            </div>
                                  <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover data-table-grid">
                                     <thead>
@@ -48,26 +48,23 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                   <?php 
-                                   if(isset($Turma))
-                                    { 
-                                        for ($i=0; $i <count($Turma) ; $i++) { 
-                                         if($Turma[$i]->anolectivo < date("Y")) {?>
-                                            <tr>
-                                                <td>{{ $Turma[$i]->nome }}</td>
-                                                <td>{{ $Turma[$i]->Quantidade }}</td>
-                                                <td>{{ $Turma[$i]->periodo }}</td>
-                                                <td>{{ $Turma[$i]->classe()->get()[0]->nome }}</td>
-                                                <td>{{ $Turma[$i]->curso()->get()[0]->nome }}</td>
-                                                <td>{{ $Turma[$i]->anolectivo }}</td>
-                                                <td>
-                                                    <a href="{{route('AlunosDaTurma',$Turma[$i]->id)}}" class="btn btn-success" ><i class="fa fa-print"></i> Lista</a>
-                                                    <a href="#" class="btn btn-success" ><i class="fa fa-pencil"></i></a>
-                                                    <a data-id="{{ $Turma[$i]->id }}" class="btn btn-danger Eliminar" ><i class="fa fa-close"></i></a>
-                                                </td>
+                                   <?php for ($i=0; $i <count($Turma) ; $i++) { 
+                                       if($Turma[$i]->anolectivo > date("Y")) {?>
+                                    <tr>
+                                        <td>{{ $Turma[$i]->nome }}</td>
+                                        <td>{{ $Turma[$i]->Quantidade }}</td>
+                                        <td>{{ $Turma[$i]->periodo }}</td>
+                                        <td>{{ $Turma[$i]->classe()->get()[0]->nome }}</td>
+                                        <td>{{ $Turma[$i]->curso()->get()[0]->nome }}</td>
+                                        <td>{{ $Turma[$i]->anolectivo }}</td>
+                                        <td>
+                                            <a href="{{route('AlunosDaTurma',$Turma[$i]->id)}}" class="btn btn-success" ><i class="fa fa-print"></i> Lista</a>
+                                            <a href="#" class="btn btn-success" ><i class="fa fa-pencil"></i></a>
+                                            <a data-id="{{ $Turma[$i]->id }}" class="btn btn-danger Eliminar" ><i class="fa fa-close"></i></a>
+                                        </td>
 
-                                            </tr>
-                                    <?php } } } ?>
+                                    </tr>
+                                    <?php } } ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -107,40 +104,6 @@
 
     </div>                
 </div>
-
-<div data-backdrop="static" class="modal inmodal" id="TurmaAntiga" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog ">
-            <div class="modal-content animated flipInY">
-
-            
-                <div class="modal-header">
-                    @if (Session::has('failed') or !isset($Turma))
-                        <div class="alert alert-danger margin-top-100" role="alert">
-                            <h4><strong>Lamento:</strong> {{ Session::get('failed')??" " }} </h4>
-                        </div>
-                    @endif       
-                </div>
-                <div class="modal-body">
-
-                    <div class="row">
-                            <div class="col-md-12 margem" >
-                                    <label for="processo">
-                                        <p>Informe o ano lectivo</p>
-                                    </label>
-                                    <input required min="2010" type="number" id="processo" name="processo" class="form-control" />
-                            </div>
-                             <a  class="margem col-sm-12 btn btn-primary procurar"> <strong>Procurar</strong></a>
-
-                        <button type="button" class="col-sm-12 btn btn-white mg-top-20 end"><strong>Cancelar</strong></button>
-                        
-                    </div>
-
-                </div>
-            
-            </div>
-        </div>
-
-    </div>       
 @endsection
 
 @section("scripts")
@@ -152,19 +115,6 @@
   <script>
   // Data table
       $(document).ready(function(){
-
-          @if(!isset($Turma))
-                $("#TurmaAntiga").modal("show");
-                $(".procurar").click(function()
-                {
-                    window.location.href=' {{url("/Administrador/listar-turmas-antigas")}}/'+$("#processo").val();
-                });
-            @endif
-            $(".end").click(function()
-            {
-                //window.history.back();
-                window.location.href=' {{url("/Administrador/listar-turmas-recentes")}}';
-            });
           
           $('.data-table-grid').DataTable({
               pageLength: 5,

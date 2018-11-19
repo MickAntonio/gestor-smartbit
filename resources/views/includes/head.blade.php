@@ -10,5 +10,10 @@
 {!! Html::style('css/custom.css') !!}
 {!! Html::style('css/plugins/datapicker/datepicker3.css') !!}   
 
-
+ <style>
+  .margem 
+  {
+      margin-bottom: 20px;
+  }</style>
+  
 @yield('head')

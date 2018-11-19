@@ -1,5 +1,5 @@
 @extends("secretaria.main")
-@section("title","Formulário de Matricula")
+@section("title","Lista de candidatos a serem inscritos")
 
 @section("head")
 {!! Html::style('css/plugins/dataTables/datatables.min.css') !!}
@@ -26,7 +26,7 @@
 
                             <a href="/servicos/pdf" class="btn btn-info btn-sm a-color-white"><i class="fa fa-file-pdf-o"></i> </a>                        
 
-                            <a href="#" data-toggle="modal" data-target="#adicionarModal" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> </a>
+                            <a href=""  class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> </a>
                       
                         </div>
 
@@ -131,9 +131,8 @@
                                 <label for="IdPeriodo">
                                     <p>Periodo</p>
                                 </label>
-                                <select required class="form-control" name="periodo" id="IdPeriodo">
-                                    <option disabled selected>Selecione:</option>
-                                    <option value="Manhã">Manhã</option>
+                                <select required class="form-control" name="periodo" id="IdPeriodo"> 
+                                    <option selected value="Manhã">Manhã</option>
                                     <option value="Tarde">Tarde</option>
                                     <option value="Noite">Noite</option>
                                 </select>                
@@ -144,7 +143,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Matricular</button>
+                        <button  type="submit" class="btn btn-primary">Matricular</button>
                     </div>
     
                     {!! Form::close() !!} 
@@ -161,6 +160,12 @@
 
     <script>
     // Data table
+        @if(Session::has("MatriFicha"))
+            @if(Session::get("MatriFicha")=="verdadeiro")
+                window.location.href = "";
+                @php Session::flash("MatriFicha","falso"); @endphp
+            @endif
+        @endif
         $(document).ready(function(){
             $(".adds").click(function ()
             {

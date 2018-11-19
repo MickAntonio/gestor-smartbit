@@ -29,8 +29,8 @@
     <div class="row">
         <div class="col-sm-9 m-b-xs">
             <div data-toggle="" class="btn-group">
-            <label class="btn btn-sm btn-white"> <a href="{{ route('ListOldClass') }}" class="">Turmas Antigas</a> </label>
-            <label class="btn btn-sm btn-white"> <a href="{{ route('ListOldClass') }}" class="">Turmas Antigas</a> </label>
+            <label class="btn btn-sm btn-white"> <a href="{{ route('ListOldClass') }}" class="">TURMAS ANTIGAS</a> </label>
+            <label class="btn btn-sm btn-white"> <a href="{{ route('ListNextClass') }}" class="">TURMAS DE {{ date("Y")+1 }}</a> </label>
             </div>
                                 </div>
                             </div>
@@ -71,7 +71,7 @@
         </div>
     </div>
 
-    <div class="modal inmodal" id="ExcluirModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div data-backdrop="static" class="modal inmodal" id="ExcluirModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-sm">
             <div class="modal-content animated bounceInRight">
 
@@ -122,7 +122,6 @@
               dom: '<"html5buttons"B>lTfgitp',
               buttons: [
                   { extend: 'copy'},
-                  {extend: 'csv'},
                   {extend: 'excel', title: 'ExampleFile'}
                  
 

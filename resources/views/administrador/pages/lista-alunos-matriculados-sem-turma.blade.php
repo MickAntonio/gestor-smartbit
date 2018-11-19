@@ -169,7 +169,7 @@
                         $(".alerta").text("");
                        
                     for(i=0; i<done.length; i++)
-                        texto += '<option value="'+done[i].id+'">'+done[i].nome+' -> '+done[i].periodo+'</option>';
+                        texto += '<option value="'+done[i].id+'">'+done[i].nome+' -> '+done[i].periodo+' -> '+done[i].anolectivo+'</option>';
                     $("#turma").html(texto);
 
                 },"Json")
