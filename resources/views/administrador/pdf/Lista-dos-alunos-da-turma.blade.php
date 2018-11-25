@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Lista da turma - {{$turma->nome?? ""}}  - {{ $turma->curso()->get()[0]->nome?? "" }} - {{$turma->classe()->get()[0]->nome?? ""}} - {{$turma->periodo?? ""}}</title>
-    {!! Html::style('css/pdfAdmin.css') !!}
-    {!! Html::style('css/animate.css') !!}
-    {!! Html::style('css/custom.css') !!}
+    <link rel="stylesheet" href="css/pdfAdmin.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/custom.css">
 <style>
    body{ background: #fff;}
    table, tr, td, th{ border-color:rgba(0,0,0,.7) !important;}
@@ -26,7 +26,7 @@
 <body>
     <header >
         <h2>INSTITUTO MEDIO POLITECNICO E CENTRO DE FORMAÇÃO PROFISSIONAL </h2>
-        <h2>SMARTBIT</h2>
+        <h2>SMARTBITS</h2>
        
             <p>Curso: {{ $turma->curso()->get()[0]->nome?? "" }} / {{$turma->classe()->get()[0]->nome?? ""}}</p>
             <p>Turma: {{$turma->nome?? ""}} / Periodo: {{$turma->periodo?? ""}} / Ano lectivo: {{$turma->anolectivo?? ""}}</p>
@@ -44,8 +44,7 @@
                         <th scope="col">Telf.</th>
                     </tr>
                 </thead>
-                <tbody>
-                <?php  $conta = 0 ?>
+                <tbody> <?php  $conta = 0 ; ?>
                 @foreach($matricula as $text)
                                     @if(isset($matriculado->where("aluno_id",$text->aluno()->get()[0]->id)->where("turma_id",$idturma)->get()[0]))
                                         @php  
@@ -55,12 +54,12 @@
                                                 <td>{{ $conta = $conta + 1 }}</td>
                                                 <td>{{ $text->aluno()->get()[0]->processo }} </td>
                                                 <td>{{ $text->nome }}</td>
-                                                <td>{{$text->sexo }} </td>
+                                                <td>{{$text->sexo=="MASCULINO"? "M" : "F" }} </td>
                                                 <td>{{$text->nascido }} </td> 
                                                 <td>{{$text->telefone }} </td> 
                                             </tr>
                                     @endif
-                                @endforeach
+                                @endforeach 
                    
                </tbody>
            </table>

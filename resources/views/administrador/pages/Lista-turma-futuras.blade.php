@@ -58,9 +58,11 @@
                                         <td>{{ $Turma[$i]->curso()->get()[0]->nome }}</td>
                                         <td>{{ $Turma[$i]->anolectivo }}</td>
                                         <td>
-                                            <a href="{{route('AlunosDaTurma',$Turma[$i]->id)}}" class="btn btn-success" ><i class="fa fa-print"></i> Lista</a>
-                                            <a href="#" class="btn btn-success" ><i class="fa fa-pencil"></i></a>
-                                            <a data-id="{{ $Turma[$i]->id }}" class="btn btn-danger Eliminar" ><i class="fa fa-close"></i></a>
+                                        <a href="{{route('AlunosDaTurma',$Turma[$i]->id)}}" class="btn btn-success" ><i class="fa fa-list"></i></a>
+                                            
+                                            <a class="btn btn-success edit-class" data-vaga="{{ $Turma[$i]->Quantidade }}" data-id="{{ $Turma[$i]->id }}" ><i class="fa fa-pencil"></i>
+                                    </a>
+                                            <a data-id="{{ $Turma[$i]->id }}" data-nome="{{ $Turma[$i]->nome }}" class="btn btn-danger drop-curso" ><i class="fa fa-close"></i></a>
                                         </td>
 
                                     </tr>
@@ -71,16 +73,16 @@
         </div>
     </div>
 
-    <div data-backdrop="static" class="modal inmodal" id="ExcluirModal" tabindex="-1" role="dialog" aria-hidden="true">
+     <div data-backdrop="static" class="modal inmodal" id="drop-curso" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-sm">
             <div class="modal-content animated bounceInRight">
 
             
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h5 class="modal-title">Tens certeza que Pretendes Excluir?</h5>
+                    <h5 class="modal-title">Tens a certeza do que Queres Excluir?</h5>
                     <small class="font-bold">
-                        Ao Excluíres está turma todos os dados associados a 
+                        Ao Excluíres a turma <strong class="drop-span">,</strong> todos os dados associados a 
                         ela serão excluídos (incluí matriculas/confirmações, e outros dados associados a
                         matricula/confirmação como  a propinas dos alunos dessa turma).
                     </small>
@@ -90,7 +92,48 @@
                     <div class="row">
 
                         {!! Form::open(['method'=>'DELETE']) !!}
-                        <button type="submit" class="col-sm-12 btn btn-primary"> <strong>Sim Tenho</strong></button>
+                        <button type="submit" class="col-sm-12 btn btn-danger margem"> <strong>Sim tenho</strong></button>
+                        {!! Form::close() !!}
+
+                        <button type="button" class="col-sm-12 btn btn-white mg-top-20" data-dismiss="modal"><strong>Não tenho</strong></button>
+                        
+                    </div>
+
+                </div>
+            
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<!-- CHANGE CLASS DATA -->
+<div data-backdrop="static" class="modal inmodal" id="edit-class" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content animated bounceInRight">
+
+            
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h5 class="modal-title">Vagas</h5>
+                    <strong> <small>Você pode zerar ou aumentar a vaga...</small>
+                                </strong>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+
+                        {!! Form::open(['method'=>'PUT']) !!}
+                        <div class="col-md-12 margem">
+                                <label for="Quantidade">
+                                    <p>Quantidade de vaga</p>
+                                </label>
+                                <input  required min="0" max="70" type="number" id="Quantidade" name="quantidade" class="form-control" />
+                                <input  required min="0" max="70" type="hidden" id="idturma" name="turma" class="form-control" />
+                            </div>                   
+                        <button type="submit" class="col-sm-12 btn btn-success margem"> <strong>Guardar</strong></button>
                         {!! Form::close() !!}
 
                         <button type="button" class="col-sm-12 btn btn-white mg-top-20" data-dismiss="modal"><strong>Cancelar</strong></button>
@@ -102,8 +145,7 @@
             </div>
         </div>
 
-    </div>                
-</div>
+    </div>
 @endsection
 
 @section("scripts")
@@ -121,8 +163,7 @@
               responsive: true,
               dom: '<"html5buttons"B>lTfgitp',
               buttons: [
-                  { extend: 'copy'},
-                  {extend: 'excel', title: 'ExampleFile'}
+                  {extend: 'excel', title:  '@yield("title")'}
                  
 
                   
@@ -134,12 +175,23 @@
 
 $(function()
 {
-    $(".Eliminar").click(function()
+    $(".drop-curso").click(function()
     {
-        $("#ExcluirModal").modal("show");
+        $("#drop-curso").modal("show");
         var url = "{{ url('/Administrador/criar-turma') }}/"+$(this).data('id');
 
-        $("#ExcluirModal form").attr("action", url);
+        $(".drop-span").text($(this).data("nome"));
+        $("#drop-curso form").attr("action", url);
+    });
+
+    $(".edit-class").click(function()
+    {
+        $("#edit-class").modal("show");
+
+         $("#Quantidade").val($(this).data("vaga"));
+         $("#idturma").val($(this).data("id"));
+        var url = "{{ url('/Administrador/Alterar-a-vaga-da-turma') }}";
+        $("#edit-class form").attr("action", url);
     });
 })
 

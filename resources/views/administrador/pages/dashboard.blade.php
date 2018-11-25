@@ -19,7 +19,16 @@
                         <h5>Vagas</h5>
                     </div>
                     <div class="ibox-content">
-                        <h1 class="no-margins">2000</h1>
+                        <h1 class="no-margins">
+                        <?php $c = 0;
+                            foreach($vagas as $v)
+                            { 
+                                $c += $v->Quantidade;
+                            }
+                            
+                            print $c; 
+                        ?>
+                        </h1>
                         <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>
                         <small>Total de vagas</small>
                     </div>
@@ -29,10 +38,10 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <span class="label label-danger pull-right">Hoje</span>
-                        <h5>Turmas preenchidas</h5>
+                        <h5>Turmas preenchidas </h5>
                     </div>
                     <div class="ibox-content">
-                                <h1 class="no-margins">80</h1>
+                                <h1 class="no-margins"> {{ count($semvaga) }}</h1>
                                 <div class="stat-percent font-bold text-danger">20% <i class="fa fa-level-up"></i></div>
                                 <small>Total de Turmas</small>
                     </div>

@@ -15,6 +15,10 @@ use PDF;
 
 class PostTurma extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -57,10 +61,21 @@ class PostTurma extends Controller
                 ->where("curso_id",$idcurso)
                 ->where("estado","NORMAL")->get() );
     }
+    public function JsonTurmaShare($idclasse,$idcurso,$except = 0,$ano = 0)
+    {
+        return json_encode( 
+                Turmas::where("classe_id",$idclasse)
+                ->where("id","!=",$except)
+                ->where("Quantidade","!=",0)
+                ->where("anolectivo","=",$ano)
+                ->where("curso_id",$idcurso)
+                ->where("estado","NORMAL")->get() );
+    }
     public function AlunosDaTurma($idturma = 0)
     {
         return view("Administrador.pages.lista-alunos-matriculados-com-turma")
                  ->withidturma($idturma)
+                 ->withturma(turmas::find($idturma)->nome)
                  ->withmatriculado(new matriculas)
                  ->withmatricula(Candidatos::orderBy("nome","ASC")->get());
     }
@@ -98,7 +113,7 @@ class PostTurma extends Controller
         
         $this->validate($request,
         [
-            "turma" => "required | min : 1 | max : 5",
+            "turma" => "required | min : 1",
             "Quantidade" => "required | numeric | min:1 | max:100",
             "periodo" => "required |string| min:5|max:10",
             "Classe" => "required | numeric | min:1",
@@ -120,7 +135,35 @@ class PostTurma extends Controller
         Session::flash('successo', 'Turma Adicionada com Successo');
         return redirect()->back();
     }
+    public function TrocarTurma ($idm,$idt,$oldt)
+    {
+        $aluno = matriculas::find($idm);
+        $aluno->turma_id = $idt;
+        $aluno->save();
+    
+        $turma = Turmas::find($idt);
+        $turma->Quantidade = $turma->Quantidade-1;
+        $turma->save();
 
+        $turma = Turmas::find($oldt);
+        $turma->Quantidade = $turma->Quantidade+1;
+        $turma->save();
+        Session::flash('successo', 'Aluno movido para outra turma com sucesso!');
+       return redirect()->back();
+    }
+    public function ALterarVaga(Request $request)
+    {
+        $turma = Turmas::find($request->turma);
+        $turma->quantidade = $request->quantidade;
+        $turma->save();
+
+        Session::flash('successo', 'Vaga da turma alterada com sucesso!');
+        return redirect()->back();
+    }
+    public function destroyAluno( $id)
+    {
+       return redirect()->back();
+    }
     /**
      * Display the specified resource.
      *
@@ -163,10 +206,24 @@ class PostTurma extends Controller
      */
     public function destroy( $id)
     {
-        Turmas::find($id)->delete();
+        $key = Turmas::find($id); 
 
-        Session::flash('successo', 'Turma exluida com sucesso');
+        $turma = Turmas::where("estado","ANONIMA")->where("periodo","=",$key->periodo)->where("curso_id",$key->curso_id)->where("classe_id",1)->get();
 
-        return redirect()->back();
+       
+        $matricula  = Matriculas::where("turma_id",$id)->get();
+        
+        if($key->classe_id==1)
+        {
+            foreach($matricula as $mat)
+            {
+                $mat->turma_id = $turma[0]->id;
+                $mat->save();
+            }
+        }
+        $key->delete();
+        Session::flash('successo', 'A Turma '.$key->nome.' da '.$key->classe->nome.' do curso '.$key->curso->nome.' exluida com sucesso');
+
+       return redirect()->back();
     }
 }

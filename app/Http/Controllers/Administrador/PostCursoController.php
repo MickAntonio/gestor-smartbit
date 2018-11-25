@@ -6,7 +6,9 @@ use App\Models\Administrador\Cursos;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Session;
+use App\Models\Administrador\Alunos;
 use App\Models\Administrador\Turmas;
+use App\Models\Secretaria\Candidatos;
 
 class PostCursoController extends Controller
 {
@@ -43,8 +45,8 @@ class PostCursoController extends Controller
     {
         $this->validate($request,
         [
-            "Curso" => "required | max:255 | min:10",
-            "Descricao" => "required | min: 5",
+            "Curso" => "required | max:255 | min:5",
+            "Descricao" => "required | min: 2",
             "Abreviacao" => "required | min: 2"
         ]);
             $curso = new Cursos;
@@ -117,8 +119,22 @@ class PostCursoController extends Controller
      * @param  \App\Models\Administrador\Cursos  $cursos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cursos $cursos)
+    public function destroy($id)
     {
-        //
+        $curso = Cursos::where("id",$id);
+        if(isset($curso->get()[0]->id))
+        {
+            $aluno = Alunos::where("curso_id",$curso->get()[0]->id)->get();
+
+                foreach($aluno as $al)
+                {
+                    Candidatos::find($al->id)->delete();
+                }
+            Session::flash('successo', 'curso de '.$curso->get()[0]->nome.' eliminado com sucesso');
+            $curso->delete();            
+        }
+        
+
+        return redirect()->back();
     }
 }

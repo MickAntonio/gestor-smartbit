@@ -15,32 +15,32 @@
                 <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
                     <i class="fa fa-reorder"></i>
                 </button>
-                <a href="#" class="navbar-brand">Smartbit</a>
+                <a href="" class="navbar-brand">Smartbit</a>
             </div>
             <div class="navbar-collapse collapse" id="navbar">
                 <ul class="nav navbar-nav">
                     <li class="active">
-                        <a aria-expanded="false" role="button" href=""> Administrador</a>
+                        <a aria-expanded="false" role="button" href="{{url('/Administrador')}}"> Administrador</a>
                     </li>
                     <li class="dropdown">
                         <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Curso <span class="caret"></span></a>
                         <ul role="menu" class="dropdown-menu">
-                            <li><a href="/Administrador/cadastrar-curso">Criar Curso</a></li>
+                            <li><a href="/Administrador/cadastrar-curso">Cadastrar Curso</a></li>
                             <li><a href="/Administrador/listar-curso">Lista de cursos</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
                         <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Turma <span class="caret"></span></a>
                         <ul role="menu" class="dropdown-menu">
-                            <li><a href="/Administrador/criar-turma">Criar Turma</a></li>
+                            <li><a href="/Administrador/criar-turma">Cadastrar Turma</a></li>
                             <li><a href="{{route('ListClass')}}">Lista de turmas</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown">Matriculas<span class="caret"></span></a>
+                        <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown">Matriculas/Confirmação<span class="caret"></span></a>
                         <ul role="menu" class="dropdown-menu">
-                            <li><a href="{{route('AtribuirTurmaAluno')}}">Matricula</a></li>
-                            <li><a href="{{route('ConfirmacaoRecentes')}}">Lista de confirmação de Matricula </a></li>
+                            <li><a href="{{route('AtribuirTurmaAluno')}}">Matricular aluno</a></li>
+                            <li><a href="{{route('ConfirmacaoRecentes')}}">Lista dos confirmados a Matricula </a></li>
                         </ul>
                     </li>
 

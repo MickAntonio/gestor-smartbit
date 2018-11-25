@@ -20,7 +20,7 @@
                 <div class="navbar-collapse collapse" id="navbar">
                     <ul class="nav navbar-nav">
                         <li class="active">
-                            <a aria-expanded="false" role="button" href=""> SECRETÁRIA</a>
+                            <a aria-expanded="false" role="button" href="{{url('/Secretaria')}}"> SECRETÁRIA</a>
                         </li>
                         <li class="dropdown">
                             <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Inscricao Matricula <span class="caret"></span></a>

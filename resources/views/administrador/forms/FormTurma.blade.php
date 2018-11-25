@@ -21,9 +21,9 @@
         </div>
         <div class="col-md-4 col-md-1-often">
             <label for="Quantidade">
-                <p>Quantidade de vagas</p>
+                <p>Quantidade de vaga</p>
             </label>
-            <input  required min="0" max="50" type="number" id="Quantidade" name="Quantidade" class="form-control" />
+            <input  required min="0" max="70" type="number" id="Quantidade" name="Quantidade" class="form-control" />
         </div>
         <div class="col-md-4">
             <label for="IdPeriodo">

@@ -19,7 +19,7 @@
                 
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5><strong>Lista de alunos com matricula confirmada</strong></h5>
+                        <h5><strong>LISTA DE ALUNOS COM MATRICULA CONFIRMADA</strong></h5>
                         <div class="ibox-tools">                        
 
                             <a href="" class="btn btn-white btn-sm"><i class="fa fa-refresh"></i> </a>

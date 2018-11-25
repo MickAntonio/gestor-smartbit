@@ -19,11 +19,11 @@
                 
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5><strong>Lista de alunos com matriculados {{ $date }}</strong></h5>
+                        <h5><strong>LISTA DE ALUNOS MATRICULADOS {{ $date }}</strong></h5>
                         <div class="ibox-tools">                        
 
                             <a href="" class="btn btn-white btn-sm"><i class="fa fa-refresh"></i> </a>
-                            <a href="{{ route('PdfAllMatriculados',$date) }}" class="btn btn-white btn-sm"><i class="fa fa-print"></i> Imprimir lista </a>
+                            <a href="{{ route('PdfAllMatriculados',$date) }}" class="btn btn-primary btn-sm"><i class="fa fa-print"></i> Imprimir lista </a>
                       
                         </div>
 
@@ -66,12 +66,13 @@
                                                     {{ $aluno->turma()->get()[0]->periodo?? "" }} </td>
                                                 <td>{{ $aluno->turma()->get()[0]->curso()->get()[0]->nome?? "" }} </td>
                                                 <td>{{ $sexo }} </td>
-                                                <td><a class=" adds btn btn-success btn-sm show-modal">
+                                                <td>
+                                                <!-- <a class=" adds btn btn-success btn-sm show-modal">
                                                         <i class="fa fa-share"></i>
                                                     </a>
                                                     <a class=" adds btn btn-danger btn-sm show-modal">
                                                         <i class="fa fa-close"></i>
-                                                    </a>
+                                                    </a> -->
                                                 </td>
                                             </tr>
                                         @endif
@@ -179,7 +180,6 @@
                 responsive: true,
                 dom: '<"html5buttons"B>lTfgitp',
                 buttons: [
-                    { extend: 'copy'},
                     {extend: 'excel', title: '@yield("title")'}
                    
 

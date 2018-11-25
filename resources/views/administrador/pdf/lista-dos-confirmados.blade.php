@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Lista de alunos que confirmaram a matricula para o ano lectivo {{$date}}</title>
-    {!! Html::style('css/pdfAdmin.css') !!}
-    {!! Html::style('css/animate.css') !!}
-    {!! Html::style('css/custom.css') !!}
+    <link rel="stylesheet" href="css/pdfAdmin.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/custom.css">
 <style>
    body{ background: #fff;}
    table, tr, td, th{ border-color:rgba(0,0,0,.7) !important;}
@@ -26,7 +26,7 @@
 <body>
     <header >
         <h2>INSTITUTO MEDIO POLITECNICO E CENTRO DE FORMAÇÃO PROFISSIONAL </h2>
-        <h2>SMARTBIT</h2>
+        <h2>SMARTBITS</h2>
         <h2>Lista de alunos com matricula confirmada {{ $date }}</h2>
        
                  
