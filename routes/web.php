@@ -18,6 +18,8 @@ Route::group(['middleware'=>['web']], function(){
     Route::prefix("Secretaria")->group(function ()
 {
     Route::get('/', 'Secretaria\DashboardController@dashboard')->name("Secre");
+
+    Route::get('/renderiza', 'Administrador\MatriculaController@renderiza');
     /* Routas para curso e turmas */
     Route::get('/listar-curso', 'Secretaria\DashboardController@ListCurso')->name("CourseList");
     Route::get('listar-turmas', 'Secretaria\DashboardController@Listturma')->name("ClassList");
