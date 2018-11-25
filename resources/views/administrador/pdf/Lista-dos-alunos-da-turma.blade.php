@@ -26,7 +26,7 @@
 <body>
     <header >
         <h2>INSTITUTO MEDIO POLITECNICO E CENTRO DE FORMAÇÃO PROFISSIONAL </h2>
-        <h2>SMARTBIT</h2>
+        <h2>SMARTBITS</h2>
        
             <p>Curso: {{ $turma->curso()->get()[0]->nome?? "" }} / {{$turma->classe()->get()[0]->nome?? ""}}</p>
             <p>Turma: {{$turma->nome?? ""}} / Periodo: {{$turma->periodo?? ""}} / Ano lectivo: {{$turma->anolectivo?? ""}}</p>
@@ -44,8 +44,7 @@
                         <th scope="col">Telf.</th>
                     </tr>
                 </thead>
-                <tbody>
-                <?php  $conta = 0 ?>
+                <tbody> <?php  $conta = 0 ; ?>
                 @foreach($matricula as $text)
                                     @if(isset($matriculado->where("aluno_id",$text->aluno()->get()[0]->id)->where("turma_id",$idturma)->get()[0]))
                                         @php  
@@ -55,12 +54,12 @@
                                                 <td>{{ $conta = $conta + 1 }}</td>
                                                 <td>{{ $text->aluno()->get()[0]->processo }} </td>
                                                 <td>{{ $text->nome }}</td>
-                                                <td>{{$text->sexo }} </td>
+                                                <td>{{$text->sexo=="MASCULINO"? "M" : "F" }} </td>
                                                 <td>{{$text->nascido }} </td> 
                                                 <td>{{$text->telefone }} </td> 
                                             </tr>
                                     @endif
-                                @endforeach
+                                @endforeach 
                    
                </tbody>
            </table>

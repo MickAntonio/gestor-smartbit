@@ -50,6 +50,8 @@ Route::prefix("Administrador")->group(function ()
     Route::get('/listar-turmas-antigas/{ano}', 'Administrador\PostTurma@ListTurmaAntigas')->name("ListOldClass");
     Route::get('/listar-turmas-antigas', 'Administrador\PostTurma@ListTurmaAntigas')->name("ListOldClass");
     Route::get('/listar-turmas-futuras', 'Administrador\PostTurma@ListTurmaFuturas')->name("ListNextClass");
+    /* VAGAS DA TURMA */
+    Route::put('/Alterar-a-vaga-da-turma', 'Administrador\PostTurma@ALterarVaga');
 
     Route::resource('/criar-turma', 'Administrador\PostTurma', ['except'=>['create', 'edit', 'show']]);   
     /* matricula */
@@ -59,8 +61,11 @@ Route::prefix("Administrador")->group(function ()
     Route::get('/lista-da-turma/{idturma}', 'Administrador\Postturma@AlunosDaTurma')->name("AlunosDaTurma");
     /* Routa para alunos vs turmas */
     Route::get('/Ficha-do-aluno/{id}', 'Administrador\MatriculaController@FichaMatricula')->name("FichaAluno");
-    Route::get('/lista-dos-alunos-da-turma/{idturma}', 'Administrador\PostTurma@ListaDosAlunos')->name("ListaDosAlunos");    
+    Route::get('/lista-dos-alunos-da-turma/{idturma}', 'Administrador\PostTurma@ListaDosAlunos')->name("ListaDosAlunos");
 
+    Route::put('/trocar-a-turma-do-aluno/{idmatricula}/{idturma}/{oldt}', 'Administrador\PostTurma@TrocarTurma')->name("TrocarTurma");
+    Route::get('/JsonTurmaShare/{idclasse}/{idcurso}/{except}/{ano}', 'Administrador\Postturma@JsonTurmaShare');   
+    
     Route::get('/json-turma/{idclasse}/{idcurso}', 'Administrador\Postturma@JsonTurma')->name("JsonTurma");
 
     /* Routas para o cursos */

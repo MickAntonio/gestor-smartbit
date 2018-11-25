@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Ficha de MAtricula</title>
     <link rel="stylesheet" href="css/pdfAdmin.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/custom.css">
     <style>
         *{
     margin:10px 10px 10px 10px;
@@ -37,7 +39,7 @@ section,p
     </style>
 <body>
         <h2>INSTITUTO MEDIO POLITECNICO E CENTRO DE FORMAÇÃO PROFISSIONAL </h2>
-        <h2>SMARTBIT</h2>
+        <h2>SMARTBITS</h2>
         
             <h3>BOLETIM DE MATRICULA</h3>
         

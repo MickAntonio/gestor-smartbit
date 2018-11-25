@@ -19,20 +19,20 @@
                 <label for="NomeCurso">
                     <p>Nome do curso</p>
                 </label>
-                <input required type="text" id="NomeCurso" name="Curso" class="form-control" />
+                <input required minlength="5" type="text" id="NomeCurso" name="Curso" class="form-control" />
             </div>
             <div class="col-md-4">
                 <label for="Abreviacao">
                     <p>Abreviacao</p>
                 </label>
-                <input required type="text" id="Abreviacao" name="Abreviacao" class="form-control" />
+                <input required minlength="2" type="text" id="Abreviacao" name="Abreviacao" class="form-control" />
             </div>
             <div class="col-md-12">
             <br>
                 <label for="Descricao">
                     <p>Descricao</p>
                 </label>
-                <textarea required id="Descricao"  rows="3" name="Descricao" class="form-control"></textarea>
+                <textarea required minlength="2" id="Descricao"  rows="3" name="Descricao" class="form-control"></textarea>
             </div>
         </div>
         <br>       

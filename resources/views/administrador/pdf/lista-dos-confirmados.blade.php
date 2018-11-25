@@ -26,7 +26,7 @@
 <body>
     <header >
         <h2>INSTITUTO MEDIO POLITECNICO E CENTRO DE FORMAÇÃO PROFISSIONAL </h2>
-        <h2>SMARTBIT</h2>
+        <h2>SMARTBITS</h2>
         <h2>Lista de alunos com matricula confirmada {{ $date }}</h2>
        
                  

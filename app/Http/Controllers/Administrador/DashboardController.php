@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Administrador;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Models\Administrador\Turmas;
 
 class DashboardController extends Controller
 {
@@ -21,7 +22,9 @@ class DashboardController extends Controller
     
     public function dashboard()
     {
-        return view('Administrador.pages.dashboard');
+        return view('Administrador.pages.dashboard')
+                ->withsemvaga(turmas::where("quantidade",0)->where("estado","NORMAL")->get())
+                ->withvagas(turmas::where("estado","NORMAL")->get());
     }
    
 }

@@ -68,12 +68,12 @@
                                                     {{ $aluno->turma()->get()[0]->periodo?? "" }} </td>
                                                 <td>{{ $aluno->turma()->get()[0]->curso()->get()[0]->nome?? "" }} </td>
                                                 <td>{{ $sexo }} </td>
-                                                <td><a class=" adds btn btn-success btn-sm show-modal">
+                                                <td><!--<a class=" adds btn btn-success btn-sm show-modal">
                                                         <i class="fa fa-share"></i>
                                                     </a>
                                                     <a class=" adds btn btn-danger btn-sm show-modal">
                                                         <i class="fa fa-close"></i>
-                                                    </a>
+                                                    </a> --
                                                 </td>
                                             </tr>
                                             @endif

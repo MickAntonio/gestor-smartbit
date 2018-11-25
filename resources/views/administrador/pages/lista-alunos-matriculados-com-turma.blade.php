@@ -9,7 +9,7 @@
 @section("content")
   
 <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 col-md.offset-1">
                 @include('components.messages')
             </div>
     <div class="container">
@@ -19,7 +19,7 @@
                 
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Lista de Alunos</h5>
+                        <h5>LISTA DE ALUNOS DA TURMA - {{ strtoupper($turma) }}</h5>
                         <div class="ibox-tools">                        
 
                             <a href="" class="btn btn-white btn-sm"><i class="fa fa-refresh"></i> </a>
@@ -34,8 +34,8 @@
                                 <thead>
                                 <tr>
 
-                                    <th>Nº de ordem</th>
-                                    <th>Nº de processo </th>
+                                    <th>Nº ordem</th>
+                                    <th>Nº Proc. </th>
                                     <th>Nome </th>
                                     <th>classe</th>
                                     <th>periodo</th>
@@ -45,27 +45,28 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <?php  $conta = 0 ?>
-                                @foreach($matricula as $text)
-                                    @if(isset($matriculado->where("aluno_id",$text->aluno()->get()[0]->id)->where("turma_id",$idturma)->get()[0]))
-                                        @php  
-                                            $aluno = $matriculado->where("aluno_id",$text->aluno()->get()[0]->id)->where("turma_id",$idturma)->get()[0];
-                                        @endphp
-                                            <tr>
-                                                <td>{{ $conta = $conta + 1 }}</td>
-                                                <td>{{ $text->aluno()->get()[0]->processo }} </td>
-                                                <td>{{ $text->nome }}</td>
-                                                <td>{{ $aluno->turma()->get()[0]->classe()->get()[0]->nome }} </td>
-                                                <td>{{ $aluno->turma()->get()[0]->periodo }} </td>
-                                                <td>{{ $aluno->turma()->get()[0]->curso()->get()[0]->nome }} </td>
-                                                <td>{{$text->sexo }} </td>
-                                                <td>
-                                                <a  class="btn btn-success btn-sm show-modal"  ><i class="fa fa-share"></i> Trocar de curso</a>
-                                                <a class=" btn btn-primary btn-sm show-modal"   ><i class="fa fa-share"></i> Trocar de turma </a>
-                                                </td>
-                                            </tr>
-                                    @endif
-                                @endforeach
+                                <?php  $conta = 0 ;?>
+                               
+                                    @foreach($matricula as $text)
+                                        @if(isset($matriculado->where("aluno_id",$text->aluno->id)->where("turma_id",$idturma)->get()[0]))
+                                            @php  
+                                                $aluno = $matriculado->where("aluno_id",$text->aluno->id)->where("turma_id",$idturma)->get()[0];
+                                            @endphp
+                                                <tr>
+                                                    <td>{{ $conta = $conta + 1 }}</td>
+                                                    <td>{{ $text->aluno->processo }} </td>
+                                                    <td>{{ $text->nome }}</td>
+                                                    <td>{{ $aluno->turma->classe->nome }} </td>
+                                                    <td>{{ $aluno->turma->periodo }} </td>
+                                                    <td>{{ $aluno->turma->curso->nome }} </td>
+                                                    <td>{{$text->sexo=="MASCULINO"? "M" : "F" }} </td>
+                                                    <td>
+                                                    <a  class="btn btn-success btn-sm change-class" data-ano="{{ $aluno->turma->anolectivo }}" data-nome="{{ $text->nome }}" data-id="{{$aluno->id}}" data-idcurso="{{ $aluno->turma->curso->id }}" data-idclasse="{{ $aluno->turma->classe->id }}" data-idturma="{{ $aluno->turma->id }}">
+                                                    <i class="fa fa-share"></i> Trocar a turma</a>
+                                                    </td>
+                                                </tr>
+                                        @endif
+                                    @endforeach
                                 
                                 </tbody>
                             </table>
@@ -79,72 +80,45 @@
     </div>
  </div>
 
- <div class="modal inmodal" id="MatricularModal" tabindex="-1" role="dialog" aria-hidden="true">
+ <div data-backdrop="static" class="modal inmodal" id="change-class" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content animated bounceInRight">
+
             
-            <div class="modal-dialog">
-                <div class="modal-content animated bounceInRight">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <i class="fa fa-desktop"></i>
-                        <h4 class="modal-title">Matricula</h4><br>
-                        <h4 class="alerta col-md-12"></h4>
-                    </div>
-                    
-                    {!! Form::open(array('route' => 'AtribuirTurmaAluno')) !!}   
-                    
-                    <div class="modal-body">
-    
-                        <div class="row">
-                            <input id="idaluno" readonly type="hidden" name="idaluno" class="form-control">                                
-                            <div class="col-md-8">
-                                <div class="form-group">
-                                    <label><p>Nome</p></label> 
-                                    <input id="nome" readonly type="text" name="nome" class="form-control">                                
-                                </div>                            
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label><p>Classe: </p></label> 
-                                    <input  id="classe" readonly type="text" name="classe" class="form-control">                                
-                                </div>                            
-                            </div>
-                            <div class="col-md-8">
-                                <div class="form-group">
-                                    <label><p>Matricula-se no curso de:</p></label> 
-                                    <select id="curso" readonly class="form-control"  tabindex="2" name="curso">
-                                    </select>                       
-                                </div>                            
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                <label for="Idperiodo">
-                                    <p>Periodo escolhido:</p>
-                                </label>
-                                <input readonly class="form-control" name="periodo" id="Idperiodo">
-                                               
-                                </div>                            
-                            </div>   
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label><p>Turmas Disponiveis:</p></label> 
-                                    <select required id="turma" class="form-control"  tabindex="2" name="turma">
-                                     
-                                    </select>
-                                </div>                            
-                            </div> 
-                            
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h5 class="modal-title">Tens a certeza do que Queres trocar?</h5>
+                    <small class="font-bold">
+                        O aluno <strong class="change-span">,</strong> será movido para uma outra turma...  todos os dados associados a 
+                        ele nessa turma serão apagados.
+                    </small>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+
+                        {!! Form::open(['method'=>'PUT']) !!}
+                        <div class="col-md-12">
+                            <label for="turma">
+                                <p>Selecione a turma</p>
+                            </label>
+                            <select required class="margem form-control" name="turma" id="turma">
+                                <option disabled selected>Selecione:</option>
+                            </select>
                         </div>
+                        <button type="submit" class="col-sm-12 btn btn-success margem"> <strong> <i class="fa fa-share"></i> Mover</strong></button>
+                        {!! Form::close() !!}
+
+                        <button type="button" class="col-sm-12 btn btn-white mg-top-20" data-dismiss="modal"><strong>Cancelar</strong></button>
                         
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Matricular</button>
-                    </div>
-    
-                    {!! Form::close() !!} 
-                    
+
                 </div>
+            
             </div>
+        </div>
+
+    </div>    
 @endsection
 
 @section("scripts")
@@ -156,47 +130,46 @@
     <script>
     // Data table
         $(document).ready(function(){
-            $(".adds").click(function ()
-            {
-                $("#idaluno").val($(this).data("idmatricula"));
-                $("#nome").val($(this).data("nome"));
-                $("#curso").html('<option value="'+$(this).data("idcurso")+'">'+$(this).data("curso")+'</option>');
-                $("#Idperiodo").val($(this).data("periodo"));
-                $("#classe").val($(this).data("classe"));
-
-                $.get("{{url('Administrador/json-turma')}}/"+$(this).data("idclasse")+"/"+$(this).data("idcurso"),{"classe":$(this).data("idclasse")},function(done)
-                {
-                    var texto = '<option disabled selected>Selecione a Turma: </option>';
-                   
-                    if(done.length<1)
-                        $(".alerta").html('<strong class="alert alert-danger" role="alert">Não há turmas disponiveis para está classe</strong>');
-                    else
-                        $(".alerta").text("");
-                       
-                    for(i=0; i<done.length; i++)
-                        texto += '<option value="'+done[i].id+'">'+done[i].nome+' -> '+done[i].periodo+'</option>';
-                    $("#turma").html(texto);
-
-                },"Json")
-                $("#MatricularModal").modal("show");
-            })        
-
-
             $('.data-table-grid').DataTable({
                 pageLength: 10,
                 responsive: true,
                 dom: '<"html5buttons"B>lTfgitp',
                 buttons: [
-                    { extend: 'copy'},
-                    {extend: 'csv'},
-                    {extend: 'excel', title: 'ExampleFile'}
-                   
-
-                    
+                    {extend: 'excel', title: 'ExampleFile'}    
                 ]
-
             });
-
         });
+$(function()
+{
+    $("#turma").change(function()
+    {
+        var url = "{{ url('/Administrador/trocar-a-turma-do-aluno') }}/"+$(".change-class").data("id")+"/"+$(this).val()+"/"+$(".change-class").data("idturma");
+        $("#change-class form").attr("action", url);
+    });
+    $(".change-class").click(function()
+    {
+        bringTurma ($(this).data("idclasse"),$(this).data("idcurso"),$(this).data("idturma"));
+
+        $("#change-class").modal("show");
+        $(".change-span").text($(this).data("nome"));
+    });
+})
+function bringTurma (cl,cu,tu)
+ {
+                $.get("{{url('Administrador/JsonTurmaShare')}}/"+cl+"/"+cu+"/"+tu+"/"+$(".change-class").data("ano"),{"classe":1},function(done)
+                {
+                    var texto = '<option disabled selected>Selecione:</option>';
+                   
+                    if(done.length<1)
+                        $(".alerta").html('<strong class="alert " role="alert" style="color:red">*Não há turmas disponiveis para está classe</strong>');
+                    else
+                        $(".alerta").text("");
+                       
+                    for(i=0; i<done.length; i++)
+                        texto += '<option value="'+done[i].id+'">'+done[i].nome+' > '+done[i].periodo+' > '+done[i].anolectivo+'</option>';
+                    $("#turma").html(texto);
+
+                },"Json")   
+ }
     </script>
 @endsection

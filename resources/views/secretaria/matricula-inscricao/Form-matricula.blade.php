@@ -16,7 +16,7 @@
             <div class="col-lg-12">
                 <div class="ibox">
                     <div class="ibox-title">
-                        <h5> FOMULÁRIO DE MATRICULA</h5>
+                        <h5> FOMULÁRIO DE INSCRIÇÃO</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -25,10 +25,10 @@
                     </div>
                     <div class="ibox-content">
                         <h2>
-                            Preencha todos os passos para fazer a matricula
+                            Preencha todos os passos para fazer a inscrição
                         </h2>
                         <p>
-                            * todos os campos são de caracter obrigatorio...
+                            * Alguns campos são de caracter obrigatorio...
                         </p>
                         {{ Form::open(["url" => "/Secretaria/inscricao-pela-primeira-vez","class" => "wizard-big","id" => "form"])}}
                             <h1>DADOS BIOGRAFICOS</h1>
@@ -78,9 +78,9 @@
                                 <br>   
                                 <div class="col-md-4">
                                         <label for="Idnumber">
-                                            <p>Número de B.I:</p>
+                                            <p>Número de B.I ou Cedula:</p>
                                         </label>
-                                        <input required type="text" minlength="14" maxlength="14" id="Idnumber" name="Idnumber" class="form-control" />
+                                        <input required type="text" minlength="3" maxlength="14" id="Idnumber" name="Idnumber" class="form-control" />
                                     </div>
                                     <div class="col-md-4">
                                         <label for="born">
@@ -115,13 +115,13 @@
                                         <label for="cellphoneFuther">
                                             <p>Telefone do pai:</p>
                                         </label>
-                                        <input required min="910000000" max="999999999" type="number" id="cellphoneFuther" name="TelefonePai" class="form-control" />
+                                        <input  type="number" id="cellphoneFuther" name="TelefonePai" class="form-control" />
                                     </div>
                                     <div class="col-md-4">
                                         <label for="cellphoneMother">
                                             <p>Telefone da mãe:</p>
                                         </label>
-                                        <input required min="910000000" max="999999999" type="number" id="cellphoneMother" name="TelefoneMae" class="form-control" />
+                                        <input  type="number" id="cellphoneMother" name="TelefoneMae" class="form-control" />
                                     </div>           
                                 </div>
                                 <div class="col-md-12">
@@ -130,13 +130,13 @@
                                         <label for="cellphone">
                                             <p>Telefone Candidato:</p>
                                         </label>
-                                        <input required min="910000000" max="999999999" type="number" id="cellphone" name="cellphone" class="form-control" />
+                                        <input  type="number" id="cellphone" name="cellphone" class="form-control" />
                                     </div>
                                     <div class="col-md-8">
                                         <label for="email">
                                             <p>Seu Email:</p>
                                         </label>
-                                        <input required type="email" id="email" name="email" class="form-control" />
+                                        <input type="email" id="email" name="email" class="form-control" />
                                     </div>          
                                 </div> 
                             </fieldset>

@@ -19,14 +19,10 @@
                 
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Lista de Alunos</h5>
+                        <h5>LISTA DE CANDIDATOS</h5>
                         <div class="ibox-tools">                        
 
                             <a href="" class="btn btn-white btn-sm"><i class="fa fa-refresh"></i> </a>
-
-                            <a href="/servicos/pdf" class="btn btn-info btn-sm a-color-white"><i class="fa fa-file-pdf-o"></i> </a>                        
-
-                            <a href=""  class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> </a>
                       
                         </div>
 
@@ -41,10 +37,9 @@
                                     <th>Nº</th>
                                     <th>Nome </th>
                                     <th>Sexo </th>
-                                    <th>B.I</th>
+                                    <th>B.I / CEDULA</th>
                                     <th>Curso</th>
-                                    <th>Telefone do pai</th>
-                                    <th>Idade</th>
+                                    <th>Nascimento</th>
                                     <th>Acção</th>
                                 </tr>
                                 </thead>
@@ -57,12 +52,10 @@
                                         <td>{{ $candidatos->sexo }}</td>
                                         <td>{{ $candidatos->bi }}</td>
                                         <td>{{ $candidatos->find($candidatos->id)->aluno()->get()[0]->curso()->get()[0]->nome?? " Nothing" }}</td>
-                                        <td>{{ $candidatos->telefone }}</td>
                                         <td>{{$candidatos->nascido}}</td>
                                         <td>
-                                        <a  class="btn btn-success btn-sm show-modal"  ><i class="fa fa-eye"></i> </a>
-                                        <a class=" adds btn btn-primary btn-sm show-modal" data-idaluno="{{ $candidatos->find($candidatos->id)->aluno()->get()[0]->id }}" data-idcandidato="{{ $candidatos->id }}" data-nome="{{ $candidatos->nome }}" data-idcurso="{{$candidatos->find($candidatos->id)->aluno()->get()[0]->curso()->get()[0]->id}}" data-curso="{{$candidatos->find($candidatos->id)->aluno()->get()[0]->curso()->get()[0]->nome}}"  ><i class="fa fa-plus"></i> </a>
-                                        <a class="btn btn-primary btn-sm show-modal"  ><i class="fa fa-pencil"></i> </a>
+                                        <a class=" adds btn btn-success btn-sm show-modal" data-idaluno="{{ $candidatos->find($candidatos->id)->aluno()->get()[0]->id }}" data-idcandidato="{{ $candidatos->id }}" data-nome="{{ $candidatos->nome }}" data-idcurso="{{$candidatos->find($candidatos->id)->aluno()->get()[0]->curso()->get()[0]->id}}" data-curso="{{$candidatos->find($candidatos->id)->aluno()->get()[0]->curso()->get()[0]->nome}}"  >
+                                        <i class="fa fa-plus"></i> </a>
                                         <a class="btn btn-danger btn-sm show-modal"  ><i class="fa fa-close"></i> </a>
                                         </td>
                                     </tr>
@@ -89,7 +82,7 @@
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                         <i class="fa fa-desktop modal-icon"></i>
     
-                        <h4 class="modal-title">Matricula</h4>
+                        <h4 class="modal-title">INSCREVÊ-LO NUMA CLASSE</h4>
                     </div>
                     
                     {!! Form::open(array('route' => 'MatriculaAnonima')) !!}   
@@ -101,6 +94,7 @@
                             <div class="col-md-12">
                                 @include('components.messages')
                             </div>
+                            
                             <input id="idaluno" readonly type="hidden" name="idaluno" class="form-control">                                
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -110,13 +104,13 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>Matricula-se no curso de:</label> 
+                                    <label>Inscreve-se no curso de:</label> 
                                     <select id="curso" readonly class="form-control"  tabindex="2" name="curso">
                                      
                                     </select>                             
                                 </div>                            
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-8">
                                 <div class="form-group">
                                     <label>Classe</label> 
                                     <select id="classe" class="form-control"  tabindex="2" name="classe">
@@ -126,7 +120,7 @@
                                     </select>
                                 </div>                            
                             </div> 
-                            <div class="col-md-12">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                 <label for="IdPeriodo">
                                     <p>Periodo</p>
@@ -137,13 +131,19 @@
                                     <option value="Noite">Noite</option>
                                 </select>                
                                 </div>                            
-                            </div>   
+                            </div> 
+                            <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="custo">Custo da Inscricao</label> 
+                                        <input min="1000" id="custo" required type="number" name="custo" class="form-control">                                
+                                    </div>                            
+                            </div>  
+                                                       
                         </div>
-                        
-                    </div>
+                        </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
-                        <button  type="submit" class="btn btn-primary">Matricular</button>
+                        <button  type="submit" class="btn btn-primary">Inscrever</button>
                     </div>
     
                     {!! Form::close() !!} 
@@ -189,8 +189,6 @@
                 responsive: true,
                 dom: '<"html5buttons"B>lTfgitp',
                 buttons: [
-                    { extend: 'copy'},
-                    {extend: 'csv'},
                     {extend: 'excel', title: 'ExampleFile'}
                    
 

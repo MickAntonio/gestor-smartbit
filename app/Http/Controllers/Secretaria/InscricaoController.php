@@ -12,6 +12,10 @@ use App\Models\Administrador\Alunos;
 use App\Models\Administrador\Cursos;
 use App\Models\Administrador\Classes;
 use App\Models\Administrador\Turmas;
+
+use App\Models\Pagamentos\PagamentoPrecos;
+use App\Models\Pagamentos\TipoPagamentos;
+use App\Models\Pagamentos\Pagamentos;
 use Session;
 
 class InscricaoController extends Controller
@@ -102,15 +106,11 @@ class InscricaoController extends Controller
             "lastName"  => "required | min:3",
             "futher" => " required | min:6",
             "mother" => " required | min:6",
-            "Idnumber" => "required | min:14 | max:14 | string",
+            "Idnumber" => "required | min:3 | max:14 | string",
             "genre" => "required | min:1",
             "born" =>  "required | date",
             "Naturalidade" => "required | min:1",
             "residencia" => "required | min:4",
-            "TelefonePai" => "required | numeric",
-            "TelefoneMae" => "required | numeric",
-            "cellphone" => "required | | numeric",
-            "email" => "required | e-mail",
             "escolaAnterior" => "required | min:3",
             "anoAnterior" => "required | min:4",
             "curso" => "required | min:1"
@@ -134,10 +134,10 @@ class InscricaoController extends Controller
             $Candidato->nascido = $request->born;
             $Candidato->municipio_id = $request->Naturalidade;
             $Candidato->bairro = $request->residencia;
-            $Candidato->email = $request->email;
-            $Candidato->telefone = $request->cellphone;
-            $Candidato->telefone_pai = $request->TelefonePai;
-            $Candidato->telefone_mae = $request->TelefoneMae;
+            $Candidato->email = $request->email??"mail@mail.mail";
+            $Candidato->telefone = $request->cellphone??"0101";
+            $Candidato->telefone_pai = $request->TelefonePai??"0101";
+            $Candidato->telefone_mae = $request->TelefoneMae??"0101";
             $Candidato->escola_anterior_id = $EscolaAnterior->id;
             $Candidato->naturalidade = "nothing";
             if($Candidato->save())
@@ -147,12 +147,14 @@ class InscricaoController extends Controller
                 $Aluno->curso_id = $request->curso;
                 $Aluno->processo = 0;
                 $Aluno->save();
-                Session::flash("successo","Candidato adicionado com sucesso...");
+
+                //TipoPagamentos::where("nome","matricula")->get()[0]
+                Session::flash("successo","Candidato inscrito com sucesso...");
                 return redirect()->back();
             }
             
         }
-        Session::flash("successo","Candidato Não adicionado, verifique os campos preenchidos...");
+        Session::flash("successo","Candidato Não inscrito, verifique os campos preenchidos...");
         return redirect()->back();
 
     }
