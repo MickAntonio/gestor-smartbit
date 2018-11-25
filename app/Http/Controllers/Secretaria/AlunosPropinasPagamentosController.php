@@ -16,6 +16,16 @@ use PDF;
 class AlunosPropinasPagamentosController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -61,8 +71,9 @@ class AlunosPropinasPagamentosController extends Controller
         $pagamento->valor_pago = $request->valor_pago;
         $pagamento->forma = $request->forma;
         $pagamento->descricao = $request->descricao;
-        $pagamento->matricula_id = $request->matricula_id;
         $pagamento->user_id = $request->user_id;                
+        $pagamento->matricula_id = $request->matricula_id;
+        $pagamento->created_at = $request->created_at;                
         $pagamento->save();
 
         for ($i=0; $i < collect($request->mes)->count(); $i++) { 
@@ -72,6 +83,7 @@ class AlunosPropinasPagamentosController extends Controller
             $propina->multa = $request->multa[$i];
             $propina->pagamento_propina_id = $pagamento->id;
             $propina->preco_classe_id = $request->preco_propina_id;
+            $propina->created_at = $request->created_at;
             $propina->save();
 
         }

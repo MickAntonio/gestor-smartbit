@@ -78,15 +78,19 @@ Route::prefix("Administrador")->group(function ()
 
     Route::prefix('secretaria')->group(function(){
         Route::get('/', 'Secretaria\DashboardController@dashboard');       
-        Route::resource('/precos', 'Secretaria\PrecosController', ['except'=>['create', 'edit', 'show']]);       
+
+    /*  Route::resource('/precos', 'Secretaria\PrecosController', ['except'=>['create', 'edit', 'show']]);       
         Route::resource('/preco-das-propinas', 'Secretaria\PrecoClassesController', ['except'=>['create', 'edit', 'show']]);  
         Route::resource('/tipos-de-pagamentos', 'Secretaria\TipoPagamentosController', ['except'=>['create', 'edit', 'show']]);       
+    */
         Route::resource('/entradas-pagamentos', 'Secretaria\EntradasPagamentosController', ['except'=>['create', 'edit', 'show']]);       
         Route::resource('/saidas-pagamentos', 'Secretaria\SaidasPagamentosController', ['except'=>['create', 'edit', 'show']]);       
         Route::resource('/alunos-outros-pagamentos', 'Secretaria\AlunosOutrosPagamentosController', ['except'=>['create', 'edit', 'show']]);       
         Route::resource('/alunos-propinas-pagamentos', 'Secretaria\AlunosPropinasPagamentosController', ['except'=>['create', 'edit']]);       
+       
         Route::get('/lista-de-alunos', 'Secretaria\AlunosPropinasPagamentosController@alunos');       
         Route::get('/preco-propina/{curso}/{classe}', 'Secretaria\AlunosPropinasPagamentosController@getPrecoPropina');       
+        Route::get('/pagamentos-preco/{tipo}', 'Secretaria\AlunosOutrosPagamentosController@getPreco');       
         Route::get('/propina-recibo/{id}', 'Secretaria\AlunosPropinasPagamentosController@pdfRecibo');  
         
         //
@@ -98,8 +102,19 @@ Route::prefix("Administrador")->group(function ()
                           
     });
 
-    Route::prefix('administrador')->group(function(){
-        Route::get('/', 'Administrador\DashboardController@dashboard');
+    Route::prefix('financeiro')->group(function(){
+        Route::get('/', 'Financeiro\DashboardController@dashboard');
+
+        Route::resource('/precos', 'Financeiro\PrecosController', ['except'=>['create', 'edit', 'show']]);       
+        Route::resource('/preco-das-propinas', 'Financeiro\PrecoClassesController', ['except'=>['create', 'edit', 'show']]);  
+        Route::resource('/tipos-de-pagamentos', 'Financeiro\TipoPagamentosController', ['except'=>['create', 'edit', 'show']]); 
+
+        Route::get('/relatorios/pagamentos-de-propinas', 'Financeiro\Relatorios\PropinasPagamentosController@index');       
+        Route::get('/relatorios/pagamentos-de-propinas-pdf/{id}', 'Financeiro\Relatorios\PropinasPagamentosController@pdfPagamentos');       
+
+        Route::post('/relatorios/outras-entradas-pdf',  ['as'=>'outras.entradas.pdf', 'uses'=>'Financeiro\EntradasPagamentosController@pdfRelatorio']);
+        Route::post('/relatorios/outras-saidas-pdf',  ['as'=>'outras.saidas.pdf', 'uses'=>'Financeiro\SaidasPagamentosController@pdfRelatorio']);
+                          
     });
 
     

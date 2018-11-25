@@ -130,8 +130,10 @@ class LoginController extends Controller
     {
         if($user->type=='Secretaria'){
             $url = '/secretaria';
-        }else{
+        }elseif($user->type=='Administrador'){
             $url = '/Administrador';
+        }elseif($user->type=='Financeiro'){
+            $url = '/Financeiro';
         }
 
         return redirect($url);

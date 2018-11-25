@@ -20,40 +20,24 @@
                 <div class="navbar-collapse collapse" id="navbar">
                     <ul class="nav navbar-nav">
                         <li class="active">
-                            <a aria-expanded="false" role="button" href=""> SECRETÁRIA</a>
+                            <a aria-expanded="false" role="button" href=""> Financeiro</a>
                         </li>
+                        
                         <li class="dropdown">
-                            <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Inscricao Matricula <span class="caret"></span></a>
+                            <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Configurações de Dados <span class="caret"></span></a>
                             <ul role="menu" class="dropdown-menu">
-                                <li><a href="{{url('/Secretaria/inscricao-pela-primeira-vez')}}">Inscrever</a></li>
-                                <li><a href="{{url('/Secretaria/lista-de-candidatos-inscritos')}}">Lista de inscritos</a></li>
-                                <li><a href="{{url('Secretaria/Lista-de-alunos-matriculados')}}">Lista de Matriculados</a></li>
-                                <li><a href="{{url('/Secretaria/confirmar-matricula')}}">Confirmar Matricula</a></li>
-                                <li><a href="{{url('/Secretaria/Lista-de-alunos-com-matricula-confirmada')}}">Lista de Confirmados</a></li>
+                                <li><a href="/financeiro/tipos-de-pagamentos">Tipos de Entradas/Saidas</a></li>
+                                <li><a href="/financeiro/preco-das-propinas">Preços das Propinas</a></li>
+                                <li><a href="/financeiro/precos">Preços Usados</a></li>
                             </ul>
                         </li>
-
-                        <li class="dropdown">
-                            <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown">Pagamentos dos Alunos<span class="caret"></span></a>
-                            <ul role="menu" class="dropdown-menu">
-                                <li><a href="/secretaria/lista-de-alunos">Pagamento de Propina</a></li>
-                                <li><a href="/secretaria/alunos-propinas-pagamentos">Pag. Propinas Efectuados</a></li>
-                                <li><a href="/secretaria/alunos-outros-pagamentos">Outros</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="dropdown">
-                            <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown">Pagamentos de Entidades<span class="caret"></span></a>
-                            <ul role="menu" class="dropdown-menu">
-                                <li><a href="/secretaria/entradas-pagamentos">Entradas</a></li>
-                                <li><a href="/secretaria/saidas-pagamentos">Saidas</a></li>
-                            </ul>
-                        </li>
+                    
                  
+
                     <li class="dropdown">
                         <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Relatórios <span class="caret"></span></a>
                         <ul role="menu" class="dropdown-menu">
-                            <li><a href="/secretaria/relatorios/pagamentos-de-propinas">Pagamentos de Propinas</a></li>
+                            <li><a href="/financeiro/relatorios/pagamentos-de-propinas">Pagamentos de Propinas</a></li>
                             <li><a href="#" data-toggle="modal" data-target="#relatorioEntradaModal">Todas Entradas</a></li>
                             <li><a href="#" data-toggle="modal" data-target="#relatorioSaidasModal">Todas Saidas</a></li>
                         </ul>
@@ -84,7 +68,14 @@
             @yield('content')
 
         </div>
-
+       <!-- <div class="footer">
+            <div class="pull-right">
+                10GB of <strong>250GB</strong> Free.
+            </div>
+            <div>
+                <strong>Copyright</strong> Example Company &copy; 2014-2017
+            </div>
+        </div> -->
     </div>
    
 

@@ -19,6 +19,15 @@
         format: "yyyy-mm-dd"
     });
 
+     $('#data_1 .input-group.date').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true,
+        format: "yyyy-mm-dd"
+            });
+
 </script>
 
 @yield('scripts')

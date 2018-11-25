@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Secretaria;
+namespace App\Http\Controllers\Financeiro;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -30,7 +30,7 @@ class PrecoClassesController extends Controller
      */
     public function index()
     {
-        return view('secretaria.preco-classes.index')
+        return view('financeiro.preco-classes.index')
         ->withPrecoClasses(PrecoClasses::all())
         ->withCursos(Cursos::all())
         ->withClasses(Classes::all())

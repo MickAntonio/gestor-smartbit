@@ -1,27 +1,26 @@
-@extends('secretaria.main')
+@extends('financeiro.main')
 
 @section('title', 'GE-Smartbit')
 
 @section('head')
     
     {!! Html::style('css/plugins/dataTables/datatables.min.css') !!}
-    {!! Html::style('css/plugins/chosen/bootstrap-chosen.css') !!}
-
+    
 @endsection
 
 @section('content')
 
     <div class="container">
 
-        @include('components.messages')    
-
+     <div class="col-md-12">
+            @include('components.messages')
+        </div>
         <div class="row">
-        
-            <div class="col-md-12">
+            <div class="col-md-8">
                 
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Alunos Outros Pagamentos</h5>
+                        <h5>Gestão dos Tipos de Pagamentos (Entradas/Saidas)</h5>
                         <div class="ibox-tools">                        
 
                             <a href="" class="btn btn-white btn-sm"><i class="fa fa-refresh"></i> </a>
@@ -41,14 +40,10 @@
                                 <tr>
 
                                     <th>#</th>
+                                    <th>Nome </th>
                                     <th>Tipo </th>
-                                    <th>Aluno</th>
-                                    <th>Curso</th>
-                                    <th>Turma</th>
-                                    <th>Valor Recebido</th>
-                                    <th>Forma Pagamento</th>
-                                    <th>Descrição</th>
-                                    <th>Data</th>
+                                    <th>Proveniênçia</th>
+                                    <th>Preço</th>
                                     <th>Acção</th>
                                 </tr>
                                 </thead>
@@ -57,32 +52,40 @@
                                 @php
                                     $i=1
                                 @endphp                              
-                                @foreach($alunoPagamentos as $aluno)
-
-                                @if($aluno->pagamento->pagamentoPreco->tipoPagamento->proveniencia=="Aluno")
+                                @foreach($tipoPagamentos as $tipoPagamento)
                                 <tr>
                                 
                                     <td>{{ $i++ }}</td>
-                                    <td>{{ $aluno->pagamento->pagamentoPreco->tipoPagamento->nome }}</td>
-                                    <td>{{ $aluno->matricula->aluno->candidato->nome }}</td>
-                                    <td>{{ $aluno->matricula->turma->curso->nome }}</td>                                                                        
-                                    <td>{{ $aluno->matricula->turma->nome }} - {{ $aluno->matricula->turma->classe->nome }}</td>
-                                    <td>{{ $aluno->pagamento->valor_pago }}</td>
-                                    <td>{{ $aluno->pagamento->forma }}</td>
-                                    <td>{{ $aluno->pagamento->descricao }}</td>
-                                    <td>{{ $aluno->created_at }}</td>
-                                   
-                                    <td>
-                                        <a class="btn btn-primary btn-sm show-modal" data-id="{{ $aluno->pagamento->id }}" data-tipo="{{  $aluno->pagamento->pagamentoPreco->tipoPagamento->nome }}" data-aluno="{{  $aluno->matricula->aluno->candidato->nome }}" data-preco="{{  $aluno->pagamento->pagamentoPreco->preco->preco }}" data-pago="{{  $aluno->pagamento->valor_pago }}" data-descricao="{{ $aluno->pagamento->descricao }}"  data-forma="{{ $aluno->pagamento->forma }}" data-updated="{{ $aluno->pagamento->updated_at }}" data-created="{{ $aluno->pagamento->created_at }}" ><i class="fa fa-eye"></i> </a>
-                                        <a class="btn btn-info btn-sm edit-modal"    data-id="{{ $aluno->pagamento->id }}" data-aluno-pagamento="{{ $aluno->id }}" data-matricula="{{ $aluno->matricula->id }}" data-tipo="{{  $aluno->pagamento->pagamentoPreco->tipoPagamento->id }}"   data-aluno="{{  $aluno->matricula->aluno->candidato->nome }}" data-preco="{{  $aluno->pagamento->pagamentoPreco->preco->preco }}" data-pago="{{  $aluno->pagamento->valor_pago }}" data-descricao="{{ $aluno->pagamento->descricao }}"  data-forma="{{ $aluno->pagamento->forma }}" data-updated="{{ $aluno->pagamento->updated_at }}" data-created="{{ $aluno->pagamento->created_at }}" ><i class="fa fa-pencil"></i> </a>
-                                        <a class="btn btn-danger btn-sm delete-modal"  data-id="{{ $aluno->pagamento->id }}" data-aluno-pagamento="{{ $aluno->id }}"><i class="fa fa-trash"></i> </a>
-                                    </td>
+                                    <td>{{ $tipoPagamento->nome }}</td>
+                                    <td>{{ $tipoPagamento->tipo }}</td>
+                                    <td>{{ $tipoPagamento->proveniencia }}</td>
 
+                                    @php
+                                        $preco='';
+                                        $precoId='';
+                                    @endphp    
+
+                                    @foreach($tipoPagamento->pagamentoPrecos as $pagamento)
+                                        @if($pagamento->estado=='Activado')
+                                            @php
+                                                $preco= $pagamento->preco->preco; 
+                                                $precoId= $pagamento->preco->id; 
+                                            @endphp                                        
+                                        @endif
+                                    @endforeach
+
+                                    <td>{{ $preco }}</td>
+                                    
+                                    
+                                    <td>
+                                        <a class="btn btn-primary btn-sm show-modal"  data-id="{{ $tipoPagamento->id }}" data-nome="{{ $tipoPagamento->nome }}" data-tipo="{{  $tipoPagamento->tipo }}" data-proveniencia="{{ $tipoPagamento->proveniencia }}"  data-preco="{{ $preco }}" data-updated="{{ $tipoPagamento->updated_at }}" data-created="{{ $tipoPagamento->created_at }}"><i class="fa fa-eye"></i> </a>
+                                        <a class="btn btn-info btn-sm edit-modal"      data-id="{{ $tipoPagamento->id }}" data-nome="{{ $tipoPagamento->nome }}" data-tipo="{{  $tipoPagamento->tipo }}" data-proveniencia="{{ $tipoPagamento->proveniencia }}" data-preco="{{ $precoId }}"><i class="fa fa-pencil"></i> </a>
+                                        <a class="btn btn-danger btn-sm delete-modal"  data-id="{{ $tipoPagamento->id }}"><i class="fa fa-trash"></i> </a>
+                                    </td>
                                 </tr>
-                                @endif
-                                
                                 @endforeach
-                     
+
+                                
                              
                                 </tbody>
                             </table>
@@ -92,8 +95,49 @@
                 </div>
 
             </div>
+
+            <div class="col-md-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Monthly income</h5>
+                        <div class="ibox-tools">
+                            <span class="label label-primary">Updated 12.2015</span>
+                        </div>
+                    </div>
+                    <div class="ibox-content no-padding">
+                        <div class="flot-chart m-t-lg" style="height: 55px;">
+                            <div class="flot-chart-content" id="flot-chart1"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="widget-head-color-box navy-bg p-lg text-center">
+                            <div class="m-b-md">
+                            <h2 class="font-bold no-margins">
+                                Alex Smith
+                            </h2>
+                                <small>Founder of Groupeq</small>
+                            </div>
+                            <img src="/img/a4.jpg" class="img-circle circle-border m-b-md" alt="profile">
+                            <div>
+                                <span>100 Tweets</span> |
+                                <span>350 Following</span> |
+                                <span>610 Followers</span>
+                            </div>
+                        </div>
+                        <div class="widget-text-box">
+                            <h4 class="media-heading">Alex Smith</h4>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                            <div class="text-right">
+                                <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> Like </a>
+                                <a class="btn btn-xs btn-primary"><i class="fa fa-heart"></i> Love</a>
+                            </div>
+                        </div>
+            </div>
         </div>
-       
+           
+         
     </div>
 
 
@@ -105,72 +149,53 @@
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     <i class="fa fa-laptop modal-icon"></i>
 
-                    <h4 class="modal-title">Novo de Pagamento</h4>
+                    <h4 class="modal-title">Adicionar Tipos de Pagamentos</h4>
                 </div>
                 
-                {!! Form::open(array('route' => 'alunos-outros-pagamentos.store')) !!}   
+                {!! Form::open(array('route' => 'tipos-de-pagamentos.store')) !!}   
                 
                 <div class="modal-body">
 
                     <div class="row">
 
-                        <div class="col-md-12">
+                      <div class="col-md-6">
                             <div class="form-group">
-                                <label>Aluno</label> 
-                                <select class="form-control chosen-select" data-placeholder="Choose a Country..." tabindex="2" name="matricula_id">
-                                    @foreach($matriculas as $matricula)                                
-                                    <option value="{{ $matricula->id }}">{{ $matricula->aluno->candidato->nome }}</option>
-                                    @endforeach
-                                </select>
+                                <label>Nome</label> 
+                                <input type="text" name="nome" placeholder="" class="form-control">                                
                             </div>                            
                         </div>
 
                          <div class="col-md-6">
                             <div class="form-group">
-                                <label>Tipo de Pagamento</label> 
-                                <select class="form-control"  tabindex="2" name="tipo_pagamento_id" id="tipo_pag">
-                                    @foreach($tipoPagamentos as $tipoPagamento)                                
-                                    <option value="{{ $tipoPagamento->id }}">{{ $tipoPagamento->nome }}</option>
-                                    @endforeach
+                                <label>Tipo</label> 
+                                <select class="form-control"  tabindex="2" name="tipo">
+                                    <option value="Entrada">Entrada</option>
+                                    <option value="Saida">Saida</option>
                                 </select>
                             </div>                            
                         </div>
 
-                        <div class="col-md-6">
+                           <div class="col-md-6">
                             <div class="form-group">
-                                <label>Valor à Pagar</label> 
-                                <input type="text" name="pago" placeholder="" id="preco_pagamento" class="form-control">                                
-                            </div>                            
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Pago</label> 
-                                <input type="number" name="valor_pago" placeholder="" class="form-control">                                
-                            </div>                            
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Forma de Pagamento</label> 
-                                 <select class="form-control"  tabindex="2" name="forma">
-                                    <option value="Banco">Banco</option>
-                                    <option value="TPA">TPA</option>
-                                    <option value="Dinheiro">Dinheiro</option>
+                                <label>Proveniênçia</label> 
+                                <select class="form-control"  tabindex="2" name="proveniencia">
+                                    <option value="Aluno">Aluno</option>
+                                    <option value="Outro">Outro</option>
                                 </select>
                             </div>                            
                         </div>
 
 
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <label>Descrição</label> 
-                                <textarea class="form-control" name="descricao" id="" cols="30" rows="1"></textarea>
+                                <label>Preço</label> 
+                                <select class="form-control"  tabindex="2" name="preco_id">
+                                @foreach($precos as $preco)
+                                    <option value="{{ $preco->id }}">{{ $preco->preco }}</option>
+                                @endforeach
+                                </select>
                             </div>                            
                         </div>
-
-                        <input type="hidden" name="user_id" value="1" placeholder="" class="form-control">                                
-                        
 
                     </div>
                     
@@ -193,13 +218,17 @@
             <div class="modal-content animated bounceInRight">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">Visualizar Entrada</h4>
+                    <h4 class="modal-title">Visualizar Preço</h4>
                 </div>
                 
                 <div class="modal-body">
 
                     <div class="row">
-        
+
+                        <div class="col-md-12">
+                            @include('components.messages')
+                        </div>
+     
                         <table class="table table-bordered table-th-200 bg-w">
 
                             <tr>
@@ -208,34 +237,24 @@
                             </tr>
 
                             <tr>
+                                <th>Nome</th>
+                                <td id="show-nome"></td>
+                            </tr>
+
+                            <tr>
                                 <th>Tipo</th>
                                 <td id="show-tipo"></td>
                             </tr>
 
-                            <tr>
-                                <th>Aluno</th>
-                                <td id="show-aluno"></td>
+                              <tr>
+                                <th>Proveniênçia</th>
+                                <td id="show-proveniencia"></td>
                             </tr>
 
                             <tr>
-                                <th>Valor Pago</th>
-                                <td id="show-pago"></td>
-                            </tr>
-
-                                <tr>
                                 <th>Preço</th>
                                 <td id="show-preco"></td>
-                            </tr>
-
-                            <tr>
-                                <th>Forma de Pagamento</th>
-                                <td id="show-forma"></td>
-                            </tr>
-
-                            <tr>
-                                <th>Descrição</th>
-                                <td id="show-descricao"></td>
-                            </tr>                   
+                            </tr>                 
 
                             <tr>
                                 <th>Criado Aos</th>
@@ -256,9 +275,8 @@
 
             </div>
         </div>
-        
-    </div>
     
+    </div>
 
     <div class="modal inmodal" id="EditarModal" tabindex="-1" role="dialog" aria-hidden="true">
             
@@ -277,71 +295,51 @@
 
                     <div class="row">
 
-                        <div class="col-md-12">
+                      <div class="col-md-6">
                             <div class="form-group">
-                                <label>Aluno</label> 
-                                <select class="form-control" data-placeholder="Choose a Country..." tabindex="2" name="matricula_id">
-                                    @foreach($matriculas as $matricula)                                
-                                    <option value="{{ $matricula->id }}">{{ $matricula->aluno->candidato->nome }}</option>
-                                    @endforeach
-                                </select>
+                                <label>Nome</label> 
+                                <input type="text" name="nome" class="form-control">                                
                             </div>                            
                         </div>
 
                          <div class="col-md-6">
                             <div class="form-group">
-                                <label>Tipo de Pagamento</label> 
-                                <select class="form-control"  tabindex="2" name="tipo_pagamento_id">
-                                    @foreach($tipoPagamentos as $tipoPagamento)                                
-                                    <option value="{{ $tipoPagamento->id }}">{{ $tipoPagamento->nome }}</option>
-                                    @endforeach
+                                <label>Tipo</label> 
+                                <select class="form-control"  tabindex="2" name="tipo">
+                                    <option value="Entrada">Entrada</option>
+                                    <option value="Saida">Saida</option>
                                 </select>
-                            </div>                            
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Valor à Pagar</label> 
-                                <input type="number" name="pago" placeholder="" value="460.00kz" class="form-control">                                
-                            </div>                            
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Pago</label> 
-                                <input type="number" name="valor_pago" placeholder="" class="form-control">                                
                             </div>                            
                         </div>
 
                            <div class="col-md-6">
                             <div class="form-group">
-                                <label>Forma de Pagamento</label> 
-                                 <select class="form-control"  tabindex="2" name="forma">
-                                    <option value="Banco">Banco</option>
-                                    <option value="TPA">TPA</option>
-                                    <option value="Dinheiro">Dinheiro</option>
+                                <label>Proveniênçia</label> 
+                                <select class="form-control"  tabindex="2" name="proveniencia">
+                                    <option value="Aluno">Aluno</option>
+                                    <option value="Outro">Outro</option>
                                 </select>
                             </div>                            
                         </div>
 
 
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <label>Descrição</label> 
-                                <textarea class="form-control" name="descricao" id="" cols="30" rows="1"></textarea>
+                                <label>Preço</label> 
+                                <select class="form-control"  tabindex="2" name="preco_id">
+                                @foreach($precos as $preco)
+                                    <option value="{{ $preco->id }}">{{ $preco->preco }}</option>
+                                @endforeach
+                                </select>
                             </div>                            
                         </div>
-
-                        <input type="hidden" name="user_id" value="1" placeholder="" class="form-control">                                
-                        <input type="hidden" name="aluno_pagamento" placeholder="" class="form-control">                                
-                        
 
                     </div>
                     
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Adicionar</button>
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
                 </div>
 
                 {!! Form::close() !!} 
@@ -374,13 +372,13 @@
                     </div>
 
                 </div>
-
+            
             </div>
         </div>
 
     </div>
 
-
+    
 
 @endsection
 
@@ -401,12 +399,8 @@
     {!! Html::script('js/demo/peity-demo.js') !!} 
 
     {!! Html::script('js/plugins/dataTables/datatables.min.js') !!}
-
-    {!! Html::script('js/plugins/chosen/chosen.jquery.js') !!}
-
+  
     <script>
-
-    
 
     // Show Categoria Function
     $(document).on('click', '.show-modal', function(){
@@ -414,91 +408,63 @@
         $("#visualizarModal").modal("show");
 
         $("#show-id").text($(this).data('id'));
+        $("#show-nome").text($(this).data('nome'));
         $("#show-tipo").text($(this).data('tipo'));
-        $("#show-aluno").text($(this).data('aluno'));
-        $("#show-pago").text($(this).data('pago'));
-        $("#show-forma").text($(this).data('forma'));
+        $("#show-proveniencia").text($(this).data('proveniencia'));
         $("#show-preco").text($(this).data('preco'));
-        $("#show-descricao").text($(this).data('descricao'));        
         $("#show-created").text($(this).data('created'));
         $("#show-updated").text($(this).data('updated'));
 
     });
-
 
      // Edit Categoria Function
     $(document).on('click', '.edit-modal', function(){
 
         $("#EditarModal").modal("show");
 
-        $("#EditarModal input[name=valor_pago]").val($(this).data('pago'));
-        $("#EditarModal textarea[name=descricao]").text($(this).data('descricao'));
-        $("#EditarModal input[name=aluno_pagamento]").val($(this).data('aluno-pagamento'));
-        
-
-        // seleciona a option matricula_id
-        var idMatriculaRemove = "#EditarModal select[name=matricula_id] option";
-        $(idMatriculaRemove).removeAttr("selected");
-        
-        var idMatricula = "#EditarModal select[name=matricula_id] option[value="+$(this).data('matricula')+"]";
-        $(idMatricula).attr({ selected:"selected" })
+        $("#EditarModal input[name=nome]").val($(this).data('nome'));
 
         // seleciona a option tipo
-        var idTipoRemove = "#EditarModal select[name=tipo_pagamento_id] option";
-        $(idTipoRemove).removeAttr("selected");
+        var idCursoRemove = "#EditarModal select[name=tipo] option";
+        $(idCursoRemove).removeAttr("selected");
         
-        var idTipo = "#EditarModal select[name=tipo_pagamento_id] option[value="+$(this).data('tipo')+"]";
-        $(idTipo).attr({ selected:"selected" })
+        var idCurso = "#EditarModal select[name=tipo] option[value="+$(this).data('tipo')+"]";
+        $(idCurso).attr({ selected:"selected" })
 
-        // seleciona a option forma
-        var idFormaRemove = "#EditarModal select[name=forma] option";
-        $(idFormaRemove).removeAttr("selected");
+        // seleciona a option proveniencia
+        var idCursoRemove = "#EditarModal select[name=proveniencia] option";
+        $(idCursoRemove).removeAttr("selected");
         
-        var idForma = "#EditarModal select[name=forma] option[value="+$(this).data('forma')+"]";
-        $(idForma).attr({ selected:"selected" })
+        var idCurso = "#EditarModal select[name=proveniencia] option[value="+$(this).data('proveniencia')+"]";
+        $(idCurso).attr({ selected:"selected" })
 
-        var url = "{{ url('secretaria/alunos-outros-pagamentos') }}/"+$(this).data('id');
+        // seleciona a option preco_id
+        var idCursoRemove = "#EditarModal select[name=preco_id] option";
+        $(idCursoRemove).removeAttr("selected");
+        
+        var idCurso = "#EditarModal select[name=preco_id] option[value="+$(this).data('preco')+"]";
+        $(idCurso).attr({ selected:"selected" })
+        
+        var url = "{{ url('secretaria/tipos-de-pagamentos') }}/"+$(this).data('id');
 
         $("#EditarModal form").attr("action", url);
         
     });
-
 
     // Edit Categoria Function
     $(document).on('click', '.delete-modal', function(){
 
         $("#ExcluirModal").modal("show");
 
-        var url = "{{ url('secretaria/alunos-outros-pagamentos') }}/"+$(this).data('aluno-pagamento');
+        var url = "{{ url('secretaria/tipos-de-pagamentos') }}/"+$(this).data('id');
 
         $("#ExcluirModal form").attr("action", url);
-
-    });
-
-    $(document).on('change', '#tipo_pag', function(){
-
-        var id = document.getElementById("tipo_pag").value;
-
-            $(function(){
-
-                $.get('http://localhost:8000/secretaria/pagamentos-preco/'+id, function(data){
-                    
-                    document.getElementById("preco_pagamento").value=data+".00 kz";
-                        
-                    return false;
-                    
-                }, 'json');
-            });
-                
 
     });
     
     </script>
 
     <script>
-
-        $('.chosen-select').chosen({width: "100%"});
-
         $(document).ready(function() {
 
 
@@ -587,19 +553,6 @@
                     
                 ]
 
-            });
-
-            var id = document.getElementById("tipo_pag").value;
-
-            $(function(){
-
-                $.get('http://localhost:8000/secretaria/pagamentos-preco/'+id, function(data){
-                    
-                    document.getElementById("preco_pagamento").value=data+".00 kz";
-                        
-                    return false;
-                    
-                }, 'json');
             });
 
         });

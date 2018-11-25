@@ -108,16 +108,25 @@
                             </div>                            
                         </div>
 
-                        <div class="col-md-3">
-                            <div class="form-group">
+                        <div class="col-md-4">
+
+                       <!--     <div class="form-group">
                                 <label>Saldo</label> 
                                 <input type="text" name="saldo_show" value="0.00" placeholder="" disabled class="form-control">                                
-                            </div>                            
+                            </div> 
+                        -->
+
+                            <div class="form-group" id="data_1">
+                                <label>Data do Pagamento</label>
+                                <div class="input-group date">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" name="created_at" value="{{ date('Y-m-d') }}">
+                                </div>
+                            </div>                           
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
-                                <label>Forma de Pagamento</label> 
+                                <label>Forma Pagam.</label> 
                                  <select class="form-control"  tabindex="2" name="forma">
                                     <option value="Banco">Banco</option>
                                     <option value="TPA">TPA</option>

@@ -13,6 +13,17 @@ use Session;
 
 class AlunosOutrosPagamentosController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
      /**
      * Display a listing of the resource.
      *
@@ -111,5 +122,18 @@ class AlunosOutrosPagamentosController extends Controller
         Session::flash('successo', 'Pagamento Excluida com Successo');
 
         return redirect()->route('alunos-outros-pagamentos.index');
+    }
+
+    public function getPreco($tipo)
+    {
+       
+        $PagamentoPrecos = PagamentoPrecos::where("tipo_pagamento_id", $tipo)->where("estado", "Activado")->get();
+        
+        if($PagamentoPrecos->count()>0){
+            return $PagamentoPrecos[0]->preco->preco;;
+        }else{
+            return 0;            
+        }
+
     }
 }
