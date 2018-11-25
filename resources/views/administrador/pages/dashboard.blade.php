@@ -19,8 +19,8 @@
                         <h5>Vagas</h5>
                     </div>
                     <div class="ibox-content">
-                        <h1 class="no-margins">2000</h1>
-                        <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>
+                        <h1 class="no-margins">00</h1>
+                        <div class="stat-percent font-bold text-success">0% <i class="fa fa-bolt"></i></div>
                         <small>Total de vagas</small>
                     </div>
                 </div>
@@ -32,8 +32,8 @@
                         <h5>Turmas preenchidas</h5>
                     </div>
                     <div class="ibox-content">
-                                <h1 class="no-margins">80</h1>
-                                <div class="stat-percent font-bold text-danger">20% <i class="fa fa-level-up"></i></div>
+                                <h1 class="no-margins">00</h1>
+                                <div class="stat-percent font-bold text-danger">0% <i class="fa fa-level-up"></i></div>
                                 <small>Total de Turmas</small>
                     </div>
                 </div>

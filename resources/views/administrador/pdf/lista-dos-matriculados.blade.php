@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Lista de alunos matriculados para o ano lectivo {{$date}}</title>
-    {!! Html::style('css/pdfAdmin.css') !!}
-    {!! Html::style('css/animate.css') !!}
-    {!! Html::style('css/custom.css') !!}
+    <link rel="stylesheet" href="css/pdfAdmin.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/custom.css">
+
 <style>
    body{ background: #fff;}
    table, tr, td, th{ border-color:rgba(0,0,0,.7) !important;}

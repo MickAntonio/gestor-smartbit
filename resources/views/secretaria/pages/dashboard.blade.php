@@ -19,8 +19,8 @@
                         <h5>Entradas</h5>
                     </div>
                     <div class="ibox-content">
-                        <h1 class="no-margins">2000,00kz</h1>
-                        <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>
+                        <h1 class="no-margins">00,00kz</h1>
+                        <div class="stat-percent font-bold text-success">0% <i class="fa fa-bolt"></i></div>
                         <small>Total de entradas</small>
                     </div>
                 </div>
@@ -32,8 +32,8 @@
                         <h5>Saídas</h5>
                     </div>
                     <div class="ibox-content">
-                                <h1 class="no-margins">80.000,kz</h1>
-                                <div class="stat-percent font-bold text-danger">20% <i class="fa fa-level-up"></i></div>
+                                <h1 class="no-margins">00,00kz</h1>
+                                <div class="stat-percent font-bold text-danger">0% <i class="fa fa-level-up"></i></div>
                                 <small>Total de saídas</small>
                     </div>
                 </div>
@@ -44,15 +44,15 @@
                 <div class="row">
                     <div class="col-xs-4">
                         <small class="stats-label"><h4>Quantidade de Alunos devendo</h4></small>
-                        <h4>20</h4>
+                        <h4>00</h4>
                     </div>
                     <div class="col-xs-4">
                     <small class="stats-label"><h4>Quantidade Alunos com Saldo negativo</h4></small>
-                        <h4>15</h4>
+                        <h4>00</h4>
                     </div>
                     <div class="col-xs-4">
                         <small class="stats-label"><h4>Quantidade Alunos Com saldo povitivo</h4></small>
-                        <h4>90</h4>
+                        <h4>00</h4>
                     </div>
                 </div>
             </div>

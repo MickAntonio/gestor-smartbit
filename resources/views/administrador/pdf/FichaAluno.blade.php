@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Ficha de MAtricula</title>
-    {!! Html::style('css/pdfAdmin.css') !!}
+    <link rel="stylesheet" href="css/pdfAdmin.css">
     <style>
         *{
     margin:10px 10px 10px 10px;
