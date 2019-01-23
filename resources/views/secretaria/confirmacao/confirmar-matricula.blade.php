@@ -66,7 +66,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label for="cellphoneFuther">
-                                                <p>ano lectivo:</p>
+                                                <p>ano lectivo anterior:</p>
                                             </label>
                                             <input type="hidden" value="{{$matricula->aluno()->get()[0]->id?? ''}}"  name="idaluno" class="form-control" />
                                             <input readonly value="{{$matricula->turma()->get()[0]->anolectivo?? ''}}" name="AnoAnterior" id="cellphoneFuther" class="form-control" />

@@ -23,7 +23,7 @@ class ConfirmacaoController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -31,7 +31,8 @@ class ConfirmacaoController extends Controller
      */
     public function index($processo = 0)
     {
-        $Aluno = Alunos::where("processo",$processo)->get();
+        if($processo!=0)
+            $Aluno = Alunos::where("processo",$processo)->get();
         if(isset($Aluno[0]))
         {
             if(isset(matriculas::where("aluno_id",$Aluno[0]->id)->orderBy("id","DESC")->get()[0]))
@@ -39,7 +40,7 @@ class ConfirmacaoController extends Controller
                     ->withprocesso($processo)
                     ->withmatricula(matriculas::where("aluno_id",$Aluno[0]->id)->orderBy("id","DESC")->get()[0])
                     ->withclasse(Classes::all());
-            else 
+            else
             {
                 Session::flash("failed","O aluno com o processo nº ".$processo." não existe...");
                 return view("secretaria.confirmacao.confirmar-matricula")->withprocesso($processo);
@@ -125,7 +126,7 @@ class ConfirmacaoController extends Controller
              porque ele ainda não terminou a classe anterior");
             return redirect()->back();
         }
-       
+
     }
 
     /**

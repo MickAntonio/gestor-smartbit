@@ -1,5 +1,5 @@
 @extends("secretaria.main")
-@section("title","Lista de candidatos a serem inscritos")
+@section("title","Lista de alunos sem turma")
 
 @section("head")
 {!! Html::style('css/plugins/dataTables/datatables.min.css') !!}
@@ -19,7 +19,7 @@
                 
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>LISTA DE CANDIDATOS</h5>
+                        <h5><strong>LISTAS DE ALUNOS SEM TURMAS</strong></h5>
                         <div class="ibox-tools">                        
 
                             <a href="" class="btn btn-white btn-sm"><i class="fa fa-refresh"></i> </a>
@@ -34,29 +34,25 @@
                                 <thead>
                                 <tr>
 
-                                    <th>Nº</th>
                                     <th>Nome </th>
-                                    <th>Sexo </th>
-                                    <th>B.I / CEDULA</th>
+                                    <th>classe</th>
+                                    <th>periodo</th>
                                     <th>Curso</th>
-                                    <th>Nascimento</th>
+                                    <th>Sexo</th>
                                     <th>Acção</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($candidato as $candidatos)
-                                    @if(!isset($candidato->find($candidatos->id)->aluno()->get()[0]->matricula()->get()[0]))
+                                @foreach($matricula as $aluno)
+                                    @if($aluno->turma()->get()[0]->estado =="ANONIMA")
                                     <tr>
-                                        <td>{{ $candidatos->id }}</td>
-                                        <td>{{ $candidatos->nome }}</td>
-                                        <td>{{ $candidatos->sexo }}</td>
-                                        <td>{{ $candidatos->bi }}</td>
-                                        <td>{{ $candidatos->find($candidatos->id)->aluno()->get()[0]->curso()->get()[0]->nome?? " Nothing" }}</td>
-                                        <td>{{$candidatos->nascido}}</td>
+                                        <td>{{ $aluno->aluno()->get()[0]->candidato()->get()[0]->nome?? "" }}</td>
+                                        <td>{{ $aluno->turma()->get()[0]->classe()->get()[0]->nome?? "" }} </td>
+                                        <td>{{ $aluno->turma()->get()[0]->periodo?? "" }} </td>
+                                        <td>{{ $aluno->turma()->get()[0]->curso()->get()[0]->nome?? "" }} </td>
+                                        <td>{{$aluno->aluno()->get()[0]->candidato()->get()[0]->sexo?? "" }} </td>
                                         <td>
-                                        <a class=" adds btn btn-success btn-sm show-modal" data-idaluno="{{ $candidatos->find($candidatos->id)->aluno()->get()[0]->id }}" data-idcandidato="{{ $candidatos->id }}" data-nome="{{ $candidatos->nome }}" data-idcurso="{{$candidatos->find($candidatos->id)->aluno()->get()[0]->curso()->get()[0]->id}}" data-curso="{{$candidatos->find($candidatos->id)->aluno()->get()[0]->curso()->get()[0]->nome}}"  >
-                                        <i class="fa fa-plus"></i> </a>
-                                        <a class="btn btn-danger btn-sm show-modal"  ><i class="fa fa-close"></i> </a>
+                                            <a href="{{route('FichaAluno',$aluno->aluno()->get()[0]->candidato()->get()[0]->id?? '')}}"  class="btn btn-success btn-sm show-modal"  ><i class="fa fa-eye"></i> Ficha </a>
                                         </td>
                                     </tr>
                                     @endif
@@ -74,82 +70,7 @@
     </div>
  </div>
 
- <div class="modal inmodal" id="MatricularModal" tabindex="-1" role="dialog" aria-hidden="true">
-            
-            <div class="modal-dialog">
-                <div class="modal-content animated bounceInRight">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <i class="fa fa-desktop modal-icon"></i>
-    
-                        <h4 class="modal-title">INSCREVÊ-LO NUMA CLASSE</h4>
-                    </div>
-                    
-                    {!! Form::open(array('route' => 'MatriculaAnonima')) !!}   
-                    
-                    <div class="modal-body">
-    
-                        <div class="row">
-    
-                            <div class="col-md-12">
-                                @include('components.messages')
-                            </div>
-                            
-                            <input id="idaluno" readonly type="hidden" name="idaluno" class="form-control">                                
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>Nome</label> 
-                                    <input id="nome" readonly type="text" name="nome" class="form-control">                                
-                                </div>                            
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>Inscreve-se no curso de:</label> 
-                                    <select id="curso" readonly class="form-control"  tabindex="2" name="curso">
-                                     
-                                    </select>                             
-                                </div>                            
-                            </div>
-                            <div class="col-md-8">
-                                <div class="form-group">
-                                    <label>Classe</label> 
-                                    <select id="classe" class="form-control"  tabindex="2" name="classe">
-                                     @foreach($classe as $c) 
-                                        <option value="{{ $c->id }}"> {{ $c->nome }}</option>
-                                    @endforeach
-                                    </select>
-                                </div>                            
-                            </div> 
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                <label for="IdPeriodo">
-                                    <p>Periodo</p>
-                                </label>
-                                <select required class="form-control" name="periodo" id="IdPeriodo"> 
-                                    <option selected value="Manhã">Manhã</option>
-                                    <option value="Tarde">Tarde</option>
-                                    <option value="Noite">Noite</option>
-                                </select>                
-                                </div>                            
-                            </div> 
-                            <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="custo">Custo da Inscricao</label> 
-                                        <input min="1000" id="custo" required type="number" name="custo" class="form-control">                                
-                                    </div>                            
-                            </div>  
-                                                       
-                        </div>
-                        </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
-                        <button  type="submit" class="btn btn-primary">Inscrever</button>
-                    </div>
-    
-                    {!! Form::close() !!} 
-                    
-                </div>
-            </div>
+ 
 @endsection
 
 @section("scripts")
@@ -160,36 +81,13 @@
 
     <script>
     // Data table
-        setTimeout(function()
-        {
-            $.get("{{url('/Secretaria/renderiza')}}",{"game":1},function(done)
-                {
-                    if(done.view == true)
-                    {
-                        window.location.href = "";
-                    }
-                    console.log(done)
-                },"Json");
-                
-        },50);
-       
         $(document).ready(function(){
-            $(".adds").click(function ()
-            {
-                $("#idcandidato").val($(this).data("idcandidato"));
-                $("#idaluno").val($(this).data("idaluno"));
-                $("#nome").val($(this).data("nome"));
-                $("#curso").html('<option value="'+$(this).data("idcurso")+'">'+$(this).data("curso")+'</option>');
-                $("#MatricularModal").modal("show");
-            })        
-
-
             $('.data-table-grid').DataTable({
-                pageLength: 25,
+                pageLength: 10,
                 responsive: true,
                 dom: '<"html5buttons"B>lTfgitp',
                 buttons: [
-                    {extend: 'excel', title: 'ExampleFile'}
+                    {extend: 'excel', title: 'alunos-matriculados-sem-turma'}
                    
 
                     

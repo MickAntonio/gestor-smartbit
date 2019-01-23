@@ -34,17 +34,17 @@
                             <h1>DADOS BIOGRAFICOS</h1>
                             <fieldset>
                                 <div class="col-md-12">
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <label for="firstName">
-                                            <p>Primeiro Nome</p>
+                                            <p>Nome Completo do Candidato</p>
                                         </label>
                                         <input required minlength="3" type="text" id="firstName" name="firstName" class="form-control" />
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="lastName">
+                                       <!-- <label for="lastName">
                                             <p>Ultimo Nome</p>
-                                        </label>
-                                        <input required minlength="3" type="text" id="lastName" name="lastName" class="form-control" />
+                                        </label> -->
+                                        <input required minlength="3" type="hidden" id="lastName" value='123456' name="lastName" class="form-control" />
                                     </div>
                                 </div>   
                                 <div class="col-md-12">
@@ -64,13 +64,13 @@
                                         <label for="futher">
                                             <p>Nome do Pai:</p>
                                         </label>
-                                        <input required minlength="7" type="text" id="futher" name="futher" class="form-control" />
+                                        <input required minlength="2" type="text" id="futher" name="futher" class="form-control" />
                                     </div>
                                     <div class="col-md-4">
                                         <label for="mother">
                                             <p>Nome do Mãe:</p>
                                         </label>
-                                        <input required minlength="7" type="text" id="mother" name="mother" class="form-control" />
+                                        <input required minlength="2" type="text" id="mother" name="mother" class="form-control" />
                                     </div>
                                    
                                 </div>

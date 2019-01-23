@@ -62,7 +62,7 @@
         </nav>
         </div>
         <div class="wrapper wrapper-content">
-            
+
             @yield('content')
 
         </div>
@@ -82,7 +82,7 @@
 
  @include('includes/scripts')
 
-   
+
 </body>
 
 

@@ -24,7 +24,9 @@ Route::group(['middleware'=>['web']], function(){
     Route::get('/listar-curso', 'Secretaria\DashboardController@ListCurso')->name("CourseList");
     Route::get('listar-turmas', 'Secretaria\DashboardController@Listturma')->name("ClassList");
     /* Routas para inscrição pela 1ª vez */
-    Route::resource('inscricao-pela-primeira-vez', 'Secretaria\InscricaoController', ['except'=>['create', 'edit', 'show']]);  
+    Route::resource('inscricao-pela-primeira-vez', 'Secretaria\InscricaoController', ['except'=>['create', 'edit', 'show']]);
+    Route::get("/passo-dois-inscricao/{idcandidato}","Secretaria\InscricaoController@ClasseCandidato")->name("ClasseCandidato");
+
     Route::get('lista-de-candidatos-inscritos', 'Secretaria\InscricaoController@listaCandidatoInscritos');
 
     /* Routas para matricula anonima */
@@ -109,7 +111,7 @@ Route::prefix("Administrador")->group(function ()
                           
     });
 
-    Route::prefix('financeiro')->group(function(){
+    Route::prefix('Financeiro')->group(function(){
         Route::get('/', 'Financeiro\DashboardController@dashboard');
 
         Route::resource('/precos', 'Financeiro\PrecosController', ['except'=>['create', 'edit', 'show']]);       

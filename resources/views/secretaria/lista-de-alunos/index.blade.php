@@ -527,13 +527,13 @@
             $("#EditarModal form").attr("action", url);
 
             $(function(){
-                $.get('http://localhost:8000/secretaria/preco-propina/'+curso+'/'+classe+'', function(data){
-                    
+                $.get('{{url("/secretaria/preco-propina")}}/'+curso+'/'+classe+'', function(data){
+                   
                     $("#adicionarModal input[name=preco_propina]").val(data[1].preco);
                     $("#adicionarModal input[name=preco_propina_id]").val(data[0]);
                 
 
-                }, 'json');
+                }, 'Json');
             });
             
         });
@@ -562,7 +562,7 @@
                 $('#tbody-pagamento').append(tr);
                 
                 $(function(){
-                    $.get('http://localhost:8000/json/lista-de-meses', function(data){
+                    $.get('{{url("/json/lista-de-meses")}}', function(data){
                     
                         for(var i=0; i<data.length; i++){
                             $("#select-mes-"+produtoAdd).append('<option value="'+data[i].id+'">'+data[i].mes+'</option>');

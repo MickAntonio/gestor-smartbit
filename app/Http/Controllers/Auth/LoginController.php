@@ -128,6 +128,7 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
+        $url = "";
         if($user->type=='Secretaria'){
             $url = '/secretaria';
         }elseif($user->type=='Administrador'){

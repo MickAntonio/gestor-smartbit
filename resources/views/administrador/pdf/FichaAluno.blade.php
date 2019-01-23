@@ -78,6 +78,8 @@ section,p
             <p>Nome do Aluno: {{ $matricula->nome?? ""}}</p>
             <p>Curso de:  {{ $matricula->aluno()->get()[0]->curso()->get()[0]->nome?? ""}}  Classe: {{ $matricula->aluno()->get()[0]->matricula()->get()[0]->turma()->get()[0]->classe()->get()[0]->nome?? ""}}</p>
             <p>Data da matricula: {{ date("d-m-Y") }}</p>
+            <br>
+            <p>O funcionário: ________________________________________</p>
 
         </article>
 </body>
