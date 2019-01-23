@@ -46,8 +46,8 @@ class CreateCandidatosTable extends Migration
      */
     public function down()
     {
-        Schema::dropForeign(['municipio_id']);        
-        Schema::dropForeign(['escola_anterior_id']);        
+        //Schema::dropForeign(['municipio_id']);        
+        //Schema::dropForeign(['escola_anterior_id']);        
         Schema::dropIfExists('candidatos');
     }
 }

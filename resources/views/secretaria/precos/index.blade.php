@@ -365,7 +365,7 @@
         var id = "#EditarPrecoModal option[value="+$(this).data('moeda')+"]";
         $(id).attr({ selected:"selected" })
 
-        var url = "{{ url('secretaria/precos') }}/"+$(this).data('id');
+        var url = "{{ url('financeiro/precos') }}/"+$(this).data('id');
 
         $("#EditarPrecoModal form").attr("action", url);
         
@@ -376,7 +376,7 @@
 
         $("#ExcluirPrecoModal").modal("show");
 
-        var url = "{{ url('secretaria/precos') }}/"+$(this).data('id');
+        var url = "{{ url('financeiro/precos') }}/"+$(this).data('id');
 
         $("#ExcluirPrecoModal form").attr("action", url);
 

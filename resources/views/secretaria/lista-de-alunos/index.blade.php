@@ -230,7 +230,7 @@
                             </div>                            
                         </div>
 
-                        <input type="hidden" name="user_id" value="1" placeholder="" class="form-control">                                
+                        <input type="hidden" name="user_id" value="{{ Auth::id() }}" placeholder="" class="form-control">                                
                         <input type="hidden" name="matricula_id" value="1" placeholder="" class="form-control">                                
                         <input type="hidden" name="preco_propina" class="form-control">                                
                         <input type="hidden" name="preco_propina_id" class="form-control">                                

@@ -86,45 +86,8 @@
 
             </div>
 
-            <div class="col-md-4">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Monthly income</h5>
-                        <div class="ibox-tools">
-                            <span class="label label-primary">Updated 12.2015</span>
-                        </div>
-                    </div>
-                    <div class="ibox-content no-padding">
-                        <div class="flot-chart m-t-lg" style="height: 55px;">
-                            <div class="flot-chart-content" id="flot-chart1"></div>
-                        </div>
-                    </div>
+            @include('components.usuario')
 
-                </div>
-
-                <div class="widget-head-color-box navy-bg p-lg text-center">
-                            <div class="m-b-md">
-                            <h2 class="font-bold no-margins">
-                                Alex Smith
-                            </h2>
-                                <small>Founder of Groupeq</small>
-                            </div>
-                            <img src="/img/a4.jpg" class="img-circle circle-border m-b-md" alt="profile">
-                            <div>
-                                <span>100 Tweets</span> |
-                                <span>350 Following</span> |
-                                <span>610 Followers</span>
-                            </div>
-                        </div>
-                        <div class="widget-text-box">
-                            <h4 class="media-heading">Alex Smith</h4>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                            <div class="text-right">
-                                <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> Like </a>
-                                <a class="btn btn-xs btn-primary"><i class="fa fa-heart"></i> Love</a>
-                            </div>
-                        </div>
-            </div>
         </div>
            
          
@@ -187,7 +150,7 @@
 
                     </div>
 
-                    <input type="hidden" name="user_id" value="1" placeholder="" class="form-control">                                
+                    <input type="hidden" name="user_id" value="{{ Auth::id() }}" placeholder="" class="form-control">                                
                     
                     
                 </div>

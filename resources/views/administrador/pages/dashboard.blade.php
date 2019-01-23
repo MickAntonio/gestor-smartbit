@@ -29,7 +29,7 @@
                             print $c; 
                         ?>
                         </h1>
-                        <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>
+                        <div class="stat-percent font-bold text-success">00% <i class="fa fa-bolt"></i></div>
                         <small>Total de vagas</small>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                     </div>
                     <div class="ibox-content">
                                 <h1 class="no-margins"> {{ count($semvaga) }}</h1>
-                                <div class="stat-percent font-bold text-danger">20% <i class="fa fa-level-up"></i></div>
+                                <div class="stat-percent font-bold text-danger">00% <i class="fa fa-level-up"></i></div>
                                 <small>Total de Turmas</small>
                     </div>
                 </div>

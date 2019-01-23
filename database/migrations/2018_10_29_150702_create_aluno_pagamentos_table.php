@@ -33,8 +33,8 @@ class CreateAlunoPagamentosTable extends Migration
      */
     public function down()
     {
-        Schema::dropForeign(['pagamento_id']);                                
-        Schema::dropForeign(['matricula_id']);
+        //Schema::dropForeign(['pagamento_id']);                                
+        //Schema::dropForeign(['matricula_id']);
         Schema::dropIfExists('aluno_pagamentos');
     }
 }

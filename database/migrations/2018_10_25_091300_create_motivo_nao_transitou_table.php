@@ -32,7 +32,7 @@ class CreateMotivoNaoTransitouTable extends Migration
      */
     public function down()
     {
-        Schema::dropForeign(['matricula_id']);
+        //Schema::dropForeign(['matricula_id']);
         Schema::dropIfExists('motivo_nao_transitou');
     }
 }

@@ -34,8 +34,8 @@ class CreateAlunosTable extends Migration
      */
     public function down()
     {
-        Schema::dropForeign(['candidato_id']);                
-        Schema::dropForeign(['cursos_id']);                
+        //Schema::dropForeign(['candidato_id']);                
+        //Schema::dropForeign(['cursos_id']);                
         Schema::dropIfExists('alunos');
     }
 }

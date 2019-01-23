@@ -32,7 +32,7 @@ class CreateSaldosTable extends Migration
      */
     public function down()
     {
-        Schema::dropForeign(['aluno_id']);                        
+        //Schema::dropForeign(['aluno_id']);                        
         Schema::dropIfExists('saldos');
     }
 }

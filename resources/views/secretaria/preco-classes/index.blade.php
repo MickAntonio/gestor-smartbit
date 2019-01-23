@@ -458,7 +458,7 @@
         $(idCurso).attr({ selected:"selected" })
 
 
-        var url = "{{ url('secretaria/preco-das-propinas') }}/"+$(this).data('id');
+        var url = "{{ url('financeiro/preco-das-propinas') }}/"+$(this).data('id');
 
         $("#EditarModal form").attr("action", url);
         
@@ -469,7 +469,7 @@
 
         $("#ExcluirModal").modal("show");
 
-        var url = "{{ url('secretaria/preco-das-propinas') }}/"+$(this).data('id');
+        var url = "{{ url('financeiro/preco-das-propinas') }}/"+$(this).data('id');
 
         $("#ExcluirModal form").attr("action", url);
 

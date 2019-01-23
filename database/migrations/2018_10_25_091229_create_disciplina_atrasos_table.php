@@ -34,8 +34,8 @@ class CreateDisciplinaAtrasosTable extends Migration
      */
     public function down()
     {
-        Schema::dropForeign(['classe_id']);                                        
-        Schema::dropForeign(['matricula_id']);
+        //Schema::dropForeign(['classe_id']);                                        
+        //Schema::dropForeign(['matricula_id']);
         Schema::dropIfExists('disciplina_atrasos');
     }
 }

@@ -44,6 +44,7 @@ class AlunosPropinasPagamentosController extends Controller
     {
         return view('secretaria.lista-de-alunos.index')
         ->withMatriculas(Matriculas::all())
+        //->withMatriculas(Matriculas::where('created_at', '2018'))
         ->withMeses(Meses::all());
     }
 
