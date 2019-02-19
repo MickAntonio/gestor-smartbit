@@ -17,7 +17,7 @@
         <div class="header mg-t--20">
 
             <div>
-            <img src="img/logo.png" class="smartbit-logo" alt="smartbit logo">
+            <img src="img/logoSmartbits.png" class="smartbit-logo" alt="smartbit logo"> 
             </div>
             <h3 class="mg-t--5">INSTITUTO MÉDIO POLITÉCNICO </h3>
             <h3>SMARTBITS</h3>
