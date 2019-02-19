@@ -32,7 +32,7 @@ class CreateMunicipiosTable extends Migration
      */
     public function down()
     {
-        Schema::dropForeign(['provincia_id']);
+        //Schema::dropForeign(['provincia_id']);
         Schema::dropIfExists('municipios');
     }
 }

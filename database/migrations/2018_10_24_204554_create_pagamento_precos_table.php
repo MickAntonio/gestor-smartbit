@@ -34,8 +34,8 @@ class CreatePagamentoPrecosTable extends Migration
      */
     public function down()
     {
-        Schema::dropForeign(['tipo_pagamento_id']);                                
-        Schema::dropForeign(['preco_id']);   
+        //Schema::dropForeign(['tipo_pagamento_id']);                                
+        //Schema::dropForeign(['preco_id']);   
         Schema::dropIfExists('pagamento_precos');
     }
 }

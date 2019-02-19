@@ -3,6 +3,7 @@
 
 <head>
     @include('includes.head')
+    <title>Login - Smartbits</title>
 </head>
 
 
@@ -12,10 +13,10 @@
     <div class="row">
 
         <div class="col-md-6">
-            <h2 class="font-bold">Login - Smartbit</h2>
+            <h2 class="font-bold">Login - Smartbits</h2>
 
             <p>
-                Perfectly designed and precisely prepared admin theme with over 50 pages with extra new web app views.
+                Seja bem vindo a tela de login do Smartbits designed and precisely prepared admin theme with over 50 pages with extra new web app views.
             </p>
 
             <p>

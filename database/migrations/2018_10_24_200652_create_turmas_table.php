@@ -38,8 +38,8 @@ class CreateTurmasTable extends Migration
      */
     public function down()
     {
-        Schema::dropForeign(['classe_id']);        
-        Schema::dropForeign(['curso_id']);        
+        //Schema::dropForeign(['classe_id']);        
+        //Schema::dropForeign(['curso_id']);        
         Schema::dropIfExists('turmas');
     }
 }

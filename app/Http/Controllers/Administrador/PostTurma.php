@@ -19,6 +19,7 @@ class PostTurma extends Controller
         $this->middleware('auth');
     }
 
+   
     /**
      * Create a new controller instance.
      */

@@ -34,8 +34,8 @@ class CreatePagamentoFolhaTurmasTable extends Migration
      */
     public function down()
     {
-        Schema::dropForeign(['turma_id']);                                        
-        Schema::dropForeign(['pagamento_id']);                                        
+        //Schema::dropForeign(['turma_id']);                                        
+        //Schema::dropForeign(['pagamento_id']);                                        
         Schema::dropIfExists('pagamento_folha_turmas');
     }
 }

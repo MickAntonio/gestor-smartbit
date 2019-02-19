@@ -102,6 +102,7 @@ Route::prefix("Administrador")->group(function ()
         Route::get('/preco-propina/{curso}/{classe}', 'Secretaria\AlunosPropinasPagamentosController@getPrecoPropina');       
         Route::get('/pagamentos-preco/{tipo}', 'Secretaria\AlunosOutrosPagamentosController@getPreco');       
         Route::get('/propina-recibo/{id}', 'Secretaria\AlunosPropinasPagamentosController@pdfRecibo');  
+        Route::get('/propina-recibo-termica/{id}', 'Secretaria\AlunosPropinasPagamentosController@pdfReciboTermica');  
         
         //
         Route::get('/relatorios/pagamentos-de-propinas', 'Secretaria\Relatorios\PropinasPagamentosController@index');       

@@ -37,9 +37,9 @@ class CreatePropinasTable extends Migration
      */
     public function down()
     {
-        Schema::dropForeign(['mes_id']);                                
-        Schema::dropForeign(['pagamento_propina_id']);                                
-        Schema::dropForeign(['preco_classe_id']);
+        //Schema::dropForeign(['mes_id']);                                
+        //Schema::dropForeign(['pagamento_propina_id']);                                
+        //Schema::dropForeign(['preco_classe_id']);
         Schema::dropIfExists('propinas');
     }
 }

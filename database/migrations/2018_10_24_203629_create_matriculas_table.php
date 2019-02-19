@@ -35,8 +35,8 @@ class CreateMatriculasTable extends Migration
      */
     public function down()
     {
-        Schema::dropForeign(['aluno_id']);                
-        Schema::dropForeign(['turma_id']);                
+        //Schema::dropForeign(['aluno_id']);                
+        //Schema::dropForeign(['turma_id']);                
         Schema::dropIfExists('matriculas');
     }
 }

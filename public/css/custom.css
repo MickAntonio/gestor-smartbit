@@ -37,3 +37,12 @@ margin-top: -5px;
     border: 2px #000 solid;
     height: 250px;
 }
+.input-bg-green{
+    background-color: #1ab394;
+    color: white;
+}
+
+.input-bg-red{
+    background-color: tomato;
+    color: white;
+}

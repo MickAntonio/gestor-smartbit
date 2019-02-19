@@ -36,9 +36,9 @@ class CreatePrecoClassesTable extends Migration
      */
     public function down()
     {
-        Schema::dropForeign(['classe_id']);                                
-        Schema::dropForeign(['preco_id']);         
-        Schema::dropForeign(['curso_id']); 
+        //Schema::dropForeign(['classe_id']);                                
+        //Schema::dropForeign(['preco_id']);         
+        //Schema::dropForeign(['curso_id']); 
         Schema::dropIfExists('preco_classes');
     }
 }

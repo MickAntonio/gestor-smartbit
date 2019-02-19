@@ -37,8 +37,8 @@ class CreatePagamentoPropinasTable extends Migration
      */
     public function down()
     {
-        Schema::dropForeign(['user_id']);                        
-        Schema::dropForeign(['matricula_id']);
+        //Schema::dropForeign(['user_id']);                        
+        //Schema::dropForeign(['matricula_id']);
         Schema::dropIfExists('pagamento_propinas');
     }
 }
