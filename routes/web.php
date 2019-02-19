@@ -63,6 +63,7 @@ Route::prefix("Administrador")->group(function ()
     Route::get('/lista-da-turma/{idturma}', 'Administrador\Postturma@AlunosDaTurma')->name("AlunosDaTurma");
     /* Routa para alunos vs turmas */
     Route::get('/Ficha-do-aluno/{id}', 'Administrador\MatriculaController@FichaMatricula')->name("FichaAluno");
+    Route::get('/Recibo-da-matricula/{id}', 'Administrador\MatriculaController@ReciboMatricula')->name("ReciboMatricula");
     Route::get('/lista-dos-alunos-da-turma/{idturma}', 'Administrador\PostTurma@ListaDosAlunos')->name("ListaDosAlunos");
 
     Route::put('/trocar-a-turma-do-aluno/{idmatricula}/{idturma}/{oldt}', 'Administrador\PostTurma@TrocarTurma')->name("TrocarTurma");

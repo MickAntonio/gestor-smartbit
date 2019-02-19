@@ -1,0 +1,4 @@
+@font-face { font-family: "Caviar"; src: url('/fonts/CaviarDreams.ttf');}
+
+.btn-primary{ background: rgb(218, 177, 42) !important;}
+.btn-primary:hover{ background: rgba(218, 177, 42,.8) !important;}

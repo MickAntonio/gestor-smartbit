@@ -12,6 +12,7 @@ use App\Models\Administrador\Classes;
 use App\Models\Administrador\Turmas;
 use Session;
 use PDF;
+use Auth;
 
 class MatriculaController extends Controller
 {
@@ -74,6 +75,15 @@ class MatriculaController extends Controller
                 ->setPaper('a4', 'portraite')->stream();;
               //  ->download('nome-arquivo-pdf-gerado.pdf');
     }
+    public function ReciboMatricula($id = 0)
+    {
+      $products =[2,2,3];//\Product::all();
+        Session::flash("MatriFicha","verdadeiro");
+        return PDF::loadView('administrador.pdf.ReciboMatricula',["user"=>Auth::user()->name,"matricula" => Candidatos::where("id",$id)->get()[0]])
+                // Se quiser que fique no formato a4 retrato:
+                ->setPaper('a6', 'portraite')->stream();;
+              //  ->download('nome-arquivo-pdf-gerado.pdf');
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -95,7 +105,8 @@ class MatriculaController extends Controller
         $this->validate($request,
         [
             "turma" => "required",
-            "idaluno" => "required"
+            "idaluno" => "required",
+            "idclasse" => "required"
         ]);
        
         $matricula = matriculas::find($request->idaluno);
@@ -103,7 +114,17 @@ class MatriculaController extends Controller
         if($matricula->save())
         {
             $aluno = Alunos::find($matricula->aluno_id);
-            $aluno->processo = Alunos::orderBy("processo","DESC")->get()[0]->processo + 1; 
+            $ordem = 00;
+            $data = date("y")-(date("Y")-$request->turmaAnolectivo);
+            if($request->idaluno > 10) $ordem = 0;
+            
+                $aluno->processo = date("y")."10".$ordem.$request->idaluno;
+            if($request->idclasse == 2)
+                $aluno->processo = date("y")."11".$ordem.$request->idaluno;
+            if($request->idclasse == 3)
+                $aluno->processo = date("y")."12".$ordem.$request->idaluno;
+            if($request->idclasse == 4)
+                $aluno->processo = date("y")."13".$ordem.$request->idaluno;
             $aluno->save();
             $turma = Turmas::find($request->turma);
             $turma->Quantidade = $turma->Quantidade - 1;

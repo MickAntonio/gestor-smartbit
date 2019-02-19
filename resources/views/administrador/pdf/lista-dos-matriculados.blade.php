@@ -18,19 +18,33 @@
         margin:0px;
         padding: 2px 0px !important;
     }
-    header > div 
+    *{ margin: 1% !important; padding: 0px; font-family:  'Segoe UI', Tahoma, Geneva, Verdana, sans-serif}
+
+article 
 {
-    margin: 20px 0px 0px 0px;
+    border: 1px dotted #000;
+    padding:5px !important;
+    margin:5px ;
 }
+
+header { width: 100%; height: 200px; margin-bottom: 50px;}
+header  div { border: none;  float: left; margin: 0px !important; padding: 0px !important; }
+.head-img { width: 16%; height: 120px; }
+.head-img img { width: 100%; height: 110px; margin: 15px 0px 0px 0px !important;}
+.head-title { width: 70%; height: 100px; padding-top: 0px !important; text-align: center;}
+.head-title h2 { font-size: 18px; font-weight: bold}
 </style>
 <body>
-    <header >
-        <h2>INSTITUTO MEDIO POLITECNICO E CENTRO DE FORMAÇÃO PROFISSIONAL </h2>
-        <h2>SMARTBITS</h2>
-        <h2>Lista de alunos matriculados para o ano lectivo <?= $date ?></h2>
-       
-                 
-    </header> 
+        <header>
+                <div class="head-img">
+                        <img src="{{url('img/logoSmartbits.png')}}" alt=" ">
+                </div>
+                <div class="head-title">
+                        <h2>INSTITUTO MÉDIO POLITÉCNICO</h2>
+                        <h2>SMARTBITS</h2>       
+                        <h2>Lista de alunos matriculados para o ano lectivo <?= $date ?></h2>
+                </div>
+        </header>
              <table class="table table-bordered">
                 <thead>
                     <tr>

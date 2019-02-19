@@ -12,7 +12,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <span class="label label-success pull-right">Hoje</span>
@@ -32,20 +32,63 @@
                         <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>
                         <small>Total de vagas</small>
                     </div>
+                    <div class="ibox-content">
+                            <h1 class="no-margins">
+                            {{ count($alunosemturma)}}
+                            </h1>
+                            <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>
+                            <small>Candidatos inscritos e sem turma</small>
+                        </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <span class="label label-danger pull-right">Hoje</span>
+                        <span class="label label-primary pull-right">Hoje</span>
                         <h5>Turmas preenchidas </h5>
                     </div>
                     <div class="ibox-content">
                                 <h1 class="no-margins"> {{ count($semvaga) }}</h1>
-                                <div class="stat-percent font-bold text-danger">20% <i class="fa fa-level-up"></i></div>
+                                <div class="stat-percent font-bold text-navy">20% <i class="fa fa-level-up"></i></div>
                                 <small>Total de Turmas</small>
                     </div>
                 </div>
+            </div>      
+            <div class="col-md-3">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <span class="label label-success pull-right">Hoje</span>
+                            <h5>Alunos por curso</h5>
+                        </div>
+                        @for($c=0;$c<count($cursoquantidade); $c++)                       
+                        <div  class=" ibox-content">
+                                    <h1 class="no-margins">{{$cursoquantidade[$c]["quantidade"] }} </h1>
+                                    <div class="stat-percent font-bold text-success">20% <i class="fa fa-level-up"></i></div>
+                                    <small>{{ $cursoquantidade[$c]["curso"] }}</small>
+                                    
+                        </div>
+                        @endfor      
+                    </div>                    
+            </div>
+            <div class="col-md-3">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <span class="label label-primary pull-right">Hoje</span>
+                            <h5>Total de Alunos</h5>
+                        </div>
+                        @php $quant = 0;
+                         for($c=0;$c<count($cursoquantidade); $c++)
+                            $quant += $cursoquantidade[$c]["quantidade"];
+                        @endphp
+
+                        <div  class=" ibox-content">
+                                    <h1 class="no-margins">{{ $quant}} </h1>
+                                    <div class="stat-percent font-bold text-navy">100% <i class="fa fa-level-up"></i></div>
+                                    <small>...</small>
+                                    
+                        </div>
+                         
+                    </div>                    
             </div>
         </div>
     </div>

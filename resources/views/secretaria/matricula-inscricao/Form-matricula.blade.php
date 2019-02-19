@@ -11,7 +11,32 @@
   
         <div class="row">
             <div class="col-md-12">
-                @include('components.messages')
+                 @if (Session::has('successo'))
+                    <div class="alert alert-success margin-top-100" role="alert">
+                    <strong>Mensagem:</strong> 
+                        {{ Session::get('successo') }} 
+                        <a href="{{route('ReciboMatricula', Session::get('idCandidatado') ) }}" class="btn btn-white">
+                           <strong> Clique Aqui para Imprimir o recibo</strong>
+                        </a>
+                    </div>
+                @endif
+                @if (Session::has('fail'))
+                    <div class="alert alert-danger margin-top-100" role="alert">
+                        <strong>Mensagem:</strong> {{ Session::get('fail') }}
+                    </div>
+                @endif
+            
+                @if (count($errors) > 0)            
+                    <div class="alert alert-danger margin-top-100" role="alert">
+                        <strong>Lamento:</strong>
+                        
+                        <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                        </ul>
+                    </div>
+                @endif
             </div>
             <div class="col-lg-12">
                 <div class="ibox">

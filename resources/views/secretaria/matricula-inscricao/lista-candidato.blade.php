@@ -52,6 +52,7 @@
                                         <td>{{ $aluno->turma()->get()[0]->curso()->get()[0]->nome?? "" }} </td>
                                         <td>{{$aluno->aluno()->get()[0]->candidato()->get()[0]->sexo?? "" }} </td>
                                         <td>
+                                            <a href="{{route('ReciboMatricula',$aluno->aluno->candidato_id)}}"  class="btn btn-primary btn-sm"  ><i class="fa fa-eye"></i> Recibo de inscrição </a>
                                             <a href="{{route('FichaAluno',$aluno->aluno()->get()[0]->candidato()->get()[0]->id?? '')}}"  class="btn btn-success btn-sm show-modal"  ><i class="fa fa-eye"></i> Ficha </a>
                                         </td>
                                     </tr>

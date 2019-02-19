@@ -58,7 +58,7 @@
                                         <td>{{ $Turma[$i]->curso()->get()[0]->nome }}</td>
                                         <td>{{ $Turma[$i]->anolectivo }}</td>
                                         <td>
-                                        <a href="{{route('AlunosDaTurma',$Turma[$i]->id)}}" class="btn btn-success" ><i class="fa fa-list"></i></a>
+                                        <a href="{{route('AlunosDaTurma',$Turma[$i]->id)}}" class="btn btn-primary" ><i class="fa fa-list"></i></a>
                                             
                                             <a class="btn btn-success edit-class" data-vaga="{{ $Turma[$i]->Quantidade }}" data-id="{{ $Turma[$i]->id }}" ><i class="fa fa-pencil"></i>
                                     </a>

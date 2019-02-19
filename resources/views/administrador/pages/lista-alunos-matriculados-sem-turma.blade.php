@@ -52,8 +52,9 @@
                                         <td>{{ $aluno->turma()->get()[0]->curso()->get()[0]->nome?? "" }} </td>
                                         <td>{{$aluno->aluno()->get()[0]->candidato()->get()[0]->sexo?? "" }} </td>
                                         <td>
+                                            <a href="{{route('ReciboMatricula',$aluno->aluno->candidato_id)}}"  class="btn btn-primary btn-sm"  ><i class="fa fa-eye"></i> Recibo de inscrição </a>
                                             <a href="{{route('FichaAluno',$aluno->aluno()->get()[0]->candidato()->get()[0]->id?? '')}}"  class="btn btn-success btn-sm show-modal"  ><i class="fa fa-eye"></i> Ficha </a>
-                                            <a class=" adds btn btn-primary btn-sm show-modal" data-processo="" data-periodo="{{ $aluno->turma()->get()[0]->periodo }}" data-idclasse="{{ $aluno->turma()->get()[0]->classe()->get()[0]->id }}" data-classe="{{ $aluno->turma()->get()[0]->classe()->get()[0]->nome }}" data-curso="{{ $aluno->turma()->get()[0]->curso()->get()[0]->nome }}" data-idcurso="{{ $aluno->turma()->get()[0]->curso()->get()[0]->id }}" data-idmatricula="{{ $aluno->id }}" data-nome="{{ $aluno->aluno()->get()[0]->candidato()->get()[0]->nome }}"  >
+                                            <a class=" adds btn btn-primary btn-sm show-modal" data-processo="" data-turmaAnolectivo="{{$aluno->turma->anolectivo}}" data-periodo="{{ $aluno->turma()->get()[0]->periodo }}" data-idclasse="{{ $aluno->turma()->get()[0]->classe()->get()[0]->id }}" data-classe="{{ $aluno->turma()->get()[0]->classe()->get()[0]->nome }}" data-curso="{{ $aluno->turma()->get()[0]->curso()->get()[0]->nome }}" data-idcurso="{{ $aluno->turma()->get()[0]->curso()->get()[0]->id }}" data-idmatricula="{{ $aluno->id }}" data-nome="{{ $aluno->aluno()->get()[0]->candidato()->get()[0]->nome }}"  >
                                                 <i class="fa fa-plus"></i> Adicionar
                                             </a>
                                         </td>
@@ -94,19 +95,21 @@
                             <div class="col-md-8">
                                 <div class="form-group">
                                     <label><p>Nome</p></label> 
-                                    <input id="nome" readonly type="text" name="nome" class="form-control">                                
+                                    <input id="nome" disabled  type="text" name="nome" class="form-control">                                
                                 </div>                            
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label><p>Classe: </p></label> 
-                                    <input  id="classe" readonly type="text" name="classe" class="form-control">                                
+                                    <input disabled  id="classe" type="text" name="classe" class="form-control">  
+                                    <input  id="idclasse" readonly type="hidden" name="idclasse" class="form-control">                                
+                                    <input  id="turmaAnolectivo" readonly type="hidden" name="turmaAnolectivo" class="form-control">                                
                                 </div>                            
                             </div>
                             <div class="col-md-8">
                                 <div class="form-group">
                                     <label><p>Matricula-se no curso de:</p></label> 
-                                    <select id="curso" readonly class="form-control"  tabindex="2" name="curso">
+                                    <select id="curso" disabled class="form-control"  tabindex="2" name="curso">
                                     </select>                       
                                 </div>                            
                             </div>
@@ -115,7 +118,7 @@
                                 <label for="Idperiodo">
                                     <p>Periodo escolhido:</p>
                                 </label>
-                                <input readonly class="form-control" name="periodo" id="Idperiodo">
+                                <input disabled class="form-control" name="periodo" id="Idperiodo">
                                                
                                 </div>                            
                             </div>   
@@ -158,6 +161,8 @@
                 $("#curso").html('<option value="'+$(this).data("idcurso")+'">'+$(this).data("curso")+'</option>');
                 $("#Idperiodo").val($(this).data("periodo"));
                 $("#classe").val($(this).data("classe"));
+                $("#idclasse").val($(this).data("idclasse"));
+                $("#turmaAnolectivo").val($(this).data("turmaAnolectivo"));
 
                 $.get("{{url('Administrador/json-turma')}}/"+$(this).data("idclasse")+"/"+$(this).data("idcurso"),{"classe":$(this).data("idclasse")},function(done)
                 {

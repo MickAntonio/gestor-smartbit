@@ -65,6 +65,7 @@ class InscricaoController extends Controller
         $this->validate($request,
             [
                 'classe' => ' required',
+                "custo" => "required| min:4",
             ]);
         if ($request->classe == 4) {
             Session::flash('fail', 'Candidato não pode ser matriculado  na 13ª classe...');
@@ -81,9 +82,11 @@ class InscricaoController extends Controller
                 $matricula->turma_id = $turma->id;
                 $matricula->tipo = 'Matricula';
                 $matricula->condicao = 'Limpo';
+                $matricula->valor_pago = $request->custo;
                 $matricula->save();
 
                 Session::flash('successo', 'Candidato matriculado com sucesso e encaminhado a coordenação');
+                Session::flash('idCandidatado', $matricula->aluno->candidato_id);
                 //return redirect("Administrador/Ficha-do-aluno/".$matricula->aluno_id);
                 return redirect('Secretaria/inscricao-pela-primeira-vez');
             }

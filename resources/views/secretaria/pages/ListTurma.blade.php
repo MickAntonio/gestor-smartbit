@@ -6,7 +6,7 @@
 <div class="row">
 <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>LISTA DAS TURMAS</h5>
+                            <h5>LISTAS DAS TURMAS</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>

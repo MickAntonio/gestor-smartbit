@@ -10,39 +10,85 @@
     <link rel="stylesheet" href="css/custom.css">
 <style>
    body{ background: #fff;}
-   table, tr, td, th{ border-color:rgba(0,0,0,.7) !important;}
+   table, tr, td, th{ border-color:rgba(0,0,0,1) !important;}
    tr,td,th 
    { 
-        font-size: 11px;
+        font-size: 12px;
         height: 10px !important;
         margin:0px;
         padding: 2px 0px !important;
     }
-    header > div 
+    header
 {
-    margin: 20px 0px 0px 0px;
+    width: 80%;
+    margin: 0px auto;
+    text-align: center;
+}
+header div
+{
+    border:1px solid #000;
+}
+header img
+{
+    width: 75px;
+    height: 70px;
+    margin: -20px 0px 0px 0px;
+} 
+header h1,h2,h3,h4
+{
+    margin:0px;
+}
+header h1
+{
+    font-size: 18px; 
+}
+header h2
+{
+    font-size: 22px;
+    font-weight: bold; 
+}
+header h3
+{
+    font-size: 17px;
+    font-weight: bold;
+    margin: 0px;   
+}
+header h4
+{
+    font-size: 17px;
+    font-weight: bold;
+    color:red; 
+} th {text-align:center;}
+table {
+    margin-top:-40px;
 }
 </style>
 <body>
     <header >
-        <h2>INSTITUTO MEDIO POLITECNICO E CENTRO DE FORMAÇÃO PROFISSIONAL </h2>
-        <h2>SMARTBITS</h2>
-       
-            <p>Curso: {{ $turma->curso()->get()[0]->nome?? "" }} / {{$turma->classe()->get()[0]->nome?? ""}}</p>
-            <p>Turma: {{$turma->nome?? ""}} / Periodo: {{$turma->periodo?? ""}} / Ano lectivo: {{$turma->anolectivo?? ""}}</p>
-        
+        <img src="{{url('img/logoSmartbits.png')}}" alt=" ">
+        <div>
+            <h1>INSTITUTO MÉDIO POLITÉCNICO</h1>
+            <h2>SMARTBITS</h2>
+            <h3>Curso: {{ $turma->curso()->get()[0]->nome?? "" }}   </h3>
+            <h4>{{$turma->classe()->get()[0]->nome?? ""}}</h4>
+        </div>        
     </header>
        
              <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th  scope="col">Nº </th>
-                        <th  scope="col">Proc.</th>
-                        <th style="width: 250px" scope="col">Nome</th>
-                        <th  scope="col"> Sexo </th>
-                        <th  scope="col"> Idade </th>
-                        <th scope="col">Telf.</th>
+                <thead >
+                    <tr >
+                        <th  scope="col"  colspan="2" >Turma </th>
+                        <th  scope="col" style="color:red;font-weight:bold;font-size:12"><strong>{{$turma->nome?? ""}}</strong></th>
+                        <th  scope="col" colspan="3" > Contacto dos encarregados </th>
                     </tr>
+                    <tr>
+                            <th  scope="col">Nº processo </th>
+                            <th  scope="col">Nº de Ordem.</th>
+                            <th style="width: 250px" scope="col">Nome</th>
+                            <th  scope="col"> Pai </th>
+                            <th  scope="col"> Mãe </th>
+                            <th scope="col">Outro</th>
+                        </tr>
                 </thead>
                 <tbody> <?php  $conta = 0 ; ?>
                 @foreach($matricula as $text)
@@ -51,11 +97,11 @@
                                             $aluno = $matriculado->where("aluno_id",$text->aluno()->get()[0]->id)->where("turma_id",$idturma)->get()[0];
                                         @endphp
                                             <tr>
-                                                <td>{{ $conta = $conta + 1 }}</td>
                                                 <td>{{ $text->aluno()->get()[0]->processo }} </td>
+                                                <td>{{ $conta = $conta + 1 }}</td>
                                                 <td>{{ $text->nome }}</td>
-                                                <td>{{$text->sexo=="MASCULINO"? "M" : "F" }} </td>
-                                                <td>{{$text->nascido }} </td> 
+                                                <td>{{$text->telefone_pai }} </td>
+                                                <td>{{$text->telefone_mae }} </td> 
                                                 <td>{{$text->telefone }} </td> 
                                             </tr>
                                     @endif
