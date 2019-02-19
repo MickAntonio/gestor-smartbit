@@ -39,9 +39,9 @@
                                 <tr>
 
                                     <th>#</th>
+                                    <th>Curso</th>
                                     <th>Nome </th>
                                     <th>Sexo </th>
-                                    <th>Curso</th>
                                     <th>Classe</th>
                                     <th>Turma</th>
                                     <th>Periódo</th>
@@ -58,16 +58,16 @@
                                 <tr>
                                 
                                     <td>{{ $i++ }}</td>
+                                    <td><label class="label label-info">{{ $matricula->turma->curso->nome }}</label> </td>                                                                        
                                     <td>{{ $matricula->aluno->candidato->nome }}</td>
-                                    <td>{{ $matricula->aluno->candidato->sexo }}</td>
-                                    <td>{{ $matricula->turma->curso->nome }}</td>                                                                        
-                                    <td>{{ $matricula->turma->classe->nome }}</td>
-                                    <td>{{ $matricula->turma->nome }}</td>
+                                    <td><label class="label label-default">{{ $matricula->aluno->candidato->sexo }}</label></td>
+                                    <td><label class="label label-warning">{{ $matricula->turma->classe->nome }}</label></td>
+                                    <td><label class="label label-success">{{ $matricula->turma->nome }}</label></td>
                                     <td>{{ $matricula->turma->periodo }}</td>
                                    
                                     <td>
                                         <a href="/secretaria/alunos-propinas-pagamentos/{{ $matricula->id }}" class="btn btn-primary btn-sm show-modal"><i class="fa fa-user-circle"></i> </a>
-                                        <a class="btn btn-info btn-sm pagar-modal"    data-id="{{ $matricula->id }}" data-nome="{{ $matricula->aluno->candidato->nome }}" data-curso="{{ $matricula->turma->curso->id }}" data-classe="{{ $matricula->turma->classe->id }}" data-saldo="{{ $matricula->aluno->saldo->valor??'' }}"><i class="fa fa-money"></i> </a>
+                                        {{-- <a class="btn btn-info btn-sm pagar-modal"    data-id="{{ $matricula->id }}" data-nome="{{ $matricula->aluno->candidato->nome }}" data-curso="{{ $matricula->turma->curso->id }}" data-classe="{{ $matricula->turma->classe->id }}" data-saldo="{{ $matricula->aluno->saldo->valor??'' }}"><i class="fa fa-money"></i> </a> --}}
                                     </td>
 
                                 </tr>
@@ -86,7 +86,7 @@
     </div>
 
 
-    <div class="modal inmodal" id="adicionarModal" tabindex="-1" role="dialog" aria-hidden="true">
+    {{-- <div class="modal inmodal" id="adicionarModal" tabindex="-1" role="dialog" aria-hidden="true">
             
         <div class="modal-dialog">
             <div class="modal-content animated bounceInRight">
@@ -109,12 +109,6 @@
                         </div>
 
                         <div class="col-md-4">
-
-                       <!--     <div class="form-group">
-                                <label>Saldo</label> 
-                                <input type="text" name="saldo_show" value="0.00" placeholder="" disabled class="form-control">                                
-                            </div> 
-                        -->
 
                             <div class="form-group" id="data_1">
                                 <label>Data do Pagamento</label>
@@ -250,184 +244,7 @@
             </div>
         </div>
     
-    </div>
-
-    <div class="modal inmodal" id="visualizarModal" tabindex="-1" role="dialog" aria-hidden="true">
-            
-        <div class="modal-dialog">
-            <div class="modal-content animated bounceInRight">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">Visualizar Preço</h4>
-                </div>
-                
-                <div class="modal-body">
-
-                    <div class="row">
-
-                        <div class="col-md-12">
-                            @include('components.messages')
-                        </div>
-     
-                        <table class="table table-bordered table-th-200 bg-w">
-
-                            <tr>
-                                <th>Código</th>
-                                <td id="show-id"></td>
-                            </tr>
-
-                            <tr>
-                                <th>Tipo de Saida</th>
-                                <td id="show-nome"></td>
-                            </tr>
-
-                            <tr>
-                                <th>Pago</th>
-                                <td id="show-nome"></td>
-                            </tr>
-
-                            <tr>
-                                <th>Forma de Pagamento</th>
-                                <td id="show-preco"></td>
-                            </tr>
-
-                            <tr>
-                                <th>Descrição</th>
-                                <td id="show-nome"></td>
-                            </tr>                 
-
-                            <tr>
-                                <th>Criado Aos</th>
-                                <td id="show-created"></td>
-                            </tr>
-
-                            <tr>
-                                <th>Ultima Actualização Aos</th>
-                                <td id="show-updated"></td>
-                            </tr>
-
-                            <tr>
-
-                            <tr>
-                                <th>Acção</th>
-                                <td id="">
-                                    <a class="btn btn-info btn-sm edit-modal"     ><i class="fa fa-pencil"></i> </a>
-                                    <a class="btn btn-danger btn-sm delete-modal"  ><i class="fa fa-trash"></i> </a>
-                                </td>
-                            </tr>
-                           
-                            
-                        </table>
-
-
-                    </div>
-                    
-                </div>
-
-            </div>
-        </div>
-    
-    </div>
-
-    <div class="modal inmodal" id="EditarModal" tabindex="-1" role="dialog" aria-hidden="true">
-            
-        <div class="modal-dialog">
-            <div class="modal-content animated bounceInRight">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <i class="fa fa-laptop modal-icon"></i>
-
-                    <h4 class="modal-title">Editar Tipo de Pagamento</h4>
-                </div>
-                
-                {!! Form::open(array('method'=>'PUT')) !!}   
-
-                <div class="modal-body">
-
-                    <div class="row">
-
-                        <div class="col-md-12">
-                            @include('components.messages')
-                        </div>
-
-                      
-                      <div class="col-md-12">
-                            <div class="form-group">
-                                <label>Tipo de Saida</label> 
-                                <select class="form-control"  tabindex="2" name="forma_pagamento">
-                                    <option value="Dinheiro">Pagamento da cantina</option>
-                                </select>
-                            </div>                            
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Pago</label> 
-                                <input type="number" name="pago" placeholder="" class="form-control">                                
-                            </div>                            
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Forma de Pagamento</label> 
-                                <select class="form-control"  tabindex="2" name="forma_pagamento">
-                                    <option value="Dinheiro">Banco</option>
-                                </select>
-                            </div>                            
-                        </div>
-
-
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>Descrição</label> 
-                                <textarea class="form-control" name="" id="" cols="30" rows="4"></textarea>
-                            </div>                            
-                        </div>
-
-                    </div>
-                    
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Adicionar</button>
-                </div>
-
-                {!! Form::close() !!} 
-                
-            </div>
-        </div>
-    
-    </div>
-
-    <div class="modal inmodal" id="ExcluirModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content animated bounceInRight">
-
-            
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">Tens Certeza Que Pretendes Excluir</h4>
-                    <small class="font-bold">Ao Excluires este Serviço todos os dados deste Serviço serão excluidos.</small>
-                </div>
-                <div class="modal-body">
-
-                    <div class="row">
-
-                        {!! Form::open(['method'=>'DELETE']) !!}
-                        <button type="submit" class="col-sm-12 btn btn-primary"> <strong>Sim Tenho</strong></button>
-                        {!! Form::close() !!}
-
-                        <button type="button" class="col-sm-12 btn btn-white mg-top-20" data-dismiss="modal"><strong>Cancelar</strong></button>
-                        
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-
-    </div>
-
+    </div> --}}
 
 
 @endsection
@@ -454,142 +271,142 @@
 
     <script>
 
-        var d = new Date();
+        // var d = new Date();
 
-        setInterval(calculate, 1000)
+        // setInterval(calculate, 1000)
 
-        function calculate(){
+        // function calculate(){
 
-            var mes = document.getElementsByClassName("mes")
+        //     var mes = document.getElementsByClassName("mes")
 
-            var multas = document.getElementsByClassName("multas")
-            var subs   = document.getElementsByClassName("subs")
-            var preco = $("#adicionarModal input[name=preco_propina]").val();
-            var total_multas=new Number()
-            var total_a_pagar=new Number()
+        //     var multas = document.getElementsByClassName("multas")
+        //     var subs   = document.getElementsByClassName("subs")
+        //     var preco = $("#adicionarModal input[name=preco_propina]").val();
+        //     var total_multas=new Number()
+        //     var total_a_pagar=new Number()
 
-            for (var i = 0; i < multas.length; i++) {
+        //     for (var i = 0; i < multas.length; i++) {
 
-                var m=new Number()
+        //         var m=new Number()
 
-                if(mes[i].value!=0){
+        //         if(mes[i].value!=0){
 
-                    if(mes[i].value==d.getMonth()+1){
+        //             if(mes[i].value==d.getMonth()+1){
 
-                        if(d.getDate()>=11 && d.getDate()<=20){
-                            m = 0.10;
-                        }else if(d.getDate()>=21 && d.getDate()<=31){
-                            m = 0.20;
-                        }
+        //                 if(d.getDate()>=11 && d.getDate()<=20){
+        //                     m = 0.10;
+        //                 }else if(d.getDate()>=21 && d.getDate()<=31){
+        //                     m = 0.20;
+        //                 }
 
-                    }else if(mes[i].value<d.getMonth()+1){
-                        m = 0.30;
-                    }else{
-                        m = 0.0;           
-                    }
+        //             }else if(mes[i].value<d.getMonth()+1){
+        //                 m = 0.30;
+        //             }else{
+        //                 m = 0.0;           
+        //             }
                 
             
-                    multas[i].value = (new Number(preco) * m)+'.00';
+        //             multas[i].value = (new Number(preco) * m)+'.00';
 
-                    subs[i].value = ((new Number(preco) * m) + new Number(preco))+'.00 kz';
+        //             subs[i].value = ((new Number(preco) * m) + new Number(preco))+'.00 kz';
 
-                    total_multas=total_multas+( new Number(preco) * m);
-                    total_a_pagar=total_a_pagar+((new Number(preco) * m) + new Number(preco));
+        //             total_multas=total_multas+( new Number(preco) * m);
+        //             total_a_pagar=total_a_pagar+((new Number(preco) * m) + new Number(preco));
 
-                }
+        //         }
 
                 
-            }
+        //     }
 
-            $("#adicionarModal input[name=total_meses]").val(0+''+multas.length);
-            $("#adicionarModal input[name=total_multas]").val(total_multas+'.00 kz');
-            $("#adicionarModal input[name=total_a_pagar]").val(total_a_pagar+'.00 kz');
-            $("#adicionarModal input[name=total]").val(total_a_pagar);
+        //     $("#adicionarModal input[name=total_meses]").val(0+''+multas.length);
+        //     $("#adicionarModal input[name=total_multas]").val(total_multas+'.00 kz');
+        //     $("#adicionarModal input[name=total_a_pagar]").val(total_a_pagar+'.00 kz');
+        //     $("#adicionarModal input[name=total]").val(total_a_pagar);
 
         
 
-        }
+        // }
 
-        // pagar Function
-        $(document).on('click', '.pagar-modal', function(){
+        // // pagar Function
+        // $(document).on('click', '.pagar-modal', function(){
 
-            $("#adicionarModal").modal("show");
+        //     $("#adicionarModal").modal("show");
 
-            $("#adicionarModal input[name=nome]").val($(this).data('nome'));
-            $("#adicionarModal input[name=saldo_show]").val($(this).data('saldo'));
-            $("#adicionarModal input[name=saldo]").val($(this).data('saldo'));
-            $("#adicionarModal input[name=matricula_id]").val($(this).data('id'));
+        //     $("#adicionarModal input[name=nome]").val($(this).data('nome'));
+        //     $("#adicionarModal input[name=saldo_show]").val($(this).data('saldo'));
+        //     $("#adicionarModal input[name=saldo]").val($(this).data('saldo'));
+        //     $("#adicionarModal input[name=matricula_id]").val($(this).data('id'));
 
-            var url = "{{ url('admin/servicos') }}/"+$(this).data('id');
-            var classe = $(this).data('classe');
-            var curso = $(this).data('curso');
+        //     var url = "{{ url('admin/servicos') }}/"+$(this).data('id');
+        //     var classe = $(this).data('classe');
+        //     var curso = $(this).data('curso');
 
-            $("#EditarModal form").attr("action", url);
+        //     $("#EditarModal form").attr("action", url);
 
-            $(function(){
-                $.get('http://localhost:8000/secretaria/preco-propina/'+curso+'/'+classe+'', function(data){
+        //     $(function(){
+        //         $.get('http://localhost:8000/secretaria/preco-propina/'+curso+'/'+classe+'', function(data){
                     
-                    $("#adicionarModal input[name=preco_propina]").val(data[1].preco);
-                    $("#adicionarModal input[name=preco_propina_id]").val(data[0]);
+        //             $("#adicionarModal input[name=preco_propina]").val(data[1].preco);
+        //             $("#adicionarModal input[name=preco_propina_id]").val(data[0]);
                 
 
-                }, 'json');
-            });
+        //         }, 'json');
+        //     });
             
-        });
+        // });
 
-        var produtoAdd = 1
+        // var produtoAdd = 1
 
-        $(document).on('click', '.btn-adicionar-mes', function(){
+        // $(document).on('click', '.btn-adicionar-mes', function(){
 
-            if(produtoAdd<=10){
+        //     if(produtoAdd<=10){
                 
-                produtoAdd++
+        //         produtoAdd++
 
-                var tr = $("<tr/>")
-                                .append($("<td/>").append($("<select/>", { id:"select-mes-"+produtoAdd, name:"mes[]", class:"form-control width-180 mes" }).append("<option value='0'>Selecione o Mês</option>")))
-                                .append($("<td/>").append(
-                                        $("<input/>", { type:"text", name:"multa[]", value:"00.00 kz", class:"form-control width-120 multas" })
-                                ))
-                                .append($("<td/>").append(
-                                        $("<input/>", { type:"text", name:"subtotal[]", value:"00.00 kz", class:"form-control width-120 subs" })
-                                ))
-                                .append($("<td/>").append($("<a/>", {class:"btn btn-danger btn-sm btn-remove"})
-                                    .append($("<i/>", {class:"fa fa-window-close"} ))
-                                ));
+        //         var tr = $("<tr/>")
+        //                         .append($("<td/>").append($("<select/>", { id:"select-mes-"+produtoAdd, name:"mes[]", class:"form-control width-180 mes" }).append("<option value='0'>Selecione o Mês</option>")))
+        //                         .append($("<td/>").append(
+        //                                 $("<input/>", { type:"text", name:"multa[]", value:"00.00 kz", class:"form-control width-120 multas" })
+        //                         ))
+        //                         .append($("<td/>").append(
+        //                                 $("<input/>", { type:"text", name:"subtotal[]", value:"00.00 kz", class:"form-control width-120 subs" })
+        //                         ))
+        //                         .append($("<td/>").append($("<a/>", {class:"btn btn-danger btn-sm btn-remove"})
+        //                             .append($("<i/>", {class:"fa fa-window-close"} ))
+        //                         ));
                                 
                 
-                $('#tbody-pagamento').append(tr);
+        //         $('#tbody-pagamento').append(tr);
                 
-                $(function(){
-                    $.get('http://localhost:8000/json/lista-de-meses', function(data){
+        //         $(function(){
+        //             $.get('http://localhost:8000/json/lista-de-meses', function(data){
                     
-                        for(var i=0; i<data.length; i++){
-                            $("#select-mes-"+produtoAdd).append('<option value="'+data[i].id+'">'+data[i].mes+'</option>');
-                        }
+        //                 for(var i=0; i<data.length; i++){
+        //                     $("#select-mes-"+produtoAdd).append('<option value="'+data[i].id+'">'+data[i].mes+'</option>');
+        //                 }
 
-                        return false;
-                        //  alert(data[0].nome)
+        //                 return false;
+        //                 //  alert(data[0].nome)
 
-                    }, 'json');
-                });
+        //             }, 'json');
+        //         });
                 
 
-            }else{
-                alert('Antigiu o Limite De Adição dos Meses de Pagamento');
-            }
+        //     }else{
+        //         alert('Antigiu o Limite De Adição dos Meses de Pagamento');
+        //     }
             
 
-        });
+        // });
 
 
-        $(document).on('click', '.btn-remove', function(){
+        // $(document).on('click', '.btn-remove', function(){
 
-            $(this).parents('tr').remove();
+        //     $(this).parents('tr').remove();
 
-            produtoAdd--;
+        //     produtoAdd--;
 
-        });
+        // });
 
     
     </script>

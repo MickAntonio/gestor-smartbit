@@ -1,0 +1,83 @@
+.containe{
+    padding: 0;
+    margin: 0;
+}
+
+.header{
+    text-align: center;
+}
+.header h3{
+    font-size: 1em;
+    line-height: 0.2em;
+    font-weight: bold;
+ }
+
+ .header h4{
+    font-size: 0.8em;
+    line-height: 0.1em;
+    font-weight: 100;
+ }
+ .mg-t-10{
+     margin-top: 20px;
+ }
+
+ .mg-t-40{
+    margin-top: 40px;
+}
+ span.field-name{
+    font-size: 0.8em;
+     font-weight: bold;
+ }
+ span.field-name-2{
+    font-size: 0.8em;
+     font-weight: bold;
+ }
+ .filds{
+    display: block;
+ }
+
+ .filds-2{
+    height: 20px;
+    display: block;
+    font-weight: bold;
+ }
+ span.field{
+    font-size: 0.8em;
+    margin-bottom: 6px;
+ }
+ .content{
+     width: 100%;
+ }
+ .title, .line{
+     padding: 0px;
+     margin: 0px;
+ }
+
+ .title{
+    font-size: 0.7em;
+}
+
+ table{
+     font-size: 0.8em!important;
+ }
+
+ .f-left{
+    float: left;
+ }
+
+ .f-right{
+    float: right;
+ }
+
+ .smartbit-logo{
+     width: 60px;
+     height: 60px;
+ }
+
+ .mg-t--20{
+     margin-top: -20px;
+ }
+
+ .mg-t--5{
+    margin-top: 5;
+}

@@ -10,6 +10,7 @@ use App\Models\Administrador\Alunos;
 use App\Models\Pagamentos\PrecoClasses;
 use App\Models\Pagamentos\PagamentoPropinas;
 use App\Models\Pagamentos\Propinas;
+use App\Models\Pagamentos\Saldo;
 use Session;
 use PDF;
 
@@ -44,7 +45,6 @@ class AlunosPropinasPagamentosController extends Controller
     {
         return view('secretaria.lista-de-alunos.index')
         ->withMatriculas(Matriculas::all())
-        //->withMatriculas(Matriculas::where('created_at', '2018'))
         ->withMeses(Meses::all());
     }
 
@@ -56,8 +56,6 @@ class AlunosPropinasPagamentosController extends Controller
      */
     public function store(Request $request)
     {
-
-    //    dd($request->preco_propina_id);
 
         $this->validate($request, array(
             'total'=>'required',
@@ -91,19 +89,30 @@ class AlunosPropinasPagamentosController extends Controller
 
         if($request->total!=$request->valor_pago){
 
+            $saldo = Saldo::where("aluno_id", $request->aluno_id)->first();
+
+
             if($request->total>$request->valor_pago){
 
-                //$saldo = Saldo::find(1);
-                //$saldo->valor = 122;
-                //$propina->save();
+                $diferenca = $request->total - $request->valor_pago; 
 
+                $saldo->valor = $saldo->valor - $diferenca;
+
+            }else{
+                $diferenca = $request->valor_pago - $request->total ; 
+
+                $saldo->valor = $saldo->valor + $diferenca;
             }
+
+            $saldo->save();
+
 
         }
 
         Session::flash('successo', 'Pagamento da Propina Efectuado com Successo');
 
-        return redirect('secretaria/lista-de-alunos');
+        return redirect()->route('alunos-propinas-pagamentos.show', $request->matricula_id);
+
     }
 
 
@@ -115,10 +124,15 @@ class AlunosPropinasPagamentosController extends Controller
      */
     public function show($id)
     {
-        $aluno = Alunos::find(Matriculas::find($id)->aluno->id);
+        $matricula = Matriculas::find($id);
+        $aluno = Alunos::find($matricula->aluno->id);
+
+        $preco_propina = $this->getPrecoPropina($matricula->turma->curso->id, $matricula->turma->classe->id);
 
         return view('secretaria.lista-de-alunos.show')->withAluno($aluno)
-            ->withPagamentos(PagamentoPropinas::where("matricula_id", $id)->get());
+            ->withPagamentos(PagamentoPropinas::where("matricula_id", $id)->get())
+            ->withMeses(Meses::all())
+            ->withPrecoPropina($preco_propina);
     }
 
     /**
@@ -152,6 +166,17 @@ class AlunosPropinasPagamentosController extends Controller
     public function pdfRecibo($id)
     {
         $pdf = PDF::loadView('secretaria.pagamentos-alunos-propinas.pdf.recibo',  $data=["pagamento"=>[PagamentoPropinas::find($id)]])->setPaper('a5', 'landscape');
+        return $pdf->stream('recibo.pdf');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function pdfReciboTermica($id)
+    {
+        $pdf = PDF::loadView('secretaria.pagamentos-alunos-propinas.pdf.recibo-termica',  $data=["pagamento"=>[PagamentoPropinas::find($id)]])->setPaper('a6');
         return $pdf->stream('recibo.pdf');
     }
 
